@@ -14,3 +14,8 @@ It will automate the permit and license issuance process for wildlife trade, fac
 - **SQL Client**: DBeaver is used for experimenting with SQL queries and managing the database schema.
 
 - **Power BI**: Providing interactive dashboards and reports to visualize insights from the data stored in the SQL Server database.
+
+  ## My Contributions
+
+In these modules, my contributions have included:
+
