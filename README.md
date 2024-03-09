@@ -14,19 +14,19 @@ It will automate the permit and license issuance process for wildlife trade, fac
 
 ## Technology Stack
 
-- **ASP.NET MVC Version**: The project is built using ASP.NET MVC 5.2.
+- **ASP.NET MVC Version** : The project is built using ASP.NET MVC 5.2.
 
-- **Database Management System**: The project uses SQL Server (MSSQL) as the backend database management system
+- **Database Management System** : The project uses SQL Server (MSSQL) as the backend database management system
 
-- **MSSQL Version**: The project is developed and tested with SQL Server 2016
+- **MSSQL Version** : The project is developed and tested with SQL Server 2016
 
-- **SQL Client**: DBeaver is used for experimenting with SQL queries and managing the database schema.
+- **SQL Client** : DBeaver is used for experimenting with SQL queries and managing the database schema.
 
-- **Power BI**: Providing interactive dashboards and reports to visualize insights from the data stored in the SQL Server database.
+- **Power BI** : Providing interactive dashboards and reports to visualize insights from the data stored in the SQL Server database.
 
 ## My Contributions
 
-In these modules, my contributions have included:
+In these modules, my contributions have included :
 
 - Users can perform better Verification and Validation tasks, as the new system improves data consistency and includes validation checks, ensuring accurate data input and enabling edit functions.
 - Create a Global Function that retrieves and displays all relevant information based on a License. This function can be reused by other developers as needed
