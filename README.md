@@ -1,4 +1,4 @@
-# Project Name
+# myPerhilitan
 
 This project is a web-based application designed for the Malaysian government agency, PERHILITAN MALAYSIA. 
 It will automate the permit and license issuance process for wildlife trade, facilitating efficient management
