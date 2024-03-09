@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="E_AlamatEksport" xml:space="preserve">
+    <value>Please Enter Export Address</value>
+  </data>
+  <data name="E_AlamatImport" xml:space="preserve">
+    <value>Please enter Import Address!</value>
+  </data>
+  <data name="E_CitesNo" xml:space="preserve">
+    <value>Please Choose Cites!</value>
+  </data>
+  <data name="E_CopyCites" xml:space="preserve">
+    <value>Please insert Copy Cites!</value>
+  </data>
+  <data name="E_LokasiPemeriksaan" xml:space="preserve">
+    <value>Please Choose Location of Inspection!</value>
+  </data>
+  <data name="E_NamaEksport" xml:space="preserve">
+    <value>Please Enter Export Name!</value>
+  </data>
+  <data name="E_NamaImport" xml:space="preserve">
+    <value>Please enter Import Name!</value>
+  </data>
+  <data name="E_NamaPemeriksa" xml:space="preserve">
+    <value>Please Insert Inspection Officer!</value>
+  </data>
+  <data name="E_NamaPengesah" xml:space="preserve">
+    <value>Please enter Verifier Officer Name!</value>
+  </data>
+  <data name="E_NegaraEksport" xml:space="preserve">
+    <value>Please Enter Export Country!</value>
+  </data>
+  <data name="E_NegaraImport" xml:space="preserve">
+    <value>Please enter Import Country!</value>
+  </data>
+  <data name="E_NoStem" xml:space="preserve">
+    <value>Please enter Stem No!</value>
+  </data>
+  <data name="E_QtySah" xml:space="preserve">
+    <value>Please enter Quantity!</value>
+  </data>
+  <data name="E_SahSehingga" xml:space="preserve">
+    <value>Please Choose Valid Date Permit!</value>
+  </data>
+  <data name="E_StatusLesen" xml:space="preserve">
+    <value>Please Choose License Status</value>
+  </data>
+  <data name="E_StatusPemilik" xml:space="preserve">
+    <value>Please Choose Owner Status</value>
+  </data>
+  <data name="E_StatusPengesah" xml:space="preserve">
+    <value>Please Choose Status!</value>
+  </data>
+  <data name="E_StatusPenyemak" xml:space="preserve">
+    <value>Please Choose Status!</value>
+  </data>
+  <data name="E_Tab1" xml:space="preserve">
+    <value>Please Enter the Details on No Permit</value>
+  </data>
+  <data name="E_Tab2" xml:space="preserve">
+    <value>Please Enter the Details on Wildlife List</value>
+  </data>
+  <data name="E_Tab3" xml:space="preserve">
+    <value>Please Enter the Details on Cites</value>
+  </data>
+  <data name="E_Tab4" xml:space="preserve">
+    <value>Please Enter the Details on Inspection</value>
+  </data>
+  <data name="E_Tab5" xml:space="preserve">
+    <value>Please Enter the Details on Semakan</value>
+  </data>
+  <data name="E_TarikhMasaSemakan" xml:space="preserve">
+    <value>Please Choose Date and Time of Inspection</value>
+  </data>
+  <data name="E_TarikhTindakan" xml:space="preserve">
+    <value>Please Choose Action Date</value>
+  </data>
+  <data name="E_Tujuan" xml:space="preserve">
+    <value>Please Choose Purpose!</value>
+  </data>
+  <data name="E_Ulasan" xml:space="preserve">
+    <value>Please insert Comment!</value>
+  </data>
+  <data name="E_ValidationSummary" xml:space="preserve">
+    <value>PLEASE ENTER ALL THIS INFORMATION : </value>
+  </data>
+  <data name="NonValid" xml:space="preserve">
+    <value>NON VALID</value>
+  </data>
+  <data name="PleaseChoose" xml:space="preserve">
+    <value>PLEASE CHOOSE</value>
+  </data>
+  <data name="Valid" xml:space="preserve">
+    <value>VALID</value>
+  </data>
+  <data name="VV_AlertSaved" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="VV_Appendix" xml:space="preserve">
+    <value>Appendix</value>
+  </data>
+  <data name="VV_ApplicantName" xml:space="preserve">
+    <value>Applicant Name</value>
+  </data>
+  <data name="VV_ApplicationCheckedList" xml:space="preserve">
+    <value>Checked Application</value>
+  </data>
+  <data name="VV_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="VV_Appndx" xml:space="preserve">
+    <value>Appendix</value>
+  </data>
+  <data name="VV_Approval" xml:space="preserve">
+    <value>Approval</value>
+  </data>
+  <data name="VV_ApprovedQuantity" xml:space="preserve">
+    <value>Approved Quantity</value>
+  </data>
+  <data name="VV_Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="VV_ChooseFile" xml:space="preserve">
+    <value>Choose File</value>
+  </data>
+  <data name="VV_CitesChanges" xml:space="preserve">
+    <value>New Cites Copy (if there changes)</value>
+  </data>
+  <data name="VV_CitesUbah" xml:space="preserve">
+    <value>Perubahan Cites Dokumen</value>
+  </data>
+  <data name="VV_Cites_Info" xml:space="preserve">
+    <value>CITES</value>
+  </data>
+  <data name="VV_CITES_No" xml:space="preserve">
+    <value>CITES NO</value>
+  </data>
+  <data name="VV_Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="VV_CommentVerifierOfficer" xml:space="preserve">
+    <value>Comment Verifier</value>
+  </data>
+  <data name="VV_CommonName" xml:space="preserve">
+    <value>Common Name</value>
+  </data>
+  <data name="VV_CompleteApplicationList" xml:space="preserve">
+    <value>Complete Application</value>
+  </data>
+  <data name="VV_CopyOfficeLetter" xml:space="preserve">
+    <value>Copy of Office Letter</value>
+  </data>
+  <data name="VV_Copy_Cites" xml:space="preserve">
+    <value>Copy of Cites (Origin Country)</value>
+  </data>
+  <data name="VV_Copy_Register_Company" xml:space="preserve">
+    <value>Copy of Company Registration</value>
+  </data>
+  <data name="VV_DateApply" xml:space="preserve">
+    <value>Apply Date</value>
+  </data>
+  <data name="VV_DateApproved" xml:space="preserve">
+    <value>Approved Date</value>
+  </data>
+  <data name="VV_DateCheck" xml:space="preserve">
+    <value>Check Date</value>
+  </data>
+  <data name="VV_Date_Time_Inspection" xml:space="preserve">
+    <value>Date Time Inspection</value>
+  </data>
+  <data name="VV_DisemakSemula" xml:space="preserve">
+    <value>Please Re-Check</value>
+  </data>
+  <data name="VV_Edit" xml:space="preserve">
+    <value>Edit Information</value>
+  </data>
+  <data name="VV_EndDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="VV_EntryDate" xml:space="preserve">
+    <value>Verification Entry Date</value>
+  </data>
+  <data name="VV_ExportAddress" xml:space="preserve">
+    <value>Address of Exporter</value>
+  </data>
+  <data name="VV_ExportCountry" xml:space="preserve">
+    <value>Export Country</value>
+  </data>
+  <data name="VV_ExportName" xml:space="preserve">
+    <value>Name of Exporter</value>
+  </data>
+  <data name="VV_ExportPurpose" xml:space="preserve">
+    <value>Purpose of Export</value>
+  </data>
+  <data name="VV_Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="VV_HolderLicense/Permit/SP" xml:space="preserve">
+    <value>License/Permit/Special Permit Holder</value>
+  </data>
+  <data name="VV_ImportAddress" xml:space="preserve">
+    <value>Importer Address</value>
+  </data>
+  <data name="VV_ImportCountry" xml:space="preserve">
+    <value>Import Country</value>
+  </data>
+  <data name="VV_ImporterName" xml:space="preserve">
+    <value>Importer Name</value>
+  </data>
+  <data name="VV_ImportPurpose" xml:space="preserve">
+    <value>Import Purpose</value>
+  </data>
+  <data name="VV_InfoAddressImporterExporter" xml:space="preserve">
+    <value>Please Enter Valid Address of Importer / Exporter</value>
+  </data>
+  <data name="VV_InfoCodeExportCountry" xml:space="preserve">
+    <value>Enter Export Country Code. Eg : MY</value>
+  </data>
+  <data name="VV_InfoComment" xml:space="preserve">
+    <value>Please Enter the Comment</value>
+  </data>
+  <data name="VV_InfoDateTimeInspection" xml:space="preserve">
+    <value>Please Choose the Date and Time of Inspection</value>
+  </data>
+  <data name="VV_InfoFailFormat" xml:space="preserve">
+    <value>Allowed File in .pdf format only</value>
+  </data>
+  <data name="VV_InfoLocationInspection" xml:space="preserve">
+    <value>Please Choose Location of Inspection</value>
+  </data>
+  <data name="VV_InfoNameImpoterExporter" xml:space="preserve">
+    <value>Please Enter Valid Name of Importer / Exporter</value>
+  </data>
+  <data name="VV_InfoNameInspectionOfficer" xml:space="preserve">
+    <value>Please Enter Name of Inspection Officer at Counter Check In</value>
+  </data>
+  <data name="VV_InfoPermitNo" xml:space="preserve">
+    <value>Please enter Valid Permit No</value>
+  </data>
+  <data name="VV_InfoPurposeExport" xml:space="preserve">
+    <value>Please Refer to the Code List : T - Commercial, Z - Zoo, G - Botanical Garden, Q - Circus or Travelling Exhibition, S - Sceintific, H - Hunting Trophy, P - Personal, M - Medical(including Biomedical Research), E - Educational, N - Reintroduction / Introduction into Wild, B - Breeding in Captivity / Artificial Propagation, L - Law Enforcement/Judicial,Forensic</value>
+  </data>
+  <data name="VV_InfoStatusApplication" xml:space="preserve">
+    <value>Please Choose the Status Application</value>
+  </data>
+  <data name="VV_InfoStemNo" xml:space="preserve">
+    <value>Please Enter Valid Stem No</value>
+  </data>
+  <data name="VV_InfoTypeLicense" xml:space="preserve">
+    <value>Please Choose the Type of License</value>
+  </data>
+  <data name="VV_InfoTypeMatter" xml:space="preserve">
+    <value>Please Choose the Type of Matters</value>
+  </data>
+  <data name="VV_InfoTypePermit" xml:space="preserve">
+    <value>Please Choose Whether Cites or Non-Cites</value>
+  </data>
+  <data name="VV_InfoValidPermit" xml:space="preserve">
+    <value>Please Choose Valid Date for Your Permit</value>
+  </data>
+  <data name="VV_InfoValidUntil" xml:space="preserve">
+    <value>Please Enter Valid Until Date</value>
+  </data>
+  <data name="VV_InfoVerifier" xml:space="preserve">
+    <value>Please Choose the Verifier Officer</value>
+  </data>
+  <data name="VV_Inspection_Info" xml:space="preserve">
+    <value>INSPECTION</value>
+  </data>
+  <data name="VV_Inspection_Location" xml:space="preserve">
+    <value>Location of Inspection</value>
+  </data>
+  <data name="VV_Inspection_Name" xml:space="preserve">
+    <value>Inspection Officer Name</value>
+  </data>
+  <data name="VV_InvalidApplicationList" xml:space="preserve">
+    <value>Invalid Application</value>
+  </data>
+  <data name="VV_License/Permit/SpecialPermitApplication" xml:space="preserve">
+    <value>License/Permit/Special Permit Application</value>
+  </data>
+  <data name="VV_LicenseExpired" xml:space="preserve">
+    <value>License Expired</value>
+  </data>
+  <data name="VV_LicenseNo" xml:space="preserve">
+    <value>License No</value>
+  </data>
+  <data name="VV_LicenseSuspended/Cancelled" xml:space="preserve">
+    <value>License Suspended/ Cancelled/ Probation</value>
+  </data>
+  <data name="VV_LicenseType" xml:space="preserve">
+    <value>License Type</value>
+  </data>
+  <data name="VV_LicenseValid" xml:space="preserve">
+    <value>License Validated</value>
+  </data>
+  <data name="VV_License_Permit" xml:space="preserve">
+    <value>License / Permit</value>
+  </data>
+  <data name="VV_List" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="VV_ListVerifiedApplication" xml:space="preserve">
+    <value>Verified Application</value>
+  </data>
+  <data name="VV_List_Wildlife" xml:space="preserve">
+    <value>WILDLIFE LIST</value>
+  </data>
+  <data name="VV_MaklumatCites" xml:space="preserve">
+    <value>CITES INFORMATION</value>
+  </data>
+  <data name="VV_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="VV_NonCites" xml:space="preserve">
+    <value>NON - CITES</value>
+  </data>
+  <data name="VV_NoPenandaan" xml:space="preserve">
+    <value>Marking No</value>
+  </data>
+  <data name="VV_NoPermitCites" xml:space="preserve">
+    <value>CITES PERMIT NO</value>
+  </data>
+  <data name="VV_Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="VV_No_Approved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="VV_No_Confirmed" xml:space="preserve">
+    <value>Confirmed</value>
+  </data>
+  <data name="VV_No_CR" xml:space="preserve">
+    <value>CR No</value>
+  </data>
+  <data name="VV_OfficeProducer" xml:space="preserve">
+    <value>Office Producer</value>
+  </data>
+  <data name="VV_Officer" xml:space="preserve">
+    <value>Officer</value>
+  </data>
+  <data name="VV_Original_Cites_No" xml:space="preserve">
+    <value>Original CITES No</value>
+  </data>
+  <data name="VV_Owner" xml:space="preserve">
+    <value>Holder</value>
+  </data>
+  <data name="VV_OwnerName" xml:space="preserve">
+    <value>Holder Name</value>
+  </data>
+  <data name="VV_ProcessSemakSemula" xml:space="preserve">
+    <value>Application in Review Process</value>
+  </data>
+  <data name="VV_Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="VV_QuantityChecking" xml:space="preserve">
+    <value>Quantity Checking</value>
+  </data>
+  <data name="VV_QuantityConfirmed" xml:space="preserve">
+    <value>Confirmed Quantity</value>
+  </data>
+  <data name="VV_Review" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="VV_Reviewer" xml:space="preserve">
+    <value>Reviewer</value>
+  </data>
+  <data name="VV_ReviewerAction" xml:space="preserve">
+    <value>Reviewer Action</value>
+  </data>
+  <data name="VV_ReviewOfficer" xml:space="preserve">
+    <value>Reviewer Officer</value>
+  </data>
+  <data name="VV_Review_Info" xml:space="preserve">
+    <value>Review Info</value>
+  </data>
+  <data name="VV_RevisedApplicationList" xml:space="preserve">
+    <value>Re-Checked Application </value>
+  </data>
+  <data name="VV_SaizFile2MB" xml:space="preserve">
+    <value>File Size Cannot Exceed 2MB</value>
+  </data>
+  <data name="VV_ScientificName" xml:space="preserve">
+    <value>Scientific Name</value>
+  </data>
+  <data name="VV_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="VV_SearchingInfo" xml:space="preserve">
+    <value>Search Information</value>
+  </data>
+  <data name="VV_SearchSpeciesReview" xml:space="preserve">
+    <value>Search Species Review</value>
+  </data>
+  <data name="VV_SemakanPengesahan" xml:space="preserve">
+    <value>Review &amp; Verification</value>
+  </data>
+  <data name="VV_Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="VV_Species" xml:space="preserve">
+    <value>Species</value>
+  </data>
+  <data name="VV_StartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="VV_Status_Application" xml:space="preserve">
+    <value>Application Status</value>
+  </data>
+  <data name="VV_StemNo" xml:space="preserve">
+    <value>Stem No</value>
+  </data>
+  <data name="VV_Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="VV_SubmitSendFormDate" xml:space="preserve">
+    <value>Form Submission Date</value>
+  </data>
+  <data name="VV_Through" xml:space="preserve">
+    <value>Through</value>
+  </data>
+  <data name="VV_TypeSearch" xml:space="preserve">
+    <value>Type of Search</value>
+  </data>
+  <data name="VV_Type_Matters" xml:space="preserve">
+    <value>Type of Matters</value>
+  </data>
+  <data name="VV_ValidUntil" xml:space="preserve">
+    <value>Valid Until</value>
+  </data>
+  <data name="VV_Verification" xml:space="preserve">
+    <value>Verification</value>
+  </data>
+  <data name="VV_Verification_Info" xml:space="preserve">
+    <value>Verification Info</value>
+  </data>
+  <data name="VV_Verifier" xml:space="preserve">
+    <value>Verifier</value>
+  </data>
+  <data name="VV_VerifyOfficer" xml:space="preserve">
+    <value>Verify Officer</value>
+  </data>
+  <data name="VV_VerifyOfficerName" xml:space="preserve">
+    <value>Verifier Officer Name</value>
+  </data>
+  <data name="VV_ViewAction" xml:space="preserve">
+    <value>View Action</value>
+  </data>
+  <data name="VV_ViewDetails" xml:space="preserve">
+    <value>View Details</value>
+  </data>
+  <data name="VV_ViewLicenseInfo" xml:space="preserve">
+    <value>View License Info</value>
+  </data>
+  <data name="_Active" xml:space="preserve">
+    <value>ACTIVE</value>
+  </data>
+  <data name="_Betina" xml:space="preserve">
+    <value>FEMALE</value>
+  </data>
+  <data name="_DateAction" xml:space="preserve">
+    <value>DATE ACTION</value>
+  </data>
+  <data name="_Document" xml:space="preserve">
+    <value>DOCUMENT</value>
+  </data>
+  <data name="_Jantan" xml:space="preserve">
+    <value>MALE</value>
+  </data>
+  <data name="_LampiranLesenDibatal" xml:space="preserve">
+    <value>LAMPIRAN LESEN/PERMIT KHAS DIBATAL</value>
+  </data>
+  <data name="_LampiranLesenDigantung" xml:space="preserve">
+    <value>LAMPIRAN LESEN/PERMIT KHAS DIGANTUNG</value>
+  </data>
+  <data name="_MinistryApproval" xml:space="preserve">
+    <value>MINISTRY APPROVAL</value>
+  </data>
+  <data name="_Month" xml:space="preserve">
+    <value>MONTH</value>
+  </data>
+  <data name="_No" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="_NoFileAttached" xml:space="preserve">
+    <value>NO FILE ATTACHED</value>
+  </data>
+  <data name="_NotActive" xml:space="preserve">
+    <value>NOT ACTIVE</value>
+  </data>
+  <data name="_StatusLesen" xml:space="preserve">
+    <value>LICENSE STATUS</value>
+  </data>
+  <data name="_StatusPemilik" xml:space="preserve">
+    <value>OWNER STATUS</value>
+  </data>
+  <data name="_TidakPasti" xml:space="preserve">
+    <value>UNKNOWN</value>
+  </data>
+  <data name="_Ya" xml:space="preserve">
+    <value>YES</value>
+  </data>
+</root>

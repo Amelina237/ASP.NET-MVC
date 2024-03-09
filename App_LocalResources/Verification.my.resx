@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="E_AlamatEksport" xml:space="preserve">
+    <value>Sila Masukkan Alamat Eksport</value>
+  </data>
+  <data name="E_AlamatImport" xml:space="preserve">
+    <value>Sila Masukkan Alamat Import!</value>
+  </data>
+  <data name="E_CitesNo" xml:space="preserve">
+    <value>Sila Pilih Cites!</value>
+  </data>
+  <data name="E_CopyCites" xml:space="preserve">
+    <value>Sila Masukkan Salinan Cites!</value>
+  </data>
+  <data name="E_LokasiPemeriksaan" xml:space="preserve">
+    <value>Sila Pilih Lokasi Pemeriksaan!</value>
+  </data>
+  <data name="E_NamaEksport" xml:space="preserve">
+    <value>Sila Masukkan Nama Eksport!</value>
+  </data>
+  <data name="E_NamaImport" xml:space="preserve">
+    <value>Sila Masukkan Nama Import!</value>
+  </data>
+  <data name="E_NamaPemeriksa" xml:space="preserve">
+    <value>Sila Masukkan Nama Pemeriksa!</value>
+  </data>
+  <data name="E_NamaPengesah" xml:space="preserve">
+    <value>Sila Masukkan Nama Pengesah!</value>
+  </data>
+  <data name="E_NegaraEksport" xml:space="preserve">
+    <value>Sila Masukkan Negara Eksport!</value>
+  </data>
+  <data name="E_NegaraImport" xml:space="preserve">
+    <value>Sila Masukkan Negara Import!</value>
+  </data>
+  <data name="E_NoStem" xml:space="preserve">
+    <value>Sila Masukkan No Stem!</value>
+  </data>
+  <data name="E_QtySah" xml:space="preserve">
+    <value>Sila Masukkan Kuantiti untuk Disahkan!</value>
+  </data>
+  <data name="E_SahSehingga" xml:space="preserve">
+    <value>Sila Masukkan Tarikh Sah Permit</value>
+  </data>
+  <data name="E_StatusLesen" xml:space="preserve">
+    <value>Sila Pilih Status Lesen</value>
+  </data>
+  <data name="E_StatusPemilik" xml:space="preserve">
+    <value>Sila Pilih Status Pemilik</value>
+  </data>
+  <data name="E_StatusPengesah" xml:space="preserve">
+    <value>Sila Pilih Status!</value>
+  </data>
+  <data name="E_StatusPenyemak" xml:space="preserve">
+    <value>Sila Pilih Status!</value>
+  </data>
+  <data name="E_Tab1" xml:space="preserve">
+    <value>Sila Masukkan Maklumat pada Bahagian No Permit</value>
+  </data>
+  <data name="E_Tab2" xml:space="preserve">
+    <value>Sila Masukkan Maklumat pada Senarai Hidupan Liar</value>
+  </data>
+  <data name="E_Tab3" xml:space="preserve">
+    <value>Sila Masukkan Maklumat pada Bahagian Cites</value>
+  </data>
+  <data name="E_Tab4" xml:space="preserve">
+    <value>Sila Masukkan Maklumat pada Bahagian Pemeriksaan</value>
+  </data>
+  <data name="E_Tab5" xml:space="preserve">
+    <value>Sila Masukkan Maklumat pada Bahagian Semakan</value>
+  </data>
+  <data name="E_TarikhMasaSemakan" xml:space="preserve">
+    <value>Sila Pilih Tarikh dan Masa Pemeriksaan</value>
+  </data>
+  <data name="E_TarikhTindakan" xml:space="preserve">
+    <value>Sila Pilih Tarikh Tindakan</value>
+  </data>
+  <data name="E_Tujuan" xml:space="preserve">
+    <value>Sila Pilih Tujuan!</value>
+  </data>
+  <data name="E_Ulasan" xml:space="preserve">
+    <value>Sila Masukkan Ulasan!</value>
+  </data>
+  <data name="E_ValidationSummary" xml:space="preserve">
+    <value>SILA PASTIKAN MAKLUMAT DIISI PADA  : </value>
+  </data>
+  <data name="NonValid" xml:space="preserve">
+    <value>TIDAK SAH</value>
+  </data>
+  <data name="PleaseChoose" xml:space="preserve">
+    <value>SILA PILIH</value>
+  </data>
+  <data name="Valid" xml:space="preserve">
+    <value>SAH</value>
+  </data>
+  <data name="VV_AlertSaved" xml:space="preserve">
+    <value>Telah Disimpan</value>
+  </data>
+  <data name="VV_Appendix" xml:space="preserve">
+    <value>Lampiran</value>
+  </data>
+  <data name="VV_ApplicantName" xml:space="preserve">
+    <value>Nama Pemohon</value>
+  </data>
+  <data name="VV_ApplicationCheckedList" xml:space="preserve">
+    <value>Permohonan Yang Disemak</value>
+  </data>
+  <data name="VV_Apply" xml:space="preserve">
+    <value>Mohon</value>
+  </data>
+  <data name="VV_Appndx" xml:space="preserve">
+    <value>Appendiks</value>
+  </data>
+  <data name="VV_Approval" xml:space="preserve">
+    <value>Kelulusan</value>
+  </data>
+  <data name="VV_ApprovedQuantity" xml:space="preserve">
+    <value>Kuantiti Diluluskan</value>
+  </data>
+  <data name="VV_Category" xml:space="preserve">
+    <value>Kategori</value>
+  </data>
+  <data name="VV_ChooseFile" xml:space="preserve">
+    <value>Pilih Fail</value>
+  </data>
+  <data name="VV_CitesChanges" xml:space="preserve">
+    <value>Salinan Cites Baru (jika ada perubahan)</value>
+  </data>
+  <data name="VV_CitesUbah" xml:space="preserve">
+    <value>Changes Cites Copy</value>
+  </data>
+  <data name="VV_Cites_Info" xml:space="preserve">
+    <value>CITES</value>
+  </data>
+  <data name="VV_CITES_No" xml:space="preserve">
+    <value>NO CITES</value>
+  </data>
+  <data name="VV_Comment" xml:space="preserve">
+    <value>Ulasan</value>
+  </data>
+  <data name="VV_CommentVerifierOfficer" xml:space="preserve">
+    <value>Ulasan Pengesah</value>
+  </data>
+  <data name="VV_CommonName" xml:space="preserve">
+    <value>Nama Biasa</value>
+  </data>
+  <data name="VV_CompleteApplicationList" xml:space="preserve">
+    <value>Permohonan Telah Selesai</value>
+  </data>
+  <data name="VV_CopyOfficeLetter" xml:space="preserve">
+    <value>Salinan Surat Pejabat</value>
+  </data>
+  <data name="VV_Copy_Cites" xml:space="preserve">
+    <value>Salinan Cites (Negara Asal)</value>
+  </data>
+  <data name="VV_Copy_Register_Company" xml:space="preserve">
+    <value>Salinan Pendaftaran Syarikat</value>
+  </data>
+  <data name="VV_DateApply" xml:space="preserve">
+    <value>Tarikh Mohon</value>
+  </data>
+  <data name="VV_DateApproved" xml:space="preserve">
+    <value>Tarikh Lulus</value>
+  </data>
+  <data name="VV_DateCheck" xml:space="preserve">
+    <value>Tarikh Semak</value>
+  </data>
+  <data name="VV_Date_Time_Inspection" xml:space="preserve">
+    <value>Tarikh &amp; Masa Semakan</value>
+  </data>
+  <data name="VV_DisemakSemula" xml:space="preserve">
+    <value>Perlu Disemak Semula</value>
+  </data>
+  <data name="VV_Edit" xml:space="preserve">
+    <value>Kemaskini Maklumat</value>
+  </data>
+  <data name="VV_EndDate" xml:space="preserve">
+    <value>Tarikh Tamat</value>
+  </data>
+  <data name="VV_EntryDate" xml:space="preserve">
+    <value>Tarikh Pengesahan Pintu Masuk</value>
+  </data>
+  <data name="VV_ExportAddress" xml:space="preserve">
+    <value>Alamat Pengeksport</value>
+  </data>
+  <data name="VV_ExportCountry" xml:space="preserve">
+    <value>Negara Eksport</value>
+  </data>
+  <data name="VV_ExportName" xml:space="preserve">
+    <value>Nama Pengeksport</value>
+  </data>
+  <data name="VV_ExportPurpose" xml:space="preserve">
+    <value>Tujuan Eksport</value>
+  </data>
+  <data name="VV_Gender" xml:space="preserve">
+    <value>Jantina</value>
+  </data>
+  <data name="VV_HolderLicense/Permit/SP" xml:space="preserve">
+    <value>Pemegang Lesen/Permit/Permit Khas</value>
+  </data>
+  <data name="VV_ImportAddress" xml:space="preserve">
+    <value>Alamat Pengimport</value>
+  </data>
+  <data name="VV_ImportCountry" xml:space="preserve">
+    <value>Negara Import</value>
+  </data>
+  <data name="VV_ImporterName" xml:space="preserve">
+    <value>Nama Pengimport</value>
+  </data>
+  <data name="VV_ImportPurpose" xml:space="preserve">
+    <value>Tujuan Import</value>
+  </data>
+  <data name="VV_InfoAddressImporterExporter" xml:space="preserve">
+    <value>Sila Masukkan Alamat Pengimport / Pengekport yang Sah</value>
+  </data>
+  <data name="VV_InfoCodeExportCountry" xml:space="preserve">
+    <value>Sila Masukkan Kod Negara Export. Cth : MY</value>
+  </data>
+  <data name="VV_InfoComment" xml:space="preserve">
+    <value>Sila Masukkan Ulasan bagi Keputusan Semakan</value>
+  </data>
+  <data name="VV_InfoDateTimeInspection" xml:space="preserve">
+    <value>Sila Masukkan Tarikh dan Masa Pemeriksaan Dilakukan</value>
+  </data>
+  <data name="VV_InfoFailFormat" xml:space="preserve">
+    <value>Fail yang Dibenarkan hanya dalam Format .pdf</value>
+  </data>
+  <data name="VV_InfoLocationInspection" xml:space="preserve">
+    <value>Sila Pilih Lokasi Pintu Masuk Pemeriksaan</value>
+  </data>
+  <data name="VV_InfoNameImpoterExporter" xml:space="preserve">
+    <value>Sila Masukkan Nama Pengimport / Pengeksport yang Sah</value>
+  </data>
+  <data name="VV_InfoNameInspectionOfficer" xml:space="preserve">
+    <value>Sila Masukkan Nama Pegawai Pemeriksaan Pintu Masuk di Kaunter 'Check In'</value>
+  </data>
+  <data name="VV_InfoPermitNo" xml:space="preserve">
+    <value>Sila Masukkan No Permit yang Sah</value>
+  </data>
+  <data name="VV_InfoPurposeExport" xml:space="preserve">
+    <value>Sila Rujuk Senarai Kod : T - Commercial, Z - Zoo, G - Botanical Garden, Q - Circus or Travelling Exhibition, S - Sceintific, H - Hunting Trophy, P - Personal, M - Medical(including Biomedical Research), E - Educational, N - Reintroduction / Introduction into Wild, B - Breeding in Captivity / Artificial Propagation, L - Law Enforcement/Judicial,Forensic</value>
+  </data>
+  <data name="VV_InfoStatusApplication" xml:space="preserve">
+    <value>Sila Pilih Status Permohonan</value>
+  </data>
+  <data name="VV_InfoStemNo" xml:space="preserve">
+    <value>Sila Masukkan No Stem yang Sah</value>
+  </data>
+  <data name="VV_InfoTypeLicense" xml:space="preserve">
+    <value>Sila Pilih Jenis Lesen yang Ditetapkan</value>
+  </data>
+  <data name="VV_InfoTypeMatter" xml:space="preserve">
+    <value>Sila Pilih Jenis Urusan</value>
+  </data>
+  <data name="VV_InfoTypePermit" xml:space="preserve">
+    <value>Sila Pilih Samada 'Cites' atau 'Non-Cites'</value>
+  </data>
+  <data name="VV_InfoValidPermit" xml:space="preserve">
+    <value>Sila Pilih Tarikh Sah Permit Anda</value>
+  </data>
+  <data name="VV_InfoValidUntil" xml:space="preserve">
+    <value>Sila Masukkan Tarikh Sah Sehingga </value>
+  </data>
+  <data name="VV_InfoVerifier" xml:space="preserve">
+    <value>Sila Pilih Pegawai Pengesah yang Ditetapkan</value>
+  </data>
+  <data name="VV_Inspection_Info" xml:space="preserve">
+    <value>PEMERIKSAAN</value>
+  </data>
+  <data name="VV_Inspection_Location" xml:space="preserve">
+    <value> Lokasi Pemeriksaan</value>
+  </data>
+  <data name="VV_Inspection_Name" xml:space="preserve">
+    <value> Nama Pemeriksa</value>
+  </data>
+  <data name="VV_InvalidApplicationList" xml:space="preserve">
+    <value>Permohonan yang Tidak Disahkan</value>
+  </data>
+  <data name="VV_License/Permit/SpecialPermitApplication" xml:space="preserve">
+    <value>Permohonan Lesen/Permit/Permit Khas</value>
+  </data>
+  <data name="VV_LicenseExpired" xml:space="preserve">
+    <value>Lesen Tamat Tempoh</value>
+  </data>
+  <data name="VV_LicenseNo" xml:space="preserve">
+    <value>No Lesen</value>
+  </data>
+  <data name="VV_LicenseSuspended/Cancelled" xml:space="preserve">
+    <value>Lesen Digantung/Dibatalkan/Pendakwaan</value>
+  </data>
+  <data name="VV_LicenseType" xml:space="preserve">
+    <value>Jenis Lesen</value>
+  </data>
+  <data name="VV_LicenseValid" xml:space="preserve">
+    <value>Lesen Berkuatkuasa</value>
+  </data>
+  <data name="VV_License_Permit" xml:space="preserve">
+    <value>Lesen / Permit</value>
+  </data>
+  <data name="VV_List" xml:space="preserve">
+    <value>Senarai Semakan</value>
+  </data>
+  <data name="VV_ListVerifiedApplication" xml:space="preserve">
+    <value>Permohonan Untuk Disahkan</value>
+  </data>
+  <data name="VV_List_Wildlife" xml:space="preserve">
+    <value>SENARAI HIDUPAN LIAR</value>
+  </data>
+  <data name="VV_MaklumatCites" xml:space="preserve">
+    <value>MAKLUMAT CITES</value>
+  </data>
+  <data name="VV_No" xml:space="preserve">
+    <value>Bil</value>
+  </data>
+  <data name="VV_NonCites" xml:space="preserve">
+    <value>BUKAN CITES</value>
+  </data>
+  <data name="VV_NoPenandaan" xml:space="preserve">
+    <value>No Penandaan</value>
+  </data>
+  <data name="VV_NoPermitCites" xml:space="preserve">
+    <value>NO PERMIT CITES</value>
+  </data>
+  <data name="VV_Notes" xml:space="preserve">
+    <value>Catatan</value>
+  </data>
+  <data name="VV_No_Approved" xml:space="preserve">
+    <value>Diluluskan</value>
+  </data>
+  <data name="VV_No_Confirmed" xml:space="preserve">
+    <value>Disahkan</value>
+  </data>
+  <data name="VV_No_CR" xml:space="preserve">
+    <value>No CR</value>
+  </data>
+  <data name="VV_OfficeProducer" xml:space="preserve">
+    <value>Pejabat Pengeluar</value>
+  </data>
+  <data name="VV_Officer" xml:space="preserve">
+    <value>Pegawai</value>
+  </data>
+  <data name="VV_Original_Cites_No" xml:space="preserve">
+    <value> No CITES Asal</value>
+  </data>
+  <data name="VV_Owner" xml:space="preserve">
+    <value>Pemegang </value>
+  </data>
+  <data name="VV_OwnerName" xml:space="preserve">
+    <value>Nama Pemegang</value>
+  </data>
+  <data name="VV_ProcessSemakSemula" xml:space="preserve">
+    <value>Dalam Proses Semak Semula</value>
+  </data>
+  <data name="VV_Quantity" xml:space="preserve">
+    <value>Kuantiti</value>
+  </data>
+  <data name="VV_QuantityChecking" xml:space="preserve">
+    <value>Semakan Kuantiti</value>
+  </data>
+  <data name="VV_QuantityConfirmed" xml:space="preserve">
+    <value>Kuantiti Disahkan</value>
+  </data>
+  <data name="VV_Review" xml:space="preserve">
+    <value>Semakan</value>
+  </data>
+  <data name="VV_Reviewer" xml:space="preserve">
+    <value>Penyemak</value>
+  </data>
+  <data name="VV_ReviewerAction" xml:space="preserve">
+    <value>Tindakan Penyemak</value>
+  </data>
+  <data name="VV_ReviewOfficer" xml:space="preserve">
+    <value>Pegawai Penyemak</value>
+  </data>
+  <data name="VV_Review_Info" xml:space="preserve">
+    <value>Keputusan Semakan</value>
+  </data>
+  <data name="VV_RevisedApplicationList" xml:space="preserve">
+    <value>Permohonan Untuk Disemak Semula</value>
+  </data>
+  <data name="VV_SaizFile2MB" xml:space="preserve">
+    <value>Saiz Fail Tidak Boleh Melebihi 2MB</value>
+  </data>
+  <data name="VV_ScientificName" xml:space="preserve">
+    <value>Nama Saintifik</value>
+  </data>
+  <data name="VV_Search" xml:space="preserve">
+    <value>Carian</value>
+  </data>
+  <data name="VV_SearchingInfo" xml:space="preserve">
+    <value>Maklumat Carian</value>
+  </data>
+  <data name="VV_SearchSpeciesReview" xml:space="preserve">
+    <value>Carian Semakan Spesis </value>
+  </data>
+  <data name="VV_SemakanPengesahan" xml:space="preserve">
+    <value>Semakan &amp; Pengesahan</value>
+  </data>
+  <data name="VV_Source" xml:space="preserve">
+    <value>Sumber</value>
+  </data>
+  <data name="VV_Species" xml:space="preserve">
+    <value>Spesis</value>
+  </data>
+  <data name="VV_StartDate" xml:space="preserve">
+    <value>Tarikh Mula</value>
+  </data>
+  <data name="VV_Status_Application" xml:space="preserve">
+    <value>Status Permohonan</value>
+  </data>
+  <data name="VV_StemNo" xml:space="preserve">
+    <value>No Setem</value>
+  </data>
+  <data name="VV_Submit" xml:space="preserve">
+    <value>Hantar</value>
+  </data>
+  <data name="VV_SubmitSendFormDate" xml:space="preserve">
+    <value>Tarikh Hantar Borang</value>
+  </data>
+  <data name="VV_Through" xml:space="preserve">
+    <value>Melalui</value>
+  </data>
+  <data name="VV_TypeSearch" xml:space="preserve">
+    <value>Jenis Carian</value>
+  </data>
+  <data name="VV_Type_Matters" xml:space="preserve">
+    <value>Jenis Urusan</value>
+  </data>
+  <data name="VV_ValidUntil" xml:space="preserve">
+    <value>Sah Sehingga</value>
+  </data>
+  <data name="VV_Verification" xml:space="preserve">
+    <value>Pengesahan</value>
+  </data>
+  <data name="VV_Verification_Info" xml:space="preserve">
+    <value> Pengesahan Maklumat</value>
+  </data>
+  <data name="VV_Verifier" xml:space="preserve">
+    <value>Pengesah</value>
+  </data>
+  <data name="VV_VerifyOfficer" xml:space="preserve">
+    <value>Pegawai Pengesah</value>
+  </data>
+  <data name="VV_VerifyOfficerName" xml:space="preserve">
+    <value> Nama Pegawai Pengesah</value>
+  </data>
+  <data name="VV_ViewAction" xml:space="preserve">
+    <value>Papar Tindakan</value>
+  </data>
+  <data name="VV_ViewDetails" xml:space="preserve">
+    <value>Papar Maklumat</value>
+  </data>
+  <data name="VV_ViewLicenseInfo" xml:space="preserve">
+    <value>Papar Lesen</value>
+  </data>
+  <data name="_Active" xml:space="preserve">
+    <value>AKTIF</value>
+  </data>
+  <data name="_Betina" xml:space="preserve">
+    <value>Betina</value>
+  </data>
+  <data name="_DateAction" xml:space="preserve">
+    <value>TARIKH TINDAKAN</value>
+  </data>
+  <data name="_Document" xml:space="preserve">
+    <value>DOKUMEN</value>
+  </data>
+  <data name="_Jantan" xml:space="preserve">
+    <value>Jantan</value>
+  </data>
+  <data name="_LampiranLesenDibatal" xml:space="preserve">
+    <value>APPENDIX OF  LICENSE/SPECIAL PERMIT REVOKED</value>
+  </data>
+  <data name="_LampiranLesenDigantung" xml:space="preserve">
+    <value>APPENDIX OF  LICENSE/SPECIAL PERMIT SUSPENDED</value>
+  </data>
+  <data name="_MinistryApproval" xml:space="preserve">
+    <value>Kelulusan Kementerian</value>
+  </data>
+  <data name="_Month" xml:space="preserve">
+    <value>BULAN</value>
+  </data>
+  <data name="_No" xml:space="preserve">
+    <value>TIDAK</value>
+  </data>
+  <data name="_NoFileAttached" xml:space="preserve">
+    <value>TIADA LAMPIRAN</value>
+  </data>
+  <data name="_NotActive" xml:space="preserve">
+    <value>TIDAK AKTIF</value>
+  </data>
+  <data name="_StatusLesen" xml:space="preserve">
+    <value>STATUS LESEN</value>
+  </data>
+  <data name="_StatusPemilik" xml:space="preserve">
+    <value>STATUS PEMILIK</value>
+  </data>
+  <data name="_TidakPasti" xml:space="preserve">
+    <value>_TidakPasti</value>
+  </data>
+  <data name="_Ya" xml:space="preserve">
+    <value>YA</value>
+  </data>
+</root>
