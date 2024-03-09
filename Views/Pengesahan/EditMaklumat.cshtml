@@ -1,0 +1,841 @@
+﻿@model ePerhilitanV2.Models.ViewModels.PengesahanViewModel.ImportExport
+@using ePerhilitanV2.Infrastructures.Services;
+
+@{
+    ViewBag.Title = @Resources.Verification.VV_Edit;
+
+}
+@{
+    var active_1 = "";
+    var active_2 = "";
+    var active_3 = "";
+    var active_4 = "";
+    var active_5 = "";
+    var active_6 = "";
+
+    var Page = Model.Page;
+
+    if (Page == "0" || Page == "1")
+    {
+        active_1 = "active";
+    }
+    else if (Page == "2")
+    {
+        active_1 = "active";
+        active_2 = "active";
+    }
+    else if (Page == "3")
+    {
+        active_1 = "active";
+        active_2 = "active";
+        active_3 = "active";
+    }
+    else if (Page == "4")
+    {
+        active_1 = "active";
+        active_2 = "active";
+        active_3 = "active";
+        active_4 = "active";
+    }
+    else if (Page == "5")
+    {
+        active_1 = "active";
+        active_2 = "active";
+        active_3 = "active";
+        active_4 = "active";
+        active_5 = "active";
+    }
+    else if (Page == "6")
+    {
+        active_1 = "active";
+        active_2 = "active";
+        active_3 = "active";
+        active_4 = "active";
+        active_5 = "active";
+        active_6 = "active";
+    }
+
+
+}
+<style>
+    .text-black {
+        color: black;
+    }
+
+    .red-text {
+        color: red;
+    }
+
+    .table > thead > tr > th,
+    .table > tbody > tr > td {
+        color: #000;
+        border: 1px solid #e4e4e4 !important;
+    }
+
+    .table th {
+        padding: 0.75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table td {
+        padding-left: 0.75rem;
+        padding-bottom: 0;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table > tbody:before {
+        content: none;
+        display: none;
+    }
+</style>
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+    <div class="col-xl-12 col-lg-10 col-md-10 mx-auto mt-3">
+        <div id="iconsAccordion" class="accordion-icons">
+            <div class="card">
+                <div class="card-header" id="headingOne3">
+                    <section class="mb-0 mt-0">
+                        <div role="menu" class="collapsed" data-toggle="collapse" data-target="#iconAccordionOne" aria-expanded="false" aria-controls="iconAccordionOne">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div class="accordion-icon">
+                                        <div class="icon-text">
+                                            <h5 style="font-weight: 100;"> @Resources.Verification.VV_ViewDetails  </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i data-feather="chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="iconAccordionOne" class="collapse" aria-labelledby="headingOne3" data-parent="#iconsAccordion" style="">
+                    <div class="card-body">
+                        <div class="col-xl-12 col-lg-10 col-md-10 mx-auto justify-content-center">
+                            <div class="form-card">
+                                <!-- START LINK EACH TAB-->
+                                <ul class="nav nav-tabs  mb-3 mt-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="lesen-tab" data-toggle="tab" href="#lesen" role="tab" aria-controls="lesen" aria-selected="true">@Resources.Resource._License.ToUpper()</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pemilik-tab" data-toggle="tab" href="#pemilik" role="tab" aria-controls="pemilik" aria-selected="false">@Resources.Verification.VV_Owner.ToUpper()</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="syarikat-tab" data-toggle="tab" href="#syarikat" role="tab" aria-controls="syarikat" aria-selected="false">@Resources.Resource._Company.ToUpper()</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="lampiran-tab" data-toggle="tab" href="#lampiran" role="tab" aria-controls="lampiran" aria-selected="false">@Resources.Verification.VV_Appendix.ToUpper()</a>
+                                    </li>
+                                </ul>
+                                <!-- END LINK EACH TAB -->
+                                <!-- START TAB -->
+                                <div class="tab-content">
+                                    <!-- START TAB LESEN -->
+                                    <div class="tab-pane fade show active" id="lesen" role="tabpanel" aria-labelledby="lesen-tab">
+                                        <div class="form-card">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered " id="">
+                                                    @*<thead>
+                                                            <tr class="thead-light">
+                                                                <th colspan="8">@Resources.Verification.VV_LicenseType</th>
+                                                            </tr>
+                                                        </thead>*@
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_LicenseType</label>
+                                                                    <div class="col-sm-9">
+                                                                        @Model.License_Type.ToUpper()
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_Type_Matters</label>
+                                                                    @if (Model.Type_Matter != null)
+                                                                    {
+                                                                        <div class="col-sm-9">
+                                                                            @Model.Type_Matter.ToUpper()
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <div class="col-sm-9">
+                                                                           N/A
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_Through</label>
+                                                                    <div class="col-sm-9">
+                                                                        @Model.Through.ToUpper()
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END LESEN TAB -->
+                                    <!-- START PEMILIK TAB -->
+                                    <div class="tab-pane fade" id="pemilik" role="tabpanel" aria-labelledby="pemilik-tab">
+                                        <div class="form-card" style="padding:10px;">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Name</label>
+                                                                    <div class="col-sm-9">
+                                                                        @Model.GetOwnerDetails.NamaPemegang.ToUpper()
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Ic_No</label>
+                                                                    <div class="col-sm-4">
+                                                                        @Model.GetOwnerDetails.IdNo
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Citizen</label>
+                                                                    <div class="col-sm-9">
+                                                                        @Model.GetOwnerDetails.Warganegara.ToUpper()
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Address <br /></label>
+                                                                    @if (@Model.GetOwnerDetails.Alamat_Semasa != null)
+                                                                    {
+                                                                        <div class="col-sm-9">
+                                                                            @Model.GetOwnerDetails.Alamat_Semasa.Address, @Model.GetOwnerDetails.Alamat_Semasa.Postcode, @Model.GetOwnerDetails.Alamat_Semasa.City, @Model.GetOwnerDetails.Alamat_Semasa.State
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._AlamatSMenyurat <br /></label>
+
+                                                                    @if (Model.GetOwnerDetails.Alamat_Surat_Menyurat != null)
+                                                                    {
+                                                                        <div class="col-sm-9">
+                                                                            @Model.GetOwnerDetails.Alamat_Surat_Menyurat.Address @Model.GetOwnerDetails.Alamat_Surat_Menyurat.Postcode @Model.GetOwnerDetails.Alamat_Surat_Menyurat.City @Model.GetOwnerDetails.Alamat_Surat_Menyurat.State
+                                                                        </div>
+                                                                    }
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Occupation</label>
+                                                                    <div class="col-sm-9">
+                                                                        @Model.GetOwnerDetails.Pekerjaan.ToUpper()
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Mobile_No</label>
+                                                                    <div class="col-sm-4">
+                                                                        @Model.GetOwnerDetails.NoTel
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Email</label>
+                                                                    <div class="col-sm-9">
+                                                                        @Model.GetOwnerDetails.Emel
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END PEMILIK TAB -->
+                                    <!-- START SYARIKAT TAB -->
+                                    <div class="tab-pane fade" id="syarikat" role="tabpanel" aria-labelledby="syarikat-tab">
+                                        <div class="form-card" style="padding:10px;">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._CompanyName</label>
+                                                                    <div class="col-sm-9">
+                                                                        @Model.GetCompanyDetails.NamaSyarikat.ToUpper()
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._CompanyType</label>
+                                                                    <div class="col-sm-9">
+                                                                        @Model.GetCompanyDetails.JenisSyarikat.ToUpper()
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._CompanyRegisterNo</label>
+                                                                    <div class="col-sm-4">
+                                                                        [@Model.GetCompanyDetails.TypeSyarikat] @Model.GetCompanyDetails.NoSyarikat
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Address <br /></label>
+                                                                    <div class="col-sm-9">
+                                                                        @Model.GetCompanyDetails.Alamat_Syarikat.Address.ToUpper(),  @Model.GetCompanyDetails.Alamat_Syarikat.Postcode, @Model.GetCompanyDetails.Alamat_Syarikat.State.ToUpper()
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Mobile_No</label>
+                                                                    <div class="col-sm-4">
+                                                                        @Model.GetCompanyDetails.NoTel
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END SYARIKAT TAB -->
+                                    <!-- START LAMPIRAN TAB -->
+                                    <div class="tab-pane fade" id="lampiran" role="tabpanel" aria-labelledby="lampiran-tab">
+                                        <div class="form-card">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="">
+                                                    @*<thead>
+                                                            <tr class="thead-light">
+                                                                <th colspan="8">@Resources.Verification._Document</th>
+                                                            </tr>
+                                                        </thead>*@
+                                                    <tbody>
+
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">@Resources.Verification.VV_Copy_Register_Company</label>
+                                                                    @if (Model.getListDocument != null && Model.getListDocument.Any(d => d.File_Name == "syarikat"))
+                                                                    {
+                                                                        foreach (var d in Model.getListDocument)
+                                                                        {
+                                                                            if (d.File_Name == "syarikat")
+                                                                            {
+                                                                                <div class="col-sm-6">
+                                                                                    <i class="feather-20" data-feather="download"></i><a href="#" onclick="openNewTab('/Content/@d.File_Location'); return false;"> @d.File_Name</a>
+                                                                                </div>
+                                                                            }
+                                                                        }
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <div class="col-sm-6">
+                                                                            @Resources.Verification._NoFileAttached
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group row">
+                                                                    <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">@Resources.Verification.VV_Copy_Cites</label>
+                                                                    @if (Model.getListDocument != null && Model.getListDocument.Any(d => d.File_Name == "maklumat_cites"))
+                                                                    {
+                                                                        foreach (var d in Model.getListDocument)
+                                                                        {
+                                                                            if (d.File_Name == "maklumat_cites")
+                                                                            {
+                                                                                <div class="col-sm-6">
+                                                                                    <i class="feather-20" data-feather="download"></i><a href="#" onclick="openNewTab('/Content/@d.File_Location'); return false;"> @d.File_Name </a>
+                                                                                </div>
+                                                                            }
+                                                                        }
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <div class="col-sm-6">
+                                                                            @Resources.Verification._NoFileAttached
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END LAMPIRAN TAB -->
+                                </div>
+                                <!-- END TAB -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div id="iconsAccordion" class="accordion-icons">
+            <div class="card">
+                <div class="card-header" id="headingOne3">
+                    <section class="mb-0 mt-0">
+                        <div role="menu" class="collapsed" data-toggle="collapse" data-target="#iconAccordionTwo" aria-expanded="false" aria-controls="iconAccordionTwo">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div class="accordion-icon">
+                                        <div class="icon-text">
+                                            <h5 style="font-weight: 100;"> @Resources.Verification.VV_ReviewerAction  </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i data-feather="chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="iconAccordionTwo" class="collapse show" aria-labelledby="headingOne3" data-parent="#iconsAccordion" style="">
+                    <div class="card-body">
+                        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto justify-content-center">
+                            <div class="form-card">
+                                @using (Html.BeginForm("EditMaklumat", "Pengesahan", FormMethod.Post, new { @class = "msform", enctype = "multipart/form-data", onsubmit = "return Validate(this,event)" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    @Html.HiddenFor(model => model.License_Id)
+
+
+                                    <input type="hidden" name="submitType" value="" id="submitType" />
+                                    <input type="hidden" name="FileType" value="" id="FileType" />
+                                    <input type="hidden" name="Page" value="@GlobalFunction.encodeThis(Model.Page)" />
+                                    @*<input type="hidden" name="License_Id" value="@GlobalFunction.encodeThis(Model.License_Id.ToString())" id="License_Id" />*@
+                                    <input type="hidden" name="License_Type" value="@Model.License_Type" id="" />
+                                    <input type="hidden" name="User_Id" value="@Model.User_Id" id="" />
+                                    <input type="hidden" name="Spesis_Id" value="@Model.getSpeciesDetails.Spesis_Id" id="" />
+                                    @*<input type="hidden" name="Status_By_Penyemak" value ="@Model.Status_By_Pengesah"id="" />*@
+                                    // suitable for dynamic value
+                                    //<input type="hidden" name="Status_By_Pengesah" value="@Model.Status_By_Pengesah" id="" />
+
+
+                                    var _accountService = new AccountService();
+                                    var Role = _accountService.getRole(Model.User_Id);
+
+                                    <!-- ========== progressbar ========== -->
+
+                                    <ul class="progressbar">
+                                        <li class="form_application @active_1"><strong><a href="@Url.Action("EditMaklumat", "Pengesahan",new {Page = GlobalFunction.encodeThis("1"), id = GlobalFunction.encodeThis(Model.License_Id.ToString())})">1. @Resources.Verification.VV_CITES_No</a></strong></li>
+                                        <li class="form_application @active_2"><strong><a href="@Url.Action("EditMaklumat", "Pengesahan",new {Page = GlobalFunction.encodeThis("2"), id = GlobalFunction.encodeThis(Model.License_Id.ToString()) })">2. @Resources.Verification.VV_List_Wildlife</a></strong></li>
+                                        <li class="form_application @active_3"><strong><a href="@Url.Action("EditMaklumat", "Pengesahan",new {Page = GlobalFunction.encodeThis("3"), id = GlobalFunction.encodeThis(Model.License_Id.ToString()) })">3. @Resources.Verification.VV_Cites_Info</a></strong></li>
+                                        <li class="form_application @active_4"><strong><a href="@Url.Action("EditMaklumat", "Pengesahan",new {Page = GlobalFunction.encodeThis("4"), id = GlobalFunction.encodeThis(Model.License_Id.ToString()) })">4. @Resources.Verification.VV_Inspection_Info</a></strong></li>
+                                        <li class="form_application @active_5"><strong><a href="@Url.Action("EditMaklumat", "Pengesahan",new {Page = GlobalFunction.encodeThis("5"), id = GlobalFunction.encodeThis(Model.License_Id.ToString()) })">5. @Resources.Verification.VV_Review</a></strong></li>
+
+                                        @if (Role.Contains(12)) // eg : Pengesah
+                                        {
+                                            if (Model.Pegawai_Penyemak != null) //dh ada pegawai penyemak
+                                            {
+                                                <li class="form_application @active_6"><strong><a href="@Url.Action("EditMaklumat", "Pengesahan",new {Page = GlobalFunction.encodeThis("6"), id = GlobalFunction.encodeThis(Model.License_Id.ToString()) })">6. @Resources.Verification.VV_Verification</a></strong></li>
+                                            }
+
+                                        }
+
+                                    </ul>
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger text-left" })
+                                    <!-- ========== No Permit  ========== -->
+                                    if (Page == "1")
+                                    {
+                                        @Html.Partial("_formNoPermit", Model)
+                                    }
+
+                                    else if (Page == "2")
+                                    {
+                                        <!-- ========== Wildlife List ========== -->
+                                        @Html.Partial("_formHidupanLiar", Model)
+
+                                    }
+                                    else if (Page == "3")
+                                    {
+                                        <!-- ========== Cites  ========== -->
+                                        @Html.Partial("_formCites", Model)
+
+                                    }
+                                    else if (Page == "4")
+                                    {
+                                        <!-- ========== Inspection ========== -->
+                                        @Html.Partial("_formPemeriksaan", Model)
+
+                                    }
+                                    else if (Page == "5")
+                                    {
+                                        <!-- ========== Review ========== -->
+                                        @Html.Partial("_formSemakan", Model)
+
+                                    }
+
+
+                                    else if (Page == "6")
+                                    {
+                                        <!-- ========== Verification  ========== -->
+                                        @Html.Partial("_formPengesahan", Model)
+
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<hr />
+@*</div>*@
+
+@section scripts{
+    <script>
+
+        function openNewTab(url) {
+            var win = window.open(url, '_blank');
+            win.focus();
+        }
+
+        $(document).ready(function () {
+
+            $("#date").flatpickr({
+            dateFormat: "d/m/Y",
+            altFormat: "d/m/Y",
+            defaultDate: new Date('@Model.Sah_Sehingga')
+            });
+
+
+            $("#dateTime").flatpickr({
+                enableTime: true,
+                dateFormat: "d/m/Y H:i:S",
+                altFormat: "d/m/Y H:i:S",
+            });
+
+
+             $(".MainAppendiks").change(function () {
+            var appendik = $(this).val();
+            var speciesId = $(this).data('species-id');
+            var appendikHidup = $('#speciesHidup').find('.newAppendiks[data-species-id="' + speciesId + '"]');
+            var appendikTrofiProduk = $('#produkTrofi').find('.newAppendiks[data-species-id="' + speciesId + '"]');
+
+            if (appendikHidup.length === 0) {
+                appendikTrofiProduk.val(appendik);
+            }
+            appendikHidup.each(function () {
+                $(this).val(appendik); // Set the value of the found element
+            })
+
+        });
+
+
+
+            //Submit button function
+           $(".SubmitBtn").click(function (e) {
+           e.preventDefault(); // Prevent default form submission
+
+             var messages = "";
+
+            // Check if model property is null
+            if ('@Model.Jenis_Permit' === '' || '@Model.Sah_Sehingga' === '') {
+                 messages += "@Resources.Verification.VV_CITES_No, ";
+               }
+
+            if ('@Model.getSpeciesDetails.Spesis_Quantity_Disahkan' === '') {
+                    messages += "@Resources.Verification.VV_List_Wildlife, ";
+               }
+
+            if ('@Model.License_Type' === 'Eksport Semula'||'@Model.License_Type' === 'Eksport') {
+                 if ('@Model.Negara_Import' === '') {
+                     messages += "@Resources.Verification.VV_Cites_Info, ";
+                 }
+             }
+
+            if ('@Model.License_Type' === 'Import') {
+                 if ('@Model.Negara_Eksport' === '' ) {
+                     messages += "@Resources.Verification.VV_Cites_Info, ";
+                 }
+             }
+
+            if ('@Model.Nama_Pemeriksa' === '' || '@Model.Lokasi_Pemeriksaan' === '' || '@Model.Tarikh_MasaSemakan' === '') {
+                messages += "@Resources.Verification.VV_Inspection_Info";
+             }
+
+
+             if (messages !== ''){
+                 swal({
+                     text: "@Resources.Verification.E_ValidationSummary  "+ messages,
+                     type: "warning",
+                     padding: '2em'
+                 });
+             }
+
+             else {
+                  // If model property is not null, submit the form
+                  $("#submitType").val("Submit"); //kne setkan value pada submit button,klau tk dia tk recognize button ni!
+                  $(".msform").submit();
+               }
+
+           });
+
+
+            //to get and assign for 'sumber' input type
+            $(".MainSumber").change(function () {
+                var sumber = $(this).val();
+                var speciesId = $(this).data('species-id');
+                var sumberHidup = $('#speciesHidup').find('.newSumber[data-species-id="' + speciesId + '"]');
+                var sumberTrofiProduk = $('#produkTrofi').find('.newSumber[data-species-id="' + speciesId + '"]');
+
+                if (sumberHidup.length === 0) {
+                    sumberTrofiProduk.val(sumber);
+                }
+                sumberHidup.each(function () {
+                    $(this).val(sumber); // Set the value of the found element
+                })
+
+            });
+
+            //to display the checked tickbox based on quantity value in 'Confirmed Quantity'
+            $(".qtySah").each(function () {
+                var kuantitiSah = parseInt($(this).val());
+                var speciesId = $(this).data('species-id');
+
+                // Find the checkbox that belongs to mainID using data attribute for better readability
+                var checkbox = $('#speciesHidup').find('.checkBoxQty[data-species-id="' + speciesId + '"]');
+
+                if (kuantitiSah > 0 ) {
+                    checkbox.each(function (index) {
+                        if (index < kuantitiSah) {
+                            $(this).prop('checked', true);
+                        }
+                    });
+                }
+            });
+
+
+            //to automatically ticked checkbox based on input 'Kuantiti Disahkan'
+            $(".qtySah").on('input', function () {
+                var kuantitiSah = parseInt($(this).val());
+                var speciesId = $(this).data('species-id');
+
+                // Cari each kuantiti based pada spesis id!
+                var quantityInput = $('.quantity[data-species-id="' + speciesId + '"]');
+                var quantityLimit = parseInt(quantityInput.text());
+
+                var checkbox = $('#speciesHidup').find('.checkBoxQty[data-species-id="' + speciesId + '"]');
+                var checkedSpecies = [];
+
+                // Get the Main_Spesis_Id from the checkbox ID
+                //var mainSpesisId = parseInt(checkbox.attr('id').replace('checkBox_', ''));
+                //console.log(mainSpesisId);
+
+                console.log(quantityLimit);
+
+                if (!Number.isInteger(kuantitiSah) || kuantitiSah < 0) {
+                    // Show a warning for invalid input(eg:huruf) and clear the input (value = 0)
+                    swal({
+                        text: "Please enter a Number!",
+                        type: "warning",
+                        padding: '2em'
+                    });
+                    $(this).val('');
+                    checkbox.prop('checked', false);
+                    return;
+                }
+
+
+                if (kuantitiSah > quantityLimit) {
+                    // Quantity exceeds the limit, show a warning and clear the input
+                    swal({
+                        text: "The Value Must Not Exceed the Quantity Limit!",
+                        type: "warning",
+                        padding: '2em'
+                    });
+                    $(this).val('');
+                    checkbox.prop('checked', false);
+                }
+
+                else {
+                    // Your existing logic for checking checkboxes based on quantity
+
+                    if (kuantitiSah > 0 && kuantitiSah <= quantityLimit) {
+                        checkbox.each(function (index) {
+                            if (index < kuantitiSah) {
+                                $(this).prop('checked', true);
+                                checkedSpecies.push($(this).val());
+                            }
+                        });
+                    }
+                }
+            });
+
+            //display success message
+            function message() {
+                return swal({
+                    //title: 'Saved!',
+                    text: "@Resources.Verification.VV_AlertSaved",
+                    type: "success",
+                    padding: '2em'
+                })
+            }
+
+            //Format for File Upload
+            $('#citesOriginalID').change(function () {
+                var validExtensions = ["pdf"];
+                var file = this.files[0]; // Get the file object
+                var filename = $(this).val().split('.').pop();
+                if (validExtensions.indexOf(filename.toLowerCase()) == -1) {
+                    swal({
+                        html: "<span style='color:black !important'>Only formats are allowed : " + validExtensions.join(', ') + "<span>",
+                        type: "warning",
+                        padding: '2em',
+                        allowEscapeKey: false,
+                    })
+                    $('#citesOriginalID').val('');
+                    return false;
+                }
+
+                if (file.size > 2000000) {
+                    swal({
+                        html: "<span style='color:black !important'>@Resources.Verification.VV_SaizFile2MB<span>",
+                        type: "warning",
+                        padding: '2em',
+                        allowEscapeKey: false,
+                    })
+                    $('#citesOriginalID').val('');
+                    return false;
+                }
+
+            })
+
+            $('#citesUbahID').change(function () {
+                var validExtensions = ["pdf"];
+                var filename = $(this).val().split('.').pop();
+                var file = this.files[0]; // Get the file object
+                if (validExtensions.indexOf(filename.toLowerCase()) == -1) {
+                    swal({
+                        html: "<span style='color:black !important'>Only formats are allowed : " + validExtensions.join(', ') + "<span>",
+                        type: "warning",
+                        padding: '2em',
+                        allowEscapeKey: false,
+                    })
+                    $('#citesUbahID').val('');
+                    return false;
+                }
+
+                if (file.size > 2000000) {
+                    swal({
+                        html: "<span style='color:black !important'>@Resources.Verification.VV_SaizFile2MB<span>",
+                        type: "warning",
+                        padding: '2em',
+                        allowEscapeKey: false,
+                    })
+                    $('#citesUbahID').val(''); //clearkan input
+                    return false;
+                }
+            })
+
+            //Assign Value for Button
+            $(".SaveButtonVal").click(function () {
+                $("#submitType").val("Draft");
+            });
+
+            $(".SaveNextBtn").click(function () {
+                $("#submitType").val("SaveNext");
+            });
+
+            //Assign Value for FileUpload Type
+
+            $(".citesOriginal").click(function () {
+                $("#FileType").val("CitesOri");
+            });
+
+            $(".cites2").click(function () {
+                $("#FileType").val("Cites2");
+            });
+
+
+            $("#statusSemak").change(function () {
+                var status = $(this).val();
+
+                if (status == 1) {
+                    $('#namaPengesah').show();
+                }
+                else if (status == 2) {
+                    $('#namaPengesah').hide();
+                }
+            })
+
+        });
+    </script>
+}
+
+
+

@@ -1,0 +1,70 @@
+﻿@model ePerhilitanV2.Models.ViewModels.PengesahanViewModel.ImportExport
+
+<div class="form-card" style="padding: 20px">
+    <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+        <div class="table-responsive">
+            <table class="table table2 table-bordered mb-4" id="">
+                <thead>
+                    <tr class="thead-light">
+                        <th colspan="8">@Resources.Verification.VV_CITES_No</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_CITES_No</label>
+                                <div class="col-sm-9">
+                                    @Model.Cites_No
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_Original_Cites_No</label>
+                                <div class="col-sm-9">
+                                    @Model.getSpeciesDetails.Original_CitesNo
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._PermitType</label>
+                                <div class="col-sm-9">
+                                    @if (Model.Jenis_Permit == "1")
+                                    {
+                                        @Resources.Verification.VV_Cites_Info
+                                    }
+                                    else
+                                    {
+                                        @Resources.Verification.VV_NonCites
+                                    }
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_ValidUntil</label>
+                                <div class="col-sm-6">
+                                    @if (Model.Sah_Sehingga != null)
+                                    {
+                                        @Convert.ToDateTime(Model.Sah_Sehingga).ToString("dd/MM/yyyy", new System.Globalization.CultureInfo("en-US"))
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

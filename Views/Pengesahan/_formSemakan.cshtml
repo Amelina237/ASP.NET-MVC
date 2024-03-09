@@ -1,0 +1,188 @@
+﻿@model ePerhilitanV2.Models.ViewModels.PengesahanViewModel.ImportExport
+@using ePerhilitanV2.Infrastructures.Services;
+@{
+    var _accountService = new AccountService();
+    var Role = _accountService.getRole(Model.User_Id);
+}
+<style>
+    .uppercase {
+        text-transform: uppercase;
+    }
+
+    .text-black {
+        color: black;
+    }
+</style>
+
+<fieldset>
+    <div class="form-card">
+        @if (Model.Pegawai_Penyemak != null && Model.User_Id.ToString() != Model.Pegawai_Penyemak)    //dah ada orang semak
+        {
+            @*@Html.HiddenFor(model => model.Status_By_Penyemak)*@
+            <div class="form-group row">
+                <div class="col-sm-12 text-right">
+                    <a href="@Url.Action("EditMaklumat", "Pengesahan",new {Page = GlobalFunction.encodeThis(@ViewBag.NextPage.ToString()), id = GlobalFunction.encodeThis(Model.License_Id.ToString())})" class="btn btn-warning mb-4 mr-2 btn-md">@Resources.Resource._Next</a>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Status_Application</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoStatusApplication"><i class="feather-13" data-feather="info"></i></a></span>
+                        </div>
+                        @Html.DropDownListFor(model => model.Status_By_Penyemak, new SelectList(Model.SelectStatus, "Value", "Text"), @Resources.Verification.PleaseChoose, new { @class = "form-control form-control-sm text-black", @id = "statusSemak", @disabled = "disabled" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Status_By_Penyemak, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group row" id="namaPengesah">
+                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_VerifyOfficerName</label>
+                <div class="col-sm-9">
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoVerifier"><i class="feather-13" data-feather="info"></i></a></span>
+                        </div>
+                        @*<input type="text" class="form-control form-control-sm uppercase" id="namaPengesah" value="" placeholder="">*@
+                        @Html.DropDownListFor(model => model.Nama_Pengesah, new SelectList(Model.SelectPengesah, "Value", "Text"), Model.getNamaPengesahSahaja.Pegawai_Pengesah, new { @class = "form-control form-control-sm text-black", @disabled = "disabled" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Nama_Pengesah, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Comment</label>
+                <div class="col-sm-9">
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoComment"><i class="feather-13" data-feather="info"></i></a></span>
+                        </div>
+                        @*<textarea class="form-control form-control-sm" placeholder="" rows="2" spellcheck="false" id="">@Model.Catatan_Penyemak</textarea>*@
+                        @Html.TextAreaFor(model => model.Catatan_Penyemak, new { @class = "form-control uppercase text-black form-control-sm", rows = "2", @disabled = "disabled", @maxlength = "255" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Catatan_Penyemak, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            if (Role.Contains(10)) //penyemak
+            {
+                @Html.HiddenFor(model => model.Status_By_Pengesah)
+                <div class="col-sm-12 text-right">
+                    <input type="submit" name="next" class="btn btn-dark mb-4 mr-2 btn-md SaveButtonVal" value="@Resources.License.LES_Save" />
+                    <input type="submit" name="next" class="btn btn-success mb-4 mr-2 btn-md SubmitBtn" value="@Resources.Resource._Submit" />
+                </div>
+
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Status_Application</label>
+                    <div class="col-sm-9">
+                        <div class="input-group ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoStatusApplication"><i class="feather-13" data-feather="info"></i></a></span>
+                            </div>
+                            @Html.DropDownListFor(model => model.Status_By_Penyemak, new SelectList(Model.SelectStatus, "Value", "Text"), @Resources.Verification.PleaseChoose, new { @class = "form-control form-control-sm", @id = "statusSemak" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Status_By_Penyemak, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                //if (Model.Status_By_Penyemak == "1")
+                //{
+                <div class="form-group row" id="namaPengesah">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_VerifyOfficerName</label>
+                    <div class="col-sm-9">
+                        <div class="input-group ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoVerifier"><i class="feather-13" data-feather="info"></i></a></span>
+                            </div>
+                            @*<input type="text" class="form-control form-control-sm uppercase" id="namaPengesah" value="" placeholder="">*@
+                            @Html.DropDownListFor(model => model.Nama_Pengesah, new SelectList(Model.SelectPengesah, "Value", "Text"), @Resources.Verification.PleaseChoose, new { @class = "form-control form-control-sm text-black" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Nama_Pengesah, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                //}
+
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Comment</label>
+                    <div class="col-sm-9">
+                        <div class="input-group ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoComment"><i class="feather-13" data-feather="info"></i></a></span>
+                            </div>
+                            @*<textarea class="form-control form-control-sm" placeholder="" rows="2" spellcheck="false" id="">@Model.Catatan_Penyemak</textarea>*@
+                            @Html.TextAreaFor(model => model.Catatan_Penyemak, new { @class = "form-control form-control-sm uppercase", rows = "2", @maxlength = "255" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Catatan_Penyemak, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            }
+
+            if (Role.Contains(12))
+            {
+                @Html.HiddenFor(model => model.Status_By_Pengesah)
+                <div class="col-sm-12 text-right">
+                    <input type="submit" name="next" class="btn btn-dark mb-4 mr-2 btn-md SaveButtonVal" value="@Resources.License.LES_Save" />
+                    <input type="submit" name="next" class="btn btn-success mb-4 mr-2 btn-md SubmitBtn" value="@Resources.Resource._Submit" />
+                </div>
+
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Status_Application</label>
+                    <div class="col-sm-9">
+                        <div class="input-group ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoStatusApplication"><i class="feather-13" data-feather="info"></i></a></span>
+                            </div>
+                            @Html.DropDownListFor(model => model.Status_By_Penyemak, new SelectList(Model.SelectStatus, "Value", "Text"), @Resources.Verification.PleaseChoose, new { @class = "form-control form-control-sm", @id = "statusSemak" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Status_By_Penyemak, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                //if (Model.Status_By_Penyemak == "1")
+                //{
+                <div class="form-group row" id="namaPengesah">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_VerifyOfficerName</label>
+                    <div class="col-sm-9">
+                        <div class="input-group ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoVerifier"><i class="feather-13" data-feather="info"></i></a></span>
+                            </div>
+                            @*<input type="text" class="form-control form-control-sm uppercase" id="namaPengesah" value="" placeholder="">*@
+                            @Html.DropDownListFor(model => model.Nama_Pengesah, new SelectList(Model.SelectPengesah, "Value", "Text"), @Resources.Verification.PleaseChoose, new { @class = "form-control form-control-sm text-black" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Nama_Pengesah, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                //}
+
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Comment</label>
+                    <div class="col-sm-9">
+                        <div class="input-group ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoComment"><i class="feather-13" data-feather="info"></i></a></span>
+                            </div>
+                            @*<textarea class="form-control form-control-sm" placeholder="" rows="2" spellcheck="false" id="">@Model.Catatan_Penyemak</textarea>*@
+                            @Html.TextAreaFor(model => model.Catatan_Penyemak, new { @class = "form-control form-control-sm uppercase", rows = "2", @maxlength = "255" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Catatan_Penyemak, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            }
+
+        }
+
+
+
+
+    </div>
+</fieldset>
+

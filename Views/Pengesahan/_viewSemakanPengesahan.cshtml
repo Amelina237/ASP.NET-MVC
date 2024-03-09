@@ -1,0 +1,121 @@
+﻿@model ePerhilitanV2.Models.ViewModels.PengesahanViewModel.ImportExport
+
+<div class="form-card" style="padding: 20px">
+    <!-- SEMAKAN -->
+    <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+        <div class="table-responsive">
+            <table class="table table2 table-bordered" id="">
+                <thead>
+                    <tr class="thead-light">
+                        <th colspan="8">@Resources.Verification.VV_Review</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm ">@Resources.Verification.VV_Status_Application</label>
+                                <div class="col-sm-9">
+                                    @if (@Model.Status_By_Penyemak == "1")
+                                    {
+                                        @Resources.Verification.Valid
+                                    }
+                                    else
+                                    {
+                                        @Resources.Verification.NonValid
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm ">@Resources.Verification.VV_ReviewOfficer</label>
+                                <div class="col-sm-9">
+                                    @if (Model.getReviewVerify.Pegawai_Penyemak != null)
+                                    {
+                                        @Model.getReviewVerify.Pegawai_Penyemak
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm ">@Resources.Verification.VV_Comment</label>
+                                <div class="col-sm-9">
+                                    @if (Model.Catatan_Penyemak != null)
+                                    {
+                                        @Model.Catatan_Penyemak.ToUpper()
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- PENGESAHAN -->
+            @if (Model.Status_By_Penyemak == "1")   //sah
+            {
+                <table class="table table2 table-bordered" id="">
+                    <thead>
+                        <tr class="thead-light">
+                            <th colspan="8">@Resources.Verification.VV_Verification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-group row">
+                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_Status_Application</label>
+                                    <div class="col-sm-9">
+                                        @if (Model.Status_By_Pengesah == "1")
+                                        {
+                                            @Resources.Verification.Valid
+                                        }
+                                        else
+                                        {
+                                            @Resources.Verification.NonValid
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group row">
+                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm ">@Resources.Verification.VV_VerifyOfficerName</label>
+                                    <div class="col-sm-9">
+                                        @if (Model.getReviewVerify.Pegawai_Pengesah != null)
+                                        {
+                                            @Model.getReviewVerify.Pegawai_Pengesah
+                                        }
+                                        </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group row">
+                                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_CommentVerifierOfficer </label>
+                                    <div class="col-sm-9">
+                                        @if (Model.Ulasan_Pengesah != null)
+                                        {
+                                            @Model.Ulasan_Pengesah.ToUpper()
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+
+        </div>
+    </div>
+</div>
+
+

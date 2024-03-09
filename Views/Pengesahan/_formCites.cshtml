@@ -1,0 +1,184 @@
+﻿@model ePerhilitanV2.Models.ViewModels.PengesahanViewModel.ImportExport
+
+<style>
+    .form-control-file {
+        color: black;
+    }
+
+    .text-blue-dwd {
+        color: blue;
+    }
+
+    .form-control-file::-webkit-file-upload-button {
+        background-color: #096d49;
+    }
+
+    .uppercase {
+        text-transform: uppercase;
+    }
+</style>
+@*<input type="text" name="salinanCitesOriginal" value="@Model.getSpecificDoc.File_Name" id="" />*@
+
+<fieldset>
+    <div class="form-group row">
+        <div class="col-sm-12 text-right">
+            <input type="submit" name="next" class="btn btn-dark mb-4 mr-2 btn-md SaveButtonVal" value="@Resources.License.LES_Save" />
+            <input type="submit" name="next" class="btn btn-warning mb-4 mr-2 btn-md SaveNextBtn" value="@Resources.License.LES_SaveNext" />
+        </div>
+    </div>
+    <div class="form-card">
+        @if (Model.License_Type == "Import")
+        {
+            <div class="form-group row">
+                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_ExportCountry</label>
+                <div class="col-sm-9">
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoCodeExportCountry"><i class="feather-13" data-feather="info"></i></a></span>
+                        </div>
+                        @Html.EditorFor(model => model.Negara_Eksport, new { htmlAttributes = new { @class = "form-control form-control-sm uppercase" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Negara_Eksport, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_ExportPurpose</label>
+                <div class="col-sm-9">
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjTtoHDgKKDAxUxTGwGHRN_DcQQFnoECAsQAQ&url=https%3A%2F%2Fcites.org%2Fsites%2Fdefault%2Ffiles%2Feng%2Fprog%2Fcaptive_breeding%2FE-Souce%2520codes%2520booklet%2520-%2520April%252017.pdf&usg=AOvVaw0TwL27SdCw9iaf7GuFeYRv&opi=89978449" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoPurposeExport "><i class="feather-13" data-feather="info"></i></a></span>
+                        </div>
+                        @Html.DropDownListFor(model => model.Tujuan, new SelectList(Model.getListCodePurposeTrade, "Value", "Text"), @Resources.Verification.PleaseChoose, new { @class = "form-control form-control-sm", @id = "" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Tujuan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_ExportName</label>
+                <div class="col-sm-9">
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoNameImpoterExporter"><i class="feather-13" data-feather="info"></i></a></span>
+                        </div>
+                        @Html.EditorFor(model => model.Nama_Eksport, new { htmlAttributes = new { @class = "form-control form-control-sm uppercase" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Negara_Eksport, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_ExportAddress</label>
+                <div class="col-sm-9">
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoAddressImporterExporter"><i class="feather-13" data-feather="info"></i></a></span>
+                        </div>
+                        @Html.TextAreaFor(model => model.Alamat_Pengeksport, new { @class = "form-control form-control-sm uppercase", rows = "2", @maxlength = "500" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Alamat_Pengeksport, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else if (Model.License_Type == "Eksport" || Model.License_Type == "Eksport Semula")
+        {
+            <div class="form-group row">
+                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_ImportCountry</label>
+                <div class="col-sm-9">
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoCodeExportCountry"><i class="feather-13" data-feather="info"></i></a></span>
+                        </div>
+                        @Html.EditorFor(model => model.Negara_Import, new { htmlAttributes = new { @class = "form-control form-control-sm uppercase" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Negara_Import, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_ImportPurpose</label>
+                <div class="col-sm-9">
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjTtoHDgKKDAxUxTGwGHRN_DcQQFnoECAsQAQ&url=https%3A%2F%2Fcites.org%2Fsites%2Fdefault%2Ffiles%2Feng%2Fprog%2Fcaptive_breeding%2FE-Souce%2520codes%2520booklet%2520-%2520April%252017.pdf&usg=AOvVaw0TwL27SdCw9iaf7GuFeYRv&opi=89978449" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoPurposeExport "><i class="feather-13" data-feather="info"></i></a></span>
+                        </div>
+                        @Html.DropDownListFor(model => model.Tujuan, new SelectList(Model.getListCodePurposeTrade, "Value", "Text"), @Resources.Verification.PleaseChoose, new { @class = "form-control form-control-sm", @id = "" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Tujuan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_ImporterName</label>
+                <div class="col-sm-9">
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoNameImpoterExporter"><i class="feather-13" data-feather="info"></i></a></span>
+                        </div>
+                        @Html.EditorFor(model => model.Nama_Import, new { htmlAttributes = new { @class = "form-control form-control-sm uppercase" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Nama_Import, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_ImportAddress</label>
+                <div class="col-sm-9">
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoAddressImporterExporter"><i class="feather-13" data-feather="info"></i></a></span>
+                        </div>
+                        @Html.TextAreaFor(model => model.Alamat_Pengimport, new { @class = "form-control form-control-sm uppercase", rows = "2",@maxlength = "500" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Alamat_Pengimport, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="form-group row">
+            <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_StemNo</label>
+            <div class="col-sm-9">
+                <div class="input-group ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoStemNo"><i class="feather-13" data-feather="info"></i></a></span>
+                    </div>
+                    @Html.EditorFor(model => model.No_Stem, new { htmlAttributes = new { @class = "form-control form-control-sm uppercase" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.No_Stem, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*retrieved data from db*@
+        @Html.HiddenFor(model => model.getSpecificDoc.File_Name)
+        @if (Model.getListDocument != null)
+        {
+            // Display for "maklumat_cites" -- nk dapatkan 1st dokumen dalam getList collection dimana filename =  maklumat_cites
+            var maklumatCites = Model.getListDocument.FirstOrDefault(d => d.File_Name == "maklumat_cites");
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Copy_Cites</label>
+                <div class="col-sm-4">
+                    @*<input type="file" class="form-control-file text-right citesOriginal" id="citesOriginalID" name="salinanCitesOriginal" value="@Model.salinanCitesOriginal">*@
+                    @Html.TextBoxFor(m => m.salinanCitesOriginal, new { type = "file", @class = "form-control-file text-right citesOriginal", @id = "citesOriginalID" })
+                    @if (maklumatCites != null) //akn appear jika ada file ni
+                    {
+                        <a href="@Url.Action("DownloadFile", "Pengesahan", new { fileName = Path.GetFileName(maklumatCites.File_Location) })"><span class="text-blue-dwd"><u><b>@maklumatCites.File_Name</b></u></span></a>
+
+                    }
+                    @Html.ValidationMessageFor(model => model.getSpecificDoc.File_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            // Display for "maklumat_cites_ubah"
+            var maklumatCitesUbah = Model.getListDocument.FirstOrDefault(d => d.File_Name == "maklumat_cites_ubah");
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_CitesChanges</label>
+                <div class="col-sm-4">
+                    @*<input type="file" class="form-control-file text-right cites2" id="citesUbahID" name="salinanCitesChanges" value="">*@
+                    @Html.TextBoxFor(m => m.salinanCitesChanges, new { type = "file", @class = "form-control-file text-right cites2", @id = "citesUbahID" })
+                    @if (maklumatCitesUbah != null)
+                    {
+                        <a href="@Url.Action("DownloadFile", "Pengesahan", new { fileName = Path.GetFileName(maklumatCitesUbah.File_Location) })"><span class="text-blue-dwd"><u><b>@maklumatCitesUbah.File_Name</b></u></span></a>
+                    }
+                </div>
+            </div>
+        }
+
+    </div>
+    <hr />
+</fieldset>
+
+
