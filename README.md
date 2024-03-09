@@ -8,9 +8,9 @@ It will automate the permit and license issuance process for wildlife trade, fac
   
 ## Modules Involved
 
-- Module Verification and Validation: Focuses on functions involving Information Reviewer and Approver Officers at the Entry Point for the purpose of importing, exporting, and re-exporting. It encompasses tasks related to verifying and validating data entries, ensuring accuracy, consistency, and compliance with regulations. Additionally, the module facilitates the review and approval process, streamlining verification tasks and enhancing data integrity.
+- Module Verification and Validation : Focuses on functions involving Information Reviewer and Approver Officers at the Entry Point for the purpose of importing, exporting, and re-exporting. It encompasses tasks related to verifying and validating data entries, ensuring accuracy, consistency, and compliance with regulations. Additionally, the module facilitates the review and approval process, streamlining verification tasks and enhancing data integrity.
 
-- Module Reporting: Focuses on visualizing the report more attractively using Power BI.
+- Module Reporting : Focuses on visualizing the report more attractively using Power BI.
 
 ## Technology Stack
 
