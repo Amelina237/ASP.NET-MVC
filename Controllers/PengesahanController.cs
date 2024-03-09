@@ -198,21 +198,7 @@ namespace ePerhilitanV2.Controllers
             return View(model);
         }
 
-        //public ActionResult ViewMaklumat(int id)
-        //{
-        //        ImportExport model = new ImportExport();
-        //        model = _PengesahanService.GetIEDetails(id);
-        //        model.GetOwnerDetails = GlobalFunction.getOwnerLicense(id);
-        //        model.GetCompanyDetails = GlobalFunction.getOrganisationLicense(id);
-        //        model.getSpeciesList = _PengesahanService.GetSpeciesList(id);
-        //        model.getSpeciesDetails = _PengesahanService.getSpeciesDetails(id);
-        //        model.SelectJenisPermit = _helper.SelectJenisPermit();
-        //        model.getReviewVerify = _PengesahanService.getReviewVerify(id);
-        //        model.getTotalSpeciesList = _PengesahanService.getTotalQuantitySpecies(id);
-        //        model.getTotalQuantityHidup = _PengesahanService.getTotalQuantityHidup(id);
-        //        model.getListDocument = _PengesahanService.getListDocument(id);
-        //        return View(model);
-        //}
+    
 
         #region  Semak Maklumat Pemohon - JSON
 
