@@ -1,0 +1,1188 @@
+﻿@*@model List<ePerhilitanV2.Models.ViewModels.PengesahanViewModel.User>*@
+
+@{
+    ViewBag.Title = "Semak Maklumat Permohonan";
+
+    var lcl = HttpContext.Current.Request.IsLocal;
+
+    var baseurl = lcl == true ? GlobalFunction.Constants.baseurlLocal : GlobalFunction.Constants.baseurlServer;
+}
+
+<style>
+
+    .txtColorbtn {
+        color: white;
+    }
+</style>
+
+<div class="col-xl-12 col-lg-12 col-md-12">
+    <div class="col-xl-12 col-lg-12 col-md-12 mx-auto mt-3">
+        <div id="iconsAccordion" class="accordion-icons">
+            <div class="card">
+                <div class="card-header" id="headingOne3">
+                    <section class="mb-0 mt-0">
+                        <div role="menu" class="collapsed" data-toggle="collapse" data-target="#iconAccordionOne" aria-expanded="false" aria-controls="iconAccordionOne">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div class="accordion-icon">
+                                        <div class="icon-text">
+                                            <h5 style="font-weight: 500;">@Resources.Verification.VV_Review   </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i data-feather="chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="iconAccordionOne" class="collapse show" aria-labelledby="headingOne3" data-parent="#iconsAccordion" style="">
+                    <div class="card-body">
+                        <div class="col-xl-8 col-lg-8 col-md-8 mx-auto ">
+
+                            <div class="form-group col-md-12" id="jenisCarianGroup" name="jenisCarianGroup">
+                                <p>@Resources.Verification.VV_TypeSearch</p>
+                                <div>
+                                    <select class="form-control form-control-sm nested" id="jenisCarianSelect" name="jenisCarianSelect">
+                                        <optgroup label="Nama">
+                                            <option selected="selected">Please Choose</option>
+                                            <option value="1">Nama Pemilik</option>
+                                            <option value="2">Nama Syarikat</option>
+                                        </optgroup>
+                                        <optgroup label="Nombor">
+                                            <option value="3">No MyKad/Pasport</option>
+                                            <option value="4">No. Pendaftaran Syarikat</option>
+                                            <option value="5">No. Lesen/Permit</option>
+                                            <option value="6">No. CITES/Non-CITES</option>
+                                            <option value="7">No. Penandaan</option>
+                                            <option value="8">No. Telefon Pemilik</option>
+                                        </optgroup>
+                                        <optgroup label="Alamat">
+                                            <option value="9">Alamat Pemilik</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12" id="kategoriAlamatGroup" style="display:none">
+                                <p>Kategori Alamat</p>
+                                <div>
+                                    <select name="kategoriAlamatSelect" class="form-control form-control-sm nested" id="kategoriAlamatSelect">
+                                        <option>Sila Pilih</option>
+                                        <option value="1">Alamat Surat-menyurat</option>
+                                        <option value="9">Alamat Menyimpan</option>
+                                        <option value="7">Alamat Premis</option>
+                                        <option value="5">Hidupan Liar Ditempatkan</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 filtered-list-search mx-auto">
+                                <p>@Resources.Verification.VV_Search</p>
+                                <form class="form-inline my-2 my-lg-0 justify-content-center">
+                                    <div class="w-100">
+                                        @*<input type="text" name="SearchBtn" class="w-100 form-control product-search br-30" id="keyword" placeholder="">*@
+                                        <input type="text" class="w-100 form-control product-search br-30" id="search" placeholder="@Resources.Verification.VV_Search">
+                                        @*<button id="SearchBtn" class="btn btn-primary" type="button"><i class="feather-20" data-feather="search"></i></button>*@
+                                        <button type="button" class="btn btn-primary" id="filterSearch"><i class="feather-20" data-feather="search"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<hr />*@
+    <br /><br />
+    <!-- START TABLE DISPLAY LIST OF APPLICATION -->
+    <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+        <div class="table-responsive" style="display:none" id="table1">
+            <table class="table table-bordered table-hover mb-4 " id="semakPemohonByNamaIC" style="display:none">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            No.
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_ApplicantName
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._Ic_No / @Resources.Resource._Passport_No
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._Email
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive" style="display:none" id="table2">
+            <table class="table table-bordered table-hover mb-4 " id="semakBySyarikat" style="display:none">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            No.
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._CompanyName
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._CompanyRegisterNo
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive" style="display:none" id="table3">
+            <table class="table table-bordered table-hover mb-4 " id="semakByNoPenandaan" style="display:none">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            No.
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_ApplicantName
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_ScientificName / @Resources.Verification.VV_CommonName
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_NoPenandaan
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_LicenseNo
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive" style="display:none" id="table4">
+            <table class="table table-bordered table-hover mb-4 " id="semakByNoLesen2" style="display:none">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            No.
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_ApplicantName
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_LicenseType [@Resources.Verification.VV_LicenseNo]
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_OfficeProducer
+                        </th>
+                        <th class="text-center">
+                           Tarikh Mula
+                        </th>
+                        <th class="text-center">
+                            Tarikh Tamat
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive" style="display:none" id="table5">
+            <table class="table table-bordered table-hover mb-4 " id="semakByAlamat" style="display:none">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            No.
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_ApplicantName
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_LicenseNo
+                        </th>
+                        <th class="text-center">
+                           JENIS ALAMAT
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._Address
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            
+        </div>
+
+        @*<div class="table-responsive" style="display:none" id="table5">
+            <table class="table table-bordered table-hover mb-4 " id="semakByAlamat" style="display:none">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            No.
+                        </th>
+                        <th class="text-center">
+                            Nama Pemegang
+                        </th>
+                        <th class="text-center">
+                            No Lesen
+                        </th>
+                        <th class="text-center">
+                            Jenis Alamat
+                        </th>
+                        <th class="text-center">
+                            Alamat
+                        </th>
+                        <th class="text-center">
+                            Tindakan
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+        </div>*@
+
+        <div class="table-responsive" style="display:none" id="table6">
+            <table class="table table-bordered table-hover mb-4 " id="semakByNoCites" style="display:none">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            No.
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_ApplicantName
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._Ic_No / @Resources.Resource._Passport_No
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_LicenseNo
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="table-responsive" style="display:none" id="table7">
+            <table class="table table-bordered table-hover mb-4 " id="semakByNoPendaftaranSyarikat" style="display:none">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            No.
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_ApplicantName
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._CompanyName
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._CompanyRegisterNo
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive" style="display:none" id="table8">
+            <table class="table table-bordered table-hover mb-4 " id="semakByNoTelefon" style="display:none">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            No.
+                        </th>
+                        <th class="text-center">
+                            @Resources.Verification.VV_ApplicantName
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._Ic_No / @Resources.Resource._Passport_No
+                        </th>
+                        <th class="text-center">
+                            @Resources.Account.ACC_PhoneNum
+                        </th>
+                        <th class="text-center">
+                            @Resources.Resource._Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- Bootstrap Modal-->
+        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="userModalLabel">@Resources.Verification.VV_ViewDetails</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modalBody">
+                        <!-- Partial view content here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END TABLE DISPLAY APPLICATION LIST -->
+</div>
+
+@section scripts{
+    <script>
+        //Get data and display in Modal
+        function openModal(userId) {
+            console.log('Received userId:', userId);
+            $.ajax({
+                url: '@Url.Action("GetOwnerDetail", "Pengesahan")',
+                type: 'GET',
+                data: { id: userId },
+                success: function (data) {
+                    $('#modalBody').html(data);
+                    $('#userModal').modal('show');
+                },
+                error: function () {
+                    swal({
+                        title: 'Invalid!',
+                        text: "Error",
+                        type: 'error',
+                        padding: '2em'
+                    })
+                }
+            });
+        }
+
+        function openNewTab(url) {
+            var win = window.open(url, '_blank');
+            win.focus();
+        }
+
+        var baseSiteURL = '@baseurl';
+
+        $(document).ready(function () {
+
+            var jenisCarianSelect;
+            var kategoriAlamatSelect;
+            $('#jenisCarianSelect').on("change", function () {
+                jenisCarianSelect = this.value;
+
+                //Related to Alamat only
+                //Show and Hide Kategori Alamat
+                if (jenisCarianSelect == 9) {
+                    $('#kategoriAlamatGroup').show();
+                }
+                else {
+                    $('#kategoriAlamatGroup').hide();
+                }
+
+            });
+
+
+            //Get value of kategoriAlamatSelect
+            $('#kategoriAlamatSelect').on("change", function () {
+                kategoriAlamatSelect = this.value;
+            });
+
+            //$('#table1').hide();
+            var dataTable1 = GetDataTable1(baseSiteURL, baseSiteURL + '/Pengesahan/queryTableSemakan');
+            var dataTable2 = GetDataTable2(baseSiteURL, baseSiteURL + '/Pengesahan/queryTableSemakan');
+            var dataTable3 = GetDataTable3(baseSiteURL, baseSiteURL + '/Pengesahan/queryTableSemakan');
+            var dataTable4 = GetDataTable4(baseSiteURL, baseSiteURL + '/Pengesahan/queryTableSemakan');
+            var dataTable5 = GetDataTable5(baseSiteURL, baseSiteURL + '/Pengesahan/queryTableSemakan');
+            var dataTable6 = GetDataTable6(baseSiteURL, baseSiteURL + '/Pengesahan/queryTableSemakan');
+            var dataTable7 = GetDataTable7(baseSiteURL, baseSiteURL + '/Pengesahan/queryTableSemakan');
+            var dataTable8 = GetDataTable8(baseSiteURL, baseSiteURL + '/Pengesahan/queryTableSemakan');
+
+            $('#filterSearch').on("click", function () {
+                var jenisCarianSelect = $("#jenisCarianSelect").val();
+                var kategoriAlamatSelect = $("#kategoriAlamatSelect").val();
+
+                // Hide both tables initially
+                $('#table1').hide();
+                $('#table2').hide();
+                $('#table3').hide();
+                $('#table4').hide();
+                $('#table5').hide();
+                $('#table6').hide();
+                $('#table7').hide();
+                $('#table8').hide();
+
+                if (jenisCarianSelect == 1 || jenisCarianSelect == 3) {   //nama pemilik
+                    $('#table1').show();
+                    $('#semakPemohonByNamaIC').show();
+                    $('#table2').hide();
+                    $('#table3').hide();
+                    $('#table4').hide();
+                    $('#table5').hide();
+                    $('#table6').hide();
+                    $('#table7').hide();
+                    $('#table8').hide();
+
+                    dataTable1.search($('#search').val()).draw();
+
+                }
+                else if (jenisCarianSelect == 2) {  //nama syarikat
+                    $('#table2').show();
+                    $('#semakBySyarikat').show();
+                    $('#table1').hide();
+                    $('#table3').hide();
+                    $('#table4').hide();
+                    $('#table5').hide();
+                    $('#table6').hide();
+                    $('#table7').hide();
+                    $('#table8').hide();
+                    dataTable2.search($('#search').val()).draw();
+
+                }
+                else if (jenisCarianSelect == 7) { //no penandaan
+                    $('#table3').show();
+                    $('#semakByNoPenandaan').show();
+                    $('#table1').hide();
+                    $('#table2').hide();
+                    $('#table4').hide();
+                    $('#table5').hide();
+                    $('#table6').hide();
+                    $('#table7').hide();
+                    $('#table8').hide();
+                    dataTable3.search($('#search').val()).draw();
+
+                }
+                else if (jenisCarianSelect == 5) { //no lesen
+                    $('#table4').show();
+                    //$('#semakByNoLesen1').show();
+                    $('#semakByNoLesen2').show();
+                    $('#table1').hide();
+                    $('#table2').hide();
+                    $('#table3').hide();
+                    $('#table5').hide();
+                    $('#table6').hide();
+                    $('#table7').hide();
+                    $('#table8').hide();
+                    dataTable4.search($('#search').val()).draw();
+
+                }
+                else if (jenisCarianSelect == 9) { //alamat
+                    $('#table5').show();
+                    $('#semakByAlamat').show();
+                    $('#table1').hide();
+                    $('#table2').hide();
+                    $('#table3').hide();
+                    $('#table4').hide();
+                    $('#table6').hide();
+                    $('#table7').hide();
+                    $('#table8').hide();
+                    dataTable5.search($('#search').val()).draw();
+
+                }
+                else if (jenisCarianSelect == 6) { //no cites
+                    $('#table6').show();
+                    $('#semakByNoCites').show();
+                    $('#table1').hide();
+                    $('#table2').hide();
+                    $('#table3').hide();
+                    $('#table4').hide();
+                    $('#table5').hide();
+                    $('#table7').hide();
+                    $('#table8').hide();
+                    dataTable6.search($('#search').val()).draw();
+
+                }
+                else if (jenisCarianSelect == 4) { //no pendaftaran syarikat
+                    $('#table7').show();
+                    $('#semakByNoPendaftaranSyarikat').show();
+                    $('#table1').hide();
+                    $('#table2').hide();
+                    $('#table3').hide();
+                    $('#table4').hide();
+                    $('#table5').hide();
+                    $('#table6').hide();
+                    $('#table8').hide();
+                    dataTable7.search($('#search').val()).draw();
+
+                }
+                else if (jenisCarianSelect == 8) { //no telefon
+                    $('#table8').show();
+                    $('#semakByNoTelefon').show();
+                    $('#table1').hide();
+                    $('#table2').hide();
+                    $('#table3').hide();
+                    $('#table4').hide();
+                    $('#table5').hide();
+                    $('#table6').hide();
+                    $('#table7').hide();
+                    dataTable8.search($('#search').val()).draw();
+
+                }
+
+            });
+        })
+
+
+        function GetDataTable1(baseSiteURL, dataURL) {
+            var datatable = $('#semakPemohonByNamaIC').DataTable({
+            // till here
+            "oLanguage": {
+                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Search...",
+                "sLengthMenu": "Results :  _MENU_",
+            },
+            "lengthMenu": [[10, 25, 50, 100, 150, 500, 1000, 5000], [10, 25, 50, 100, 150, 500, 1000, 5000]],
+            "pageLength": 10,
+            'columnDefs': [
+                {
+                    'targets': [0, 4], // column index (start from 0)
+                    'orderable': false, // set orderable false for selected columns
+                },
+            ],
+            ajax: {
+                url: dataURL,
+                type: "POST",
+                'data': function (data) {
+                    data.search = $("#search").val(); //send  parameters to the server when making an AJAX request for data.(send to controller/service)
+                    data.jenisCarianSelect = $("#jenisCarianSelect").val();
+                    data.type = 1;
+                }
+            },
+            searching: false,
+            "bServerSide": true,
+            "bProcessing": true,
+            "bSearchable": false,
+            "order": [[1, 'asc']],
+            "bAutoWidth": false,
+            "ordering": true,
+            drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); },
+            //set which table column from DB
+            "columns": [
+                {
+                    data: null,
+                    className: "text-center",
+                    render: function (data, type, full, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1; // Displays continuous numbering
+                    }
+                },
+                { data: "Nama_Pemegang", className: "text-center" },
+                { data: "Id_Pemegang", className: "text-center" },
+                {
+                    data: "Emel", className: "text-center",
+                    render: function (data) {
+                        return data || ""; // Handle undefined or null values
+                    }
+                },
+                {
+                  data: null,
+                  className: "text-center",
+                    render: function (data) {
+                     //data.id_user is must formatted as a string when it's passed to the openModal function(kne ltk '' mark)
+                        return '<a href="#" class="rounded bs-tooltip mr-1" data-original-title="Papar" onclick="openModal(\'' + data.Id_Lesen + '\')">' +
+                         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye feather-20">' +
+                         '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>' +
+                         '<circle cx="12" cy="12" r="3"></circle></svg></a>';
+
+                 }
+             },
+            ]
+        });
+
+        return datatable;
+
+    }
+
+        function GetDataTable2(baseSiteURL, dataURL) {
+            var datatable = $('#semakBySyarikat').DataTable({
+                // till here
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                    "sSearchPlaceholder": "Search...",
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                "lengthMenu": [[10, 25, 50, 100, 150, 500, 1000, 5000], [10, 25, 50, 100, 150, 500, 1000, 5000]],
+                "pageLength": 10,
+                'columnDefs': [
+                    {
+                        'targets': [0, 3], // column index (start from 0)
+                        'orderable': false, // set orderable false for selected columns
+                    },
+                ],
+                ajax: {
+                    url: dataURL,
+                    type: "POST",
+                    'data': function (data) {
+                        data.search = $("#search").val(); //send  parameters to the server when making an AJAX request for data.(send to controller/service)
+                        data.jenisCarianSelect = $("#jenisCarianSelect").val();
+                        data.type = 2;
+                    }
+                },
+                searching: false,
+                "bServerSide": true,
+                "bProcessing": true,
+                "bSearchable": false,
+                "order": [[1, 'asc']],
+                "bAutoWidth": false,
+                "ordering": true,
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); },
+                //set which table column from DB
+                "columns": [
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data, type, full, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1; // Displays continuous numbering
+                        }
+                    },
+                    { data: "NamaSyarikat", className: "text-center" },
+                    { data: "RocNo", className: "text-center" },
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data) {
+                            //data.id_user is must formatted as a string when it's passed to the openModal function(kne ltk '' mark)
+                            return '<a href="#" class="rounded bs-tooltip mr-1" data-original-title="Papar" onclick="openModal(\'' + data.Id_Lesen + '\')">' +
+                                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye feather-20">' +
+                                '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>' +
+                                '<circle cx="12" cy="12" r="3"></circle></svg></a>';
+
+                        }
+                    },
+                ]
+            });
+
+            return datatable;
+
+        }
+
+        function GetDataTable3(baseSiteURL, dataURL) {
+            var datatable = $('#semakByNoPenandaan').DataTable({
+                // till here
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                    "sSearchPlaceholder": "Search...",
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                "lengthMenu": [[10, 25, 50, 100, 150, 500, 1000, 5000], [10, 25, 50, 100, 150, 500, 1000, 5000]],
+                "pageLength": 10,
+                'columnDefs': [
+                    {
+                        'targets': [0, 5], // column index (start from 0)
+                        'orderable': false, // set orderable false for selected columns
+                    },
+                ],
+                ajax: {
+                    url: dataURL,
+                    type: "POST",
+                    'data': function (data) {
+                        data.search = $("#search").val(); //send  parameters to the server when making an AJAX request for data.(send to controller/service)
+                        data.jenisCarianSelect = $("#jenisCarianSelect").val();
+                        data.type = 3;
+                    }
+                },
+                searching: false,
+                "bServerSide": true,
+                "bProcessing": true,
+                "bSearchable": false,
+                "order": [[1, 'asc']],
+                "bAutoWidth": false,
+                "ordering": true,
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); },
+                //set which table column from DB
+                "columns": [
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data, type, full, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1; // Displays continuous numbering
+                        }
+                    },
+                    { data: "Nama_Pemegang", className: "text-center" },
+                    {
+                       "data": null,
+                       "width": "35%",
+                       "className": "text-center",
+                       "render": function (data) {
+                           return data.NamaSaintifik + ' <b>[' + data.NamaBiasa + ']</b> ';
+                       }
+                    },
+                    { data: "NoPenandaan", className: "text-center" },
+                    { data: "No_Lesen", className: "text-center" },
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data) {
+                            //data.id_user is must formatted as a string when it's passed to the openModal function(kne ltk '' mark)
+                            return '<a href="#" class="rounded bs-tooltip mr-1" data-original-title="Papar" onclick="openModal(\'' + data.Id_Lesen + '\')">' +
+                                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye feather-20">' +
+                                '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>' +
+                                '<circle cx="12" cy="12" r="3"></circle></svg></a>';
+
+                        }
+                    },
+                ]
+            });
+
+            return datatable;
+
+        }
+
+        function GetDataTable4(baseSiteURL, dataURL) {
+
+            var datatable = $('#semakByNoLesen2').DataTable({
+                // till here
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                    "sSearchPlaceholder": "Search...",
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                "lengthMenu": [[10, 25, 50, 100, 150, 500, 1000, 5000], [10, 25, 50, 100, 150, 500, 1000, 5000]],
+                "pageLength": 10,
+                'columnDefs': [
+                    {
+                        'targets': [0, 5], // column index (start from 0)
+                        'orderable': false, // set orderable false for selected columns
+                    },
+                ],
+                ajax: {
+                    url: dataURL,
+                    type: "POST",
+                    'data': function (data) {
+                        data.search = $("#search").val(); //send  parameters to the server when making an AJAX request for data.(send to controller/service)
+                        data.jenisCarianSelect = $("#jenisCarianSelect").val();
+                        data.type = 4;
+                    }
+                },
+                searching: false,
+                "bServerSide": true,
+                "bProcessing": true,
+                "bSearchable": false,
+                "order": [[1, 'asc']],
+                "bAutoWidth": false,
+                "ordering": true,
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); },
+                //set which table column from DB
+                "columns": [
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data, type, full, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1; // Displays continuous numbering
+                        }
+                    },
+                    { data: "Nama_Pemegang", className: "text-center" },
+                    {
+                        "data": null,
+                        "width": "35%",
+                        "className": "text-center",
+                        "render": function (data) {
+                            return data.Kategori_Lesen + ' <b>[' + data.No_Lesen + ']</b> ';
+                        }
+                    },
+                    { data: "PejabatPengeluar", className: "text-center" },
+
+                    {
+                        data: "TarikhMula",
+                        className: "text-center",
+                        render: function (data) {
+                            // Check if data is null or undefined
+                            if (data == null) {
+                                return ''; // or return some default value
+                            }
+
+                            // Parse the date string
+                            var timestamp = parseInt(data.replace("/Date(", "").replace(")/", ""), 10);
+
+                            // Check if timestamp is a valid number
+                            if (isNaN(timestamp)) {
+                                return ''; // or return some default value
+                            }
+
+                            // Create a Date object
+                            var date = new Date(timestamp);
+
+                            // Check if date is valid
+                            if (isNaN(date.getTime())) {
+                                return ''; // or return some default value
+                            }
+
+                            // Format the date using a JavaScript Date object
+                            var formattedDate = date.toLocaleDateString("en-GB");
+                            return formattedDate;
+
+                        },
+                    },
+                    {
+                        data: "TarikhTamat",
+                        className: "text-center",
+                        render: function (data) {
+                            // Check if data is null or undefined
+                            if (data == null) {
+                                return ''; // or return some default value
+                            }
+
+                            // Parse the date string
+                            var timestamp = parseInt(data.replace("/Date(", "").replace(")/", ""), 10);
+
+                            // Check if timestamp is a valid number
+                            if (isNaN(timestamp)) {
+                                return ''; // or return some default value
+                            }
+
+                            // Create a Date object
+                            var date = new Date(timestamp);
+
+                            // Check if date is valid
+                            if (isNaN(date.getTime())) {
+                                return ''; // or return some default value
+                            }
+
+                            // Format the date using a JavaScript Date object
+                            var formattedDate = date.toLocaleDateString("en-GB");
+                            return formattedDate;
+                        }
+                    },
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data) {
+                            var urlView = '@Url.Action("ViewSemakanLesen", "Pengesahan")';
+                            urlView = urlView + '/' + data.Id_Lesen;
+                            return '<a href="' + urlView + '" title="Semak" class="rounded bs-tooltip mr-1" data-original-title="Semak" onclick = "openNewTab(\'' + urlView + '\');return false;">' +
+                                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit feather-20"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></a>';
+
+                        }
+                    },
+                ]
+            });
+
+            return datatable;
+
+        }
+
+        function GetDataTable5(baseSiteURL, dataURL) {
+
+            var datatable = $('#semakByAlamat').DataTable({
+                // till here
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                    "sSearchPlaceholder": "Search...",
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                "lengthMenu": [[10, 25, 50, 100, 150, 500, 1000, 5000], [10, 25, 50, 100, 150, 500, 1000, 5000]],
+                "pageLength": 10,
+                'columnDefs': [
+                    {
+                        'targets': [0, 5], // column index (start from 0)
+                        'orderable': false, // set orderable false for selected columns
+                    },
+                ],
+                ajax: {
+                    url: dataURL,
+                    type: "POST",
+                    'data': function (data) {
+                        data.search = $("#search").val(); //send  parameters to the server when making an AJAX request for data.(send to controller/service)
+                        data.jenisCarianSelect = $("#jenisCarianSelect").val();
+                        data.kategoriAlamatSelect = $("#kategoriAlamatSelect").val();
+                        data.type = 5;
+                    }
+                },
+                searching: false,
+                "bServerSide": true,
+                "bProcessing": true,
+                "bSearchable": false,
+                "order": [[1, 'asc']],
+                "bAutoWidth": false,
+                "ordering": true,
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); },
+                //set which table column from DB
+                "columns": [
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data, type, full, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1; // Displays continuous numbering
+                        }
+                    },
+                    { data: "Nama_Pemegang", className: "text-center" },
+                    { data: "No_Lesen", className: "text-center" },
+                    { data: "JenisNamaAlamat", className: "text-center" },
+                    { data: "Alamat", className: "text-center" },
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data) {
+                            //data.id_user is must formatted as a string when it's passed to the openModal function(kne ltk '' mark)
+                            return '<a href="#" class="rounded bs-tooltip mr-1" data-original-title="Papar" onclick="openModal(\'' + data.Id_Lesen + '\')">' +
+                                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye feather-20">' +
+                                '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>' +
+                                '<circle cx="12" cy="12" r="3"></circle></svg></a>';
+
+                        }
+                    },
+                ]
+            });
+
+            return datatable;
+
+        }
+
+        function GetDataTable6(baseSiteURL, dataURL) {
+            var datatable = $('#semakByNoCites').DataTable({
+                // till here
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                    "sSearchPlaceholder": "Search...",
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                "lengthMenu": [[10, 25, 50, 100, 150, 500, 1000, 5000], [10, 25, 50, 100, 150, 500, 1000, 5000]],
+                "pageLength": 10,
+                'columnDefs': [
+                    {
+                        'targets': [0, 4], // column index (start from 0)
+                        'orderable': false, // set orderable false for selected columns
+                    },
+                ],
+                ajax: {
+                    url: dataURL,
+                    type: "POST",
+                    'data': function (data) {
+                        data.search = $("#search").val(); //send  parameters to the server when making an AJAX request for data.(send to controller/service)
+                        data.jenisCarianSelect = $("#jenisCarianSelect").val();
+                        data.type = 6;
+                    }
+                },
+                searching: false,
+                "bServerSide": true,
+                "bProcessing": true,
+                "bSearchable": false,
+                "order": [[1, 'asc']],
+                "bAutoWidth": false,
+                "ordering": true,
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); },
+                //set which table column from DB
+                "columns": [
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data, type, full, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1; // Displays continuous numbering
+                        }
+                    },
+                    { data: "Nama_Pemegang", className: "text-center" },
+                    { data: "Id_Pemegang", className: "text-center" },
+                    {
+                        data: "No_Lesen", className: "text-center",
+                        render: function (data) {
+                            return data || 0; // Handle undefined or null values
+                        }
+                    },
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data) {
+                            //data.id_user is must formatted as a string when it's passed to the openModal function(kne ltk '' mark)
+                            return '<a href="#" class="rounded bs-tooltip mr-1" data-original-title="Papar" onclick="openModal(\'' + data.Id_Lesen + '\')">' +
+                                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye feather-20">' +
+                                '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>' +
+                                '<circle cx="12" cy="12" r="3"></circle></svg></a>';
+
+                        }
+                    },
+                ]
+            });
+
+            return datatable;
+
+        }
+
+        function GetDataTable7(baseSiteURL, dataURL) {
+            var datatable = $('#semakByNoPendaftaranSyarikat').DataTable({
+                // till here
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                    "sSearchPlaceholder": "Search...",
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                "lengthMenu": [[10, 25, 50, 100, 150, 500, 1000, 5000], [10, 25, 50, 100, 150, 500, 1000, 5000]],
+                "pageLength": 10,
+                'columnDefs': [
+                    {
+                        'targets': [0, 3], // column index (start from 0)
+                        'orderable': false, // set orderable false for selected columns
+                    },
+                ],
+                ajax: {
+                    url: dataURL,
+                    type: "POST",
+                    'data': function (data) {
+                        data.search = $("#search").val(); //send  parameters to the server when making an AJAX request for data.(send to controller/service)
+                        data.jenisCarianSelect = $("#jenisCarianSelect").val();
+                        data.type = 7;
+                    }
+                },
+                searching: false,
+                "bServerSide": true,
+                "bProcessing": true,
+                "bSearchable": false,
+                "order": [[1, 'asc']],
+                "bAutoWidth": false,
+                "ordering": true,
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); },
+                //set which table column from DB
+                "columns": [
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data, type, full, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1; // Displays continuous numbering
+                        }
+                    },
+                    { data: "Nama_Pemegang", className: "text-center" },
+                    { data: "NamaSyarikat", className: "text-center" },
+                    { data: "RocNo", className: "text-center" },
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data) {
+                            //data.id_user is must formatted as a string when it's passed to the openModal function(kne ltk '' mark)
+                            return '<a href="#" class="rounded bs-tooltip mr-1" data-original-title="Papar" onclick="openModal(\'' + data.Id_Lesen + '\')">' +
+                                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye feather-20">' +
+                                '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>' +
+                                '<circle cx="12" cy="12" r="3"></circle></svg></a>';
+
+                        }
+                    },
+                ]
+            });
+
+            return datatable;
+
+        }
+
+        function GetDataTable8(baseSiteURL, dataURL) {
+            var datatable = $('#semakByNoTelefon').DataTable({
+                // till here
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                    "sSearchPlaceholder": "Search...",
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                "lengthMenu": [[10, 25, 50, 100, 150, 500, 1000, 5000], [10, 25, 50, 100, 150, 500, 1000, 5000]],
+                "pageLength": 10,
+                'columnDefs': [
+                    {
+                        'targets': [0, 4], // column index (start from 0)
+                        'orderable': false, // set orderable false for selected columns
+                    },
+                ],
+                ajax: {
+                    url: dataURL,
+                    type: "POST",
+                    'data': function (data) {
+                        data.search = $("#search").val(); //send  parameters to the server when making an AJAX request for data.(send to controller/service)
+                        data.jenisCarianSelect = $("#jenisCarianSelect").val();
+                        data.type = 8;
+                    }
+                },
+                searching: false,
+                "bServerSide": true,
+                "bProcessing": true,
+                "bSearchable": false,
+                "order": [[1, 'asc']],
+                "bAutoWidth": false,
+                "ordering": true,
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); },
+                //set which table column from DB
+                "columns": [
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data, type, full, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1; // Displays continuous numbering
+                        }
+                    },
+                    { data: "Nama_Pemegang", className: "text-center" },
+                    { data: "Id_Pemegang", className: "text-center" },
+                    {
+                        data: "NoTel", className: "text-center",
+                        render: function (data) {
+                            return data || 0; // Handle undefined or null values
+                        }
+                    },
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data) {
+                            //data.id_user is must formatted as a string when it's passed to the openModal function(kne ltk '' mark)
+                            return '<a href="#" class="rounded bs-tooltip mr-1" data-original-title="Papar" onclick="openModal(\'' + data.Id_Lesen + '\')">' +
+                                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye feather-20">' +
+                                '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>' +
+                                '<circle cx="12" cy="12" r="3"></circle></svg></a>';
+
+                        }
+                    },
+                ]
+            });
+
+            return datatable;
+
+        }
+
+
+    </script>
+}
+

@@ -1,0 +1,149 @@
+﻿@using ePerhilitanV2.Infrastructures.Services
+@{
+    var services = new HomeService();
+    var pengumuman = services.ListAnnouncement(Request.Cookies["culture"].Value);
+    var hqDetail = services.HQdetail();
+}
+<div class="col-md-12">
+    <div class="footer-desktop">
+        <div class="information-section" style="display:inline-table !important;">
+            <div class="row">
+                <div class="col-md-6 order-md-1 order-2" style="padding-bottom:10px">
+                    <div class="group">
+                        <div class="location">
+                            <div class="frame-1180">
+                                <iframe class="w-100 shadow rounded screenshot-2023-12-14-at-12-22-1" data-aos="fade-up" data-aos-delay="100" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15936.154139538174!2d101.7447817!3d3.0843906!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc35b1c90666a9%3A0x9a0c0cead28bc342!2sIbu%20Pejabat%20Jabatan%20Perhilitan!5e0!3m2!1sen!2smy!4v1707897156472!5m2!1sen!2smy" style="border:0; height: 300px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <div class="frame-1183" style="padding:22px !important;">
+                                    <div class="frame-11762">
+                                        <div class="km-10-jln-cheras-56100-kuala-lumpur-wilayah-persekutuan-kuala-lumpur">
+                                            @hqDetail.alamat
+                                        </div>
+                                    </div>
+                                    <div class="frame-1177">
+                                        <div class="frame-1182">
+                                            <img src="~/Content/plugins/font-icons/feather/phone.svg" style="padding:6px"/>
+                                        </div>
+                                        <div class="_03-90866800">@hqDetail.telNo</div>
+                                    </div>
+                                    @if(hqDetail.email != null)
+                                    {
+                                      <div class="frame-1177">
+                                          <div class="frame-1182">
+                                              <img src="~/Content/plugins/font-icons/feather/mail.svg" style="padding:6px"/>
+                                          </div>
+                                          <div class="_03-90866800">
+                                              <a href="mailto:@hqDetail.email">@hqDetail.email</a>
+                                          </div>
+                                      </div>  
+                                    }
+                                    <div class="frame-1177">
+                                        <div class="frame-1182">
+                                            <img src="~/Content/plugins/font-icons/feather/help-circle.svg" style="padding:6px"/>
+                                        </div>
+                                        <div class="_03-90866800">
+                                            @Resources.Home.Portal_infoFeedback
+                                            <a href="@Url.Action("FeedbackForm","Home")" title="@Resources.Home.Portal_feedback"> @Resources.Home.Portal_disini</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 order-md-2 order-1" style="padding-bottom:10px">
+                    <div class="card" style="background-color: #fff4f0; border-radius: 20px; height: 100%">
+                        <div class=" card-body col-xs-12" style="display: flex; align-items: center;background-color:unset;">
+                            <div class="frame-1191">
+                                <img class="megaphone-1" src="~/Content/Portal/img/megaphone-10.png" />
+                            </div>
+                            <span class="glyphicon glyphicon-list-alt"></span> &emsp;
+                            <b> @Resources.Home.Portal_Announcement</b>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="col-xs-12">
+                                @if (pengumuman.Count() > 0)
+                                {
+                                    <ul class="demo1">
+                                        @foreach (var item in pengumuman)
+                                        {
+                                            <li class="news-item">
+                                                <div class="row" style="padding-bottom: 10px">
+                                                    <div class="col-md-12">
+                                                        <div class="blog-card">
+                                                            <div class="frame-1192">
+                                                                <div class="pembayaran-atas-talian-fpx" style="height:auto !important;">
+                                                                    @item.title 
+                                                                </div>
+                                                                @if (item.content.Length < 100)
+                                                                {
+                                                                    <div class="adalah-dimaklumkan-bahawa-fungsi-pembayaran-secara-online-sistem-e-lesen-sedang-mengalami-gangguan-teknikal-pad">
+                                                                        @item.content
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="adalah-dimaklumkan-bahawa-fungsi-pembayaran-secara-online-sistem-e-lesen-sedang-mengalami-gangguan-teknikal-pad">
+                                                                        @item.content.Substring(0, 100)..
+                                                                    </div>
+                                                                }
+
+                                                            </div>
+                                                            <div class="frame-1193">
+                                                                <div class="_14-dec">@item.datePublish.ToString("dd/MM/yyyy")</div>
+                                                                <div class="secondry-button">
+                                                                    <div class="frame-63">
+                                                                        <button class="sign-in3" onclick="OpenPopup(@item.announcementID)">@Resources.Home.Portal_ReadMore</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <ul>
+                                        <li>@Resources.Home.Portal_noAnnouncement</li>
+                                    </ul>
+                                }
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <ul class="pagination float-right" style="margin: 0px;">
+                             
+                                <li class="page-item"><a href="#" class="page-link prev"><i data-feather="chevron-down"></i></a></li>
+                                <li class="page-item"><a href="#" class="page-link nexttt"><i data-feather="chevron-up"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img class="feather-12" src="~/Content/plugins/font-icons/feather/line-spjp.svg" />
+
+        <div class="copyright-section">
+            <div class="copyright-2023-jabatan-perlindungan-hidupan-liar-dan-taman-negara-all-rights-reserved">
+                © 2023 @Resources.Home.Portal_copyright
+            </div>
+
+            <div class="social-media-section">
+               
+                <div class="frame-1146 ">
+                    <a href="https://www.facebook.com/perhilitanofficial?fref=ts" target="_blank"><img class="facebook-1-2" src="~/Content/Portal/img/facebook-1-20.png" /></a>
+                </div>
+                <div class="frame-1147">
+                    <a href="https://twitter.com/PERHILITAN" target="_blank"><img class="twitter-1-1" src="~/Content/Portal/img/twitter-1-10.png" /></a>
+                </div>
+                <div class="frame-1173">
+                    <a href="https://www.instagram.com/perhilitan_malaysia/" target="_blank"><img class="instagram-1" src="~/Content/Portal/img/instagram-10.png" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

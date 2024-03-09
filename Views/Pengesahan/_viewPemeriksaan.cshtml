@@ -1,0 +1,59 @@
+﻿@model ePerhilitanV2.Models.ViewModels.PengesahanViewModel.ImportExport
+
+<style>
+    .uppercase {
+        text-transform: uppercase;
+    }
+</style>
+
+<div class="form-card" style="padding: 20px">
+    <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+        <div class="table-responsive">
+            <table class="table table2 table-bordered" id="">
+                <thead>
+                    <tr class="thead-light">
+                        <th colspan="8">@Resources.Verification.VV_Inspection_Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_Inspection_Name </label>
+                                <div class="col-sm-9">
+                                    @Model.Nama_Pemeriksa.ToUpper()
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_Inspection_Location </label>
+                                <div class="col-sm-9">
+                                    @Model.Through.ToUpper()
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_Date_Time_Inspection </label>
+                                <div class="col-sm-6 uppercase">
+                                    @if (Model.Tarikh_MasaSemakan != null)
+                                    {
+                                        @Convert.ToDateTime(Model.Tarikh_MasaSemakan).ToString("dd/MM/yyyy hh:mm tt", new System.Globalization.CultureInfo("en-US"))
+                                    }
+                                    @*@Model.Tarikh_MasaSemakan*@
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

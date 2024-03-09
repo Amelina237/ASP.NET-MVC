@@ -1,0 +1,50 @@
+﻿@model ePerhilitanV2.Models.ViewModels.PengesahanViewModel.ImportExport
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped mb-4">
+        <tbody>
+            <tr>
+                <td width="30%">@Resources.Resource._Citizen</td>
+                <td>@Model.GetOwnerDetails.Warganegara</td>
+            </tr>
+            <tr>
+                <td>@Resources.Resource._Ic_No</td>
+                <td>@Model.GetOwnerDetails.IdNo</td>
+            </tr>
+            <tr>
+                <td>@Resources.Resource._Name</td>
+                <td>@Model.GetOwnerDetails.NamaPemegang</td>
+            </tr>
+            <tr>
+                <td>@Resources.Resource._Occupation</td>
+                <td>@Model.GetOwnerDetails.Pekerjaan</td>
+            </tr>
+            <tr>
+                <td>@Resources.Resource._Address</td>
+                <td>@Model.GetOwnerDetails.Alamat_Semasa.Address,@Model.GetOwnerDetails.Alamat_Semasa.Postcode,@Model.GetOwnerDetails.Alamat_Semasa.City,@Model.GetOwnerDetails.Alamat_Semasa.State </td>
+            </tr>
+            <tr>
+                <td>@Resources.Resource._Mobile_No</td>
+                <td>@Model.GetOwnerDetails.NoTel</td>
+            </tr>
+            <tr>
+                <td>@Resources.Resource._Email</td>
+                <td>@Model.GetOwnerDetails.Emel</td>
+            </tr>
+            <tr>
+                <td>@Resources.Resource._CompanyName</td>
+                <td>@Model.GetCompanyDetails.NamaSyarikat</td>
+            </tr>
+            <tr>
+                <td>@Resources.Resource._CompanyRegisterNo</td>
+                <td>[@Model.GetCompanyDetails.TypeSyarikat] @Model.GetCompanyDetails.NoSyarikat</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> @Resources.Resource._Close</button>
+    <a href="#" class="btn btn-primary" onclick="openNewTab('@Url.Action("MaklumatCarian", "Pengesahan", new {id = GlobalFunction.encodeThis(Model.License_Id.ToString()) })')">
+        @Resources.Verification.VV_Review
+    </a>
+</div>

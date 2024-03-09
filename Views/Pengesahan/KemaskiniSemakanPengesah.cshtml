@@ -1,0 +1,805 @@
+﻿@model ePerhilitanV2.Models.ViewModels.PengesahanViewModel.ImportExport
+
+@{
+    ViewBag.Title = "Kemaskini Maklumat";
+
+}
+<style>
+    .no-drop{
+        cursor:no-drop;
+    }
+    .uppercase {
+        text-transform: uppercase;
+    }
+
+    .nav-pills .nav-link .changeTabWhite {
+        background-color: white;
+    }
+</style>
+
+<div class="col-lg-12 col-12 layout-spacing">
+    <div class="widget-heading mb-3">
+        <h5 class=""> @Resources.Verification.VV_Edit</h5>
+    </div>
+    <hr />
+
+    <!--START TABS -->
+    <div class="row mb-4 mt-3">
+        <!-- START TABS MENU -->
+        <div class="col-sm-2 col-12 ">
+            <div class="nav flex-column nav-pills mb-sm-0 mb-3 text-black" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active mb-2 changeTabWhite" id="v-pills-jenisLesen-tab" data-toggle="pill" href="#v-pills-jenisLesen" role="tab" aria-controls="v-pills-jenisLesen" aria-selected="true" > @Resources.Resource._License</a>
+                <a class="nav-link mb-2 disabled no-drop changeTabWhite" id="v-pills-noPermit-tab" data-toggle="pill" href="#v-pills-noPermit" role="tab" aria-controls="v-pills-noPermit" aria-selected="false" > @Resources.Verification.VV_CITES_No</a>
+                <a class="nav-link mb-2 disabled no-drop" id="v-pills-pemilik-tab" data-toggle="pill" href="#v-pills-pemilik" role="tab" aria-controls="v-pills-pemilik" aria-selected="false"> @Resources.Verification.VV_Owner</a>
+                <a class="nav-link mb-2 disabled no-drop" id="v-pills-syarikat-tab" data-toggle="pill" href="#v-pills-syarikat" role="tab" aria-controls="v-pills-syarikat" aria-selected="false"> @Resources.Resource._Company</a>
+                <a class="nav-link mb-2 disabled no-drop" id="v-pills-hidupanLiar-tab" data-toggle="pill" href="#v-pills-hidupanLiar" role="tab" aria-controls="v-pills-hidupanLiar" aria-selected="false"> @Resources.Verification.VV_List_Wildlife</a>
+                <a class="nav-link mb-2 disabled no-drop" id="v-pills-cites-tab" data-toggle="pill" href="#v-pills-cites" role="tab" aria-controls="v-pills-cites" aria-selected="false"> @Resources.Verification.VV_Cites_Info</a>
+                <a class="nav-link mb-2 disabled no-drop" id="v-pills-pemeriksaan-tab" data-toggle="pill" href="#v-pills-pemeriksaan" role="tab" aria-controls="v-pills-pemeriksaan" aria-selected="false"> @Resources.Verification.VV_Inspection_Info</a>
+                <a class="nav-link mb-2 disabled no-drop" id="v-pills-lampiran-tab" data-toggle="pill" href="#v-pills-lampiran" role="tab" aria-controls="v-pills-lampiran" aria-selected="false"> @Resources.Verification.VV_Appndx</a>
+                <a class="nav-link mb-2 disabled no-drop" id="v-pills-keputusanSemakan-tab" data-toggle="pill" href="#v-pills-keputusanSemakan" role="tab" aria-controls="v-pills-keputusanSemakan" aria-selected="false"> @Resources.Verification.VV_Review_Info</a>
+                <a class="nav-link mb-2 disabled no-drop" id="v-pills-pengesahanMaklumat-tab" data-toggle="pill" href="#v-pills-pengesahanMaklumat" role="tab" aria-controls="v-pills-pengesahanMaklumat" aria-selected="false"> @Resources.Verification.VV_Verification_Info</a>
+            </div>
+        </div>
+        <!-- END TABS MENU -->
+
+        <div class="col-sm-10 col-12">
+            <div class="tab-content" id="v-pills-tabContent">
+                <!-- START JENIS LESEN -->
+                <div class="tab-pane fade show active" id="v-pills-jenisLesen" role="tabpanel" aria-labelledby="v-pills-jenisLesen-tab">
+                    <blockquote class="blockquote">
+                        <div class="form-card">
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_LicenseType</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control form-control-sm" id="colFormLabelSm" value="IMPORT" placeholder="" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_Type_Matters</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control form-control-sm" id="colFormLabelSm" value="LUAR NEGARA" placeholder="" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_Through</label>
+                                <div class="col-sm-9">
+                                    Lapangan Terbang Kuala Lumpur KLIA
+                                </div>
+                            </div>
+                        </div>
+                        <div class="justify-content-end text-right">
+                            <button id="lesen" type="button" class="btn btn-success mb-4 btn-sm nextBtn">@Resources.Resource._Next</button>
+                        </div>
+
+                    </blockquote>
+                </div>
+                <!-- END JENIS LESEN -->
+                <!-- START NO PERMIT CITES -->
+                <div class="tab-pane fade" id="v-pills-noPermit" role="tabpanel" aria-labelledby="v-pills-noPermit-tab">
+                    <blockquote class="blockquote">
+                        <div class="form-card">
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_CITES_No</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoPermitNo"><i class="feather-13" data-feather="info"></i></a></span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm uppercase" id="colFormLabelSm" value="WL(WP)0734/2013" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Resource._PermitType</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group ">
+                                        <!-- Add input group-prepend with your icon -->
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoTypePermit"><i class="feather-13" data-feather="info"></i></a></span>
+                                        </div>
+                                        <!-- Input field -->
+                                        <select name="" class="form-control form-control-sm" id="">
+                                            <option value="">Sila Pilih</option>
+                                            <option value="">CITES</option>
+                                            <option value="">NON-CITES</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_ValidUntil</label>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <!-- Add input group-prepend with your icon -->
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoValidPermit"><i class="feather-13" data-feather="info"></i></a></span>
+                                        </div>
+                                        <!-- Input field -->
+                                        <input type="text" class="form-control form-control-sm" id="date" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="justify-content-end text-right">
+                            @*<button class="btn btn-warning mb-4 btn-sm">@Resources.Resource._Previous</button>*@
+                            <button id="noPermit" class="btn btn-success mb-4 btn-sm">@Resources.Resource._Next</button>
+                        </div>
+                    </blockquote>
+                </div>
+                <!-- END NO PERMIT CITES-->
+                <!-- START PEMILIK -->
+                <div class="tab-pane fade" id="v-pills-pemilik" role="tabpanel" aria-labelledby="v-pills-pemilik-tab">
+                    <blockquote class="blockquote">
+                        <div class="form-card ">
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Citizen</label>
+                                <div class="col-sm-9">
+                                    Warganegara
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Ic_No</label>
+                                <div class="col-sm-4">
+                                    @Model.GetUserDetails.IC_No
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Name</label>
+                                <div class="col-sm-9">
+                                    @Model.GetUserDetails.Name
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Occupation</label>
+                                <div class="col-sm-9">
+                                    Lain-lain []
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Address <br /></label>
+                                <div class="col-sm-9">
+                                    @Model.GetUserDetails.Address
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Postcode</label>
+                                <div class="col-sm-9">
+                                    @Model.GetUserDetails.Postcode
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Mobile_No</label>
+                                <div class="col-sm-4">
+                                    @Model.GetUserDetails.Phone
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Fax_No</label>
+                                <div class="col-sm-4">
+                                    @Model.GetUserDetails.Fax_No
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Email</label>
+                                <div class="col-sm-9">
+                                    @Model.GetUserDetails.Email
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="justify-content-end text-right">
+                            @*<button class="btn btn-warning mb-4 btn-sm">@Resources.Resource._Previous</button>*@
+                            <button id ="pemilik" class="btn btn-success mb-4 btn-sm">@Resources.Resource._Next</button>
+                        </div>
+                    </blockquote>
+                </div>
+                <!-- END PEMILIK-->
+                <!-- START SYARIKAT -->
+                <div class="tab-pane fade" id="v-pills-syarikat" role="tabpanel" aria-labelledby="v-pills-syarikat-tab">
+                    <blockquote class="blockquote">
+                        <div class="form-card ">
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._CompanyType</label>
+                                <div class="col-sm-9">
+                                    Swasta [Perkongsian]
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._CompanyRegisterNo</label>
+                                <div class="col-sm-4">
+                                    [ ROC ] 98765-C
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._CompanyName</label>
+                                <div class="col-sm-9">
+                                    F.J. BENJAMIN (M) SDN. BHD.
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Address <br /></label>
+                                <div class="col-sm-9">
+                                    MENARA PAN GLOBAL,12TH FLOOR 8 LORONG P.RAMLEE
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Postcode</label>
+                                <div class="col-sm-9">
+                                    50250-KUALA LUMPUR,WILAYAH PERSEKUTUAN KUALA LUMPUR
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._State</label>
+                                <div class="col-sm-9">
+                                    KUALA LUMPUR
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Mobile_No</label>
+                                <div class="col-sm-4">
+                                    0356338631
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Resource._Fax_No</label>
+                                <div class="col-sm-4">
+                                    0356330985
+                                </div>
+                            </div>
+                        </div>
+                        <div class="justify-content-end text-right">
+                           @* <button class="btn btn-warning mb-4 btn-sm">@Resources.Resource._Previous</button>*@
+                            <button id ="syarikat" class="btn btn-success mb-4 btn-sm">@Resources.Resource._Next</button>
+                        </div>
+                    </blockquote>
+                </div>
+                <!-- END SYARIKAT -->
+                <!-- START HIDUPAN LIAR -->
+                <div class="tab-pane fade" id="v-pills-hidupanLiar" role="tabpanel" aria-labelledby="v-pills-hidupanLiar-tab">
+                    <blockquote class="blockquote">
+                        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+                            <div class="table-responsive">
+                                @*Table Semakan Kuantiti*@
+                                <table class="table table-bordered table-hover mb-4">
+                                    <thead>
+                                        <tr class="thead-light">
+                                            <th class="text-center" colspan="8">@Resources.Verification.VV_QuantityChecking</th>
+                                        </tr>
+
+                                        <tr class="thead-light">
+                                            <th class="">@Resources.Verification.VV_Species</th>
+                                            <th class="">@Resources.Verification.VV_Appendix</th>
+                                            <th class="text-center">@Resources.Verification.VV_Source</th>
+                                            <th class="text-center">@Resources.Verification.VV_ApprovedQuantity</th>
+                                            <th class="text-center">@Resources.Verification.VV_QuantityConfirmed</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="">Gonocephalus chamaeleontinus</td>
+                                            <td class="text-center">
+                                                <select name="" class="form-control form-control-sm" id="appendiks">
+                                                    <option value="">Sila Pilih</option>
+                                                    <option value="I">I</option>
+                                                    <option value="II">II</option>
+                                                    <option value="III">III</option>
+                                                </select>
+                                            </td>
+                                            <td class="text-center">
+                                                <select name="" class="form-control form-control-sm" id="sumber">
+                                                    <option value="">Sila Pilih</option>
+                                                    <option value="W">W</option>
+                                                    <option value="R">R</option>
+                                                    <option value="D">D</option>
+                                                    <option value="A">A</option>
+                                                </select>
+                                            </td>
+                                            <td class="text-center">2</td>
+                                            <td class="text-center">
+                                                <input type="text" class="form-control form-control-sm" value="" placeholder="Sila Masukkan Kuantiti">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br />
+
+                                @*Table Kuantiti yg disahkan--AKAN GUNA AJAX NANTI*@
+                                @*table import*@
+                                <table class="table table-bordered table-hover mb-4" id="speciesProduk">
+                                    <thead>
+                                        <tr class="thead-light">
+                                            <th class="text-center">@Resources.Verification.VV_No</th>
+                                            <th class="">@Resources.Verification.VV_Species</th>
+                                            <th class="text-center">@Resources.Verification.VV_Appendix</th>
+                                            <th class="text-center">@Resources.Verification.VV_Source</th>
+                                            <th class="text-center">@Resources.Verification.VV_Quantity</th>
+                                            <th class="text-center">@Resources.Verification.VV_Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">1</td>
+                                            <td>Gonocephalus chamaeleontinus</td>
+                                            <td class="text-center">
+                                                <input type="text" id="" class="form-control form-control-sm newAppendiks" value="" placeholder="e.g : I">
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="text" id="" class="form-control form-control-sm newSumber" value="" placeholder="e.g : W">
+                                            </td>
+                                            <td class="text-center">20 keping</td>
+                                            <td class="text-center">Kulit</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <table class="table table-bordered table-hover mb-4" id="speciesHidup">
+                                    <thead>
+                                        <tr class="thead-light">
+                                            <th class="text-center">@Resources.Verification.VV_No</th>
+                                            <th class="">@Resources.Verification.VV_Species</th>
+                                            <th class="text-center">@Resources.Verification.VV_Appendix</th>
+                                            <th class="text-center">@Resources.Verification.VV_Source</th>
+                                            <th class="text-center">@Resources.Verification.VV_No_Approved</th>
+                                            <th class="text-center">@Resources.Verification.VV_No_Confirmed</th>
+                                            <th class="text-center">@Resources.Verification.VV_Gender</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">1</td>
+                                            <td>Gonocephalus chamaeleontinus</td>
+                                            <td class="text-center">
+                                                <input type="text" id="" class="form-control form-control-sm newAppendiks" value="" placeholder="e.g : I">
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="text" id="" class="form-control form-control-sm newSumber" value="" placeholder="e.g : W">
+                                            </td>
+                                            <td class="text-center">-</td>
+                                            <td class="text-center">
+                                                <input type="text" class="form-control form-control-sm" value="" placeholder="">
+                                            </td>
+                                            <td class="text-center">Tidak Pasti</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                @*table export*@
+                                <table class="table table-bordered table-hover mb-4" id="export">
+                                    <thead>
+                                        <tr class="thead-light">
+                                            <th class="text-center">@Resources.Verification.VV_No</th>
+                                            <th class="">@Resources.Verification.VV_Species</th>
+                                            <th class="text-center">@Resources.Verification.VV_Appendix</th>
+                                            <th class="text-center">@Resources.Verification.VV_Source</th>
+                                            <th class="text-center">@Resources.Verification.VV_Quantity</th>
+                                            <th class="text-center">@Resources.Verification.VV_No_CR</th>
+                                            <th class="text-center">@Resources.Verification.VV_Original_Cites_No</th>
+                                            <th class="text-center">@Resources.Verification.VV_Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">1</td>
+                                            <td>Gonocephalus chamaeleontinus</td>
+                                            <td class="text-center">
+                                                <input type="text" id="" class="form-control form-control-sm newAppendiks" value="" placeholder="e.g : I">
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="text" id="" class="form-control form-control-sm newSumber" value="" placeholder="e.g : W">
+                                            </td>
+                                            <td class="text-center">41</td>
+                                            <td class="text-center">
+                                                <input type="text" class="form-control form-control-sm" value="" placeholder="">
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="text" class="form-control form-control-sm" value="" placeholder="">
+                                            </td>
+                                            <td class="text-center">Untuk Watchstrap</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="justify-content-end text-right">
+                            @*<button class="btn btn-warning mb-4 btn-sm">@Resources.Resource._Previous</button>*@
+                            <button id="hidupanLiar" class="btn btn-success mb-4 btn-sm">@Resources.Resource._Next</button>
+                        </div>
+                    </blockquote>
+                </div>
+                <!-- END HIDUPAN LIAR -->
+                <!-- START CITES INFO -->
+                <div class="tab-pane fade" id="v-pills-cites" role="tabpanel" aria-labelledby="v-pills-cites-tab">
+                    <blockquote class="blockquote">
+                        <div class="form-card">
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_ExportCountry</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group ">
+                                        <!-- Add input group-prepend with your icon -->
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoCodeExportCountry"><i class="feather-13" data-feather="info"></i></a></span>
+                                        </div>
+                                        <!-- Input field -->
+                                        <input type="text" class="form-control form-control-sm uppercase" id="eksport" value="" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_ExportPurpose</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group ">
+                                        <!-- Add input group-prepend with your icon -->
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoPurposeExport "><i class="feather-13" data-feather="info"></i></a></span>
+                                        </div>
+                                        <!-- Input field -->
+                                        @Html.DropDownListFor(model => model.Code_PurposeTrade, new SelectList(Model.getListCodePurposeTrade, "Value", "Text"), "Please Choose", new { @class = "form-control form-control-sm", @id = "" })
+                                        @Html.ValidationMessageFor(model => model.Code_PurposeTrade, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_StemNo</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group ">
+                                        <!-- Add input group-prepend with your icon -->
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoStemNo"><i class="feather-13" data-feather="info"></i></a></span>
+                                        </div>
+                                        <!-- Input field -->
+                                        <input type="text" class="form-control form-control-sm" id="noSetem" value="" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_ExportName</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group ">
+                                        <!-- Add input group-prepend with your icon -->
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoNameImpoterExporter"><i class="feather-13" data-feather="info"></i></a></span>
+                                        </div>
+                                        <!-- Input field -->
+                                        <input type="text" class="form-control form-control-sm" id="namaPengeksport" value="" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_ExportAddress</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group ">
+                                        <!-- Add input group-prepend with your icon -->
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoAddressImporterExporter"><i class="feather-13" data-feather="info"></i></a></span>
+                                        </div>
+                                        <!-- Input field -->
+                                        <textarea class="form-control form-control-sm" placeholder="" rows="2" spellcheck="false" id=""></textarea>
+                                        @*<input type="text" class="form-control form-control-sm" id="noSetem" value="" placeholder="">*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Copy_Cites</label>
+                                @*<a href="#" class="rounded bs-tooltip" data-placement="right" title="@Resources.Verification.VV_InfoFailFormat"><i class="feather-13" data-feather="info"></i></a>*@
+                                <div class="col-sm-5">
+                                    <div class="custom-file mb-4">
+                                        <input type="file" class="custom-file-input" id="customFile">
+                                        <label class="custom-file-label" for="customFile">@Resources.Verification.VV_ChooseFile</label>
+                                    </div>
+                                    <p class="red-text">Saiz maksimum fail 10MB</p>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="justify-content-end text-right">
+                            @*<button class="btn btn-warning mb-4 btn-sm">@Resources.Resource._Previous</button>*@
+                            <button id="cites" class="btn btn-success mb-4 btn-sm">@Resources.Resource._Next</button>
+                        </div>
+                    </blockquote>
+                </div>
+                <!-- END CITES INFO -->
+                <!-- START PEMERIKSAAN -->
+                <div class="tab-pane fade" id="v-pills-pemeriksaan" role="tabpanel" aria-labelledby="v-pills-pemeriksaan-tab">
+                    <blockquote class="blockquote">
+                        <div class="form-card">
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Inspection_Name </label>
+                                <div class="col-sm-9">
+                                    <div class="input-group ">
+                                        <!-- Add input group-prepend with your icon -->
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoNameInspectionOfficer"><i class="feather-13" data-feather="info"></i></a></span>
+                                        </div>
+                                        <!-- Input field -->
+                                        <input type="text" class="form-control form-control-sm uppercase" id="namaPemeriksa" value="" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Inspection_Location </label>
+                                <div class="col-sm-9">
+                                    <div class="input-group ">
+                                        <!-- Add input group-prepend with your icon -->
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoLocationInspection"><i class="feather-13" data-feather="info"></i></a></span>
+                                        </div>
+                                        <!-- Input field -->
+                                        @Html.DropDownListFor(model => model.Import_Export_Center, new SelectList(Model.getListImportExportCenter, "Value", "Text"), "Please Choose", new { @class = "form-control form-control-sm", @id = "" })
+                                        @Html.ValidationMessageFor(model => model.Import_Export_Center, "", new { @class = "text-danger" })
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Date_Time_Inspection </label>
+                                <div class="col-sm-6">
+                                    <div class="input-group ">
+                                        <!-- Add input group-prepend with your icon -->
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoDateTimeInspection"><i class="feather-13" data-feather="info"></i></a></span>
+                                        </div>
+                                        <!-- Input field -->
+                                        <input type="text" class="form-control form-control-sm" id="dateTime" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="justify-content-end text-right">
+                            @*<button class="btn btn-warning mb-4 btn-sm">@Resources.Resource._Previous</button>*@
+                            <button id="pemeriksaan" class="btn btn-success mb-4 btn-sm nextBtn">@Resources.Resource._Next</button>
+                        </div>
+                    </blockquote>
+                </div>
+                <!-- END PEMERIKSAAN -->
+                <!-- LAMPIRAN -->
+                <div class="tab-pane fade" id="v-pills-lampiran" role="tabpanel" aria-labelledby="v-pills-lampiran-tab">
+                    <blockquote class="blockquote">
+                        <div class="form-card">
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_Copy_Register_Company</label>
+                                <div class="col-sm-6 form-control-sm">
+                                    <i class="feather-20" data-feather="download"></i><a href=""> suratDaftarSyarikat.pdf</a>
+                                </div>
+                            </div>
+                        </div>
+                        @*export*@
+                        <div class="form-card">
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">@Resources.Verification.VV_Copy_Cites</label>
+                                <div class="col-sm-6 form-control-sm">
+                                    <i class="feather-20" data-feather="download"></i><a href=""> suratCites.pdf</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="justify-content-end text-right">
+                            @*<button class="btn btn-warning mb-4 btn-sm">@Resources.Resource._Previous</button>*@
+                            <button id="lampiran" class="btn btn-success mb-4 btn-sm nextBtn">@Resources.Resource._Next</button>
+                        </div>
+                    </blockquote>
+                </div>
+                <!-- END LAMPIRAN -->
+                <!-- START KEPUTUSAN SEMAKAN -->
+                <div class="tab-pane fade" id="v-pills-keputusanSemakan" role="tabpanel" aria-labelledby="v-pills-keputusanSemakan-tab">
+                    <blockquote class="blockquote">
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Status_Application</label>
+                            <div class="col-sm-9">
+                                <div class="input-group ">
+                                    <!-- Add input group-prepend with your icon -->
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoStatusApplication"><i class="feather-13" data-feather="info"></i></a></span>
+                                    </div>
+                                    <!-- Input field -->
+                                    <select name="" class="form-control form-control-sm" id="">
+                                        <option value="">Sila Pilih Status Permohonan</option>
+                                        <option value="">Sahkan</option>
+                                        <option value="">Tidak Sahkan</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_VerifyOfficerName</label>
+                            <div class="col-sm-9">
+                                <div class="input-group ">
+                                    <!-- Add input group-prepend with your icon -->
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoVerifier"><i class="feather-13" data-feather="info"></i></a></span>
+                                    </div>
+                                    <!-- Input field -->
+                                    <select name="" class="form-control form-control-sm" id="">
+                                        <option value="">Sila Pilih</option>
+                                        <option value="">Nur Syuhadah</option>
+                                        <option value="">Razali Hussin</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Comment</label>
+                            <div class="col-sm-9">
+                                <div class="input-group ">
+                                    <!-- Add input group-prepend with your icon -->
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoComment"><i class="feather-13" data-feather="info"></i></a></span>
+                                    </div>
+                                    <!-- Input field -->
+                                    <textarea class="form-control form-control-sm" placeholder="" rows="2" spellcheck="false" id=""></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="justify-content-end text-right">
+                            @*<button class="btn btn-warning mb-4 btn-sm">@Resources.Resource._Previous</button>*@
+                            <button id="keputusanSemakan" class="btn btn-success mb-4 btn-sm nextBtn">@Resources.Resource._Next</button>
+                        </div>
+                    </blockquote>
+                </div>
+                <!-- END KEPUTUSAN SEMAKAN -->
+                <!-- START PENGESAHAN SEMAKAN -->
+                <div class="tab-pane fade" id="v-pills-pengesahanMaklumat" role="tabpanel" aria-labelledby="v-pills-pengesahanMaklumat-tab">
+                    <blockquote class="blockquote">
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_Status_Application</label>
+                            <div class="col-sm-9">
+                                <div class="input-group ">
+                                    <!-- Add input group-prepend with your icon -->
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoStatusApplication"><i class="feather-13" data-feather="info"></i></a></span>
+                                    </div>
+                                    <!-- Input field -->
+                                    <select name="" class="form-control form-control-sm" id="">
+                                        <option value="">Sila Pilih Status Pemohonan</option>
+                                        <option value="">Diluluskan</option>
+                                        <option value="">Tidak Diluluskan</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm labelReq">@Resources.Verification.VV_CommentVerifierOfficer </label>
+                            <div class="col-sm-9">
+                                <div class="input-group ">
+                                    <!-- Add input group-prepend with your icon -->
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><a href="#" class="rounded bs-tooltip" data-placement="left" title="@Resources.Verification.VV_InfoComment"><i class="feather-13" data-feather="info"></i></a></span>
+                                    </div>
+                                    <!-- Input field -->
+                                    <textarea class="form-control form-control-sm" placeholder="" rows="2" spellcheck="false" id=""></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="justify-content-end text-right">
+                            @*<button class="btn btn-warning mb-4 btn-sm">@Resources.Resource._Previous</button>*@
+                            <button type="submit" id="submitBtn" class="btn btn-success mb-4 btn-sm">@Resources.Verification.VV_Submit</button>
+                        </div>
+                    </blockquote>
+                </div>
+                <!-- END PENGESAHAN SEMAKAN -->
+            </div>
+        </div>
+    </div>
+
+    <!-- END TABS-->
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //formatted date using flatpickr
+            $("#date").flatpickr({
+                dateFormat: "d-m-Y",
+            });
+
+            $("#dateTime").flatpickr({
+                enableTime: true,
+                dateFormat: "d-m-Y H:i K",
+            });
+
+            //to get the value from select option
+            $("#appendiks").change(function () {
+                var appendik = $(this).val();
+
+                //assign the appendiks to the new appendik input type based on class(because input type>1)
+                $('.newAppendiks').val(appendik);
+
+            });
+
+            //to get and assign for 'sumber' input type
+            $("#sumber").change(function () {
+                var sumber = $(this).val();
+
+                //assign to new sumber input type
+                $(".newSumber").val(sumber);
+            });
+
+            //display success message
+            function message() {
+               return swal({
+                    //title: 'Saved!',
+                    text: "@Resources.Verification.VV_AlertSaved",
+                    type: "success",
+                    padding: '2em'
+                })
+            }
+
+            //Start Enable and Disable Tabs
+            $('#lesen').on("click", function () {
+                message();
+                $('#v-pills-noPermit-tab').removeClass("disabled");
+                $('#v-pills-noPermit-tab').removeClass("no-drop");
+                $('#v-pills-noPermit-tab').attr('data-toggle', 'pill');
+                $('.nav-pills> .active').next('a').trigger('click');
+                $('#v-pills-jenisLesen-tab').addClass("changeTabWhite");
+            });
+
+            $('#noPermit').on("click", function () {
+                message();
+                $('#v-pills-pemilik-tab').removeClass("disabled");
+                $('#v-pills-pemilik-tab').removeClass("no-drop");
+                $('#v-pills-pemilik-tab').attr('data-toggle', 'pill');
+                $('.nav-pills> .active').next('a').trigger('click');
+            });
+
+            $('#pemilik').on("click", function () {
+                message();
+                $('#v-pills-syarikat-tab').removeClass("disabled");
+                $('#v-pills-syarikat-tab').removeClass("no-drop");
+                $('#v-pills-syarikat-tab').attr('data-toggle', 'pill');
+                $('.nav-pills> .active').next('a').trigger('click');
+            });
+
+            $('#syarikat').on("click", function () {
+                message();
+                $('#v-pills-hidupanLiar-tab').removeClass("disabled");
+                $('#v-pills-hidupanLiar-tab').removeClass("no-drop");
+                $('#v-pills-hidupanLiar-tab').attr('data-toggle', 'pill');
+                $('.nav-pills> .active').next('a').trigger('click');
+            });
+
+            $('#hidupanLiar').on("click", function () {
+                message();
+                $('#v-pills-cites-tab').removeClass("disabled");
+                $('#v-pills-cites-tab').removeClass("no-drop");
+                $('#v-pills-cites-tab').attr('data-toggle', 'pill');
+                $('.nav-pills> .active').next('a').trigger('click');
+            });
+
+            $('#cites').on("click", function () {
+                message();
+                $('#v-pills-pemeriksaan-tab').removeClass("disabled");
+                $('#v-pills-pemeriksaan-tab').removeClass("no-drop");
+                $('#v-pills-pemeriksaan-tab').attr('data-toggle', 'pill');
+                $('.nav-pills> .active').next('a').trigger('click');
+            });
+
+            $('#pemeriksaan').on("click", function () {
+                message();
+                $('#v-pills-lampiran-tab').removeClass("disabled");
+                $('#v-pills-lampiran-tab').removeClass("no-drop");
+                $('#v-pills-lampiran-tab').attr('data-toggle', 'pill');
+                $('.nav-pills> .active').next('a').trigger('click');
+            });
+
+            $('#lampiran').on("click", function () {
+                message();
+                $('#v-pills-keputusanSemakan-tab').removeClass("disabled");
+                $('#v-pills-keputusanSemakan-tab').removeClass("no-drop");
+                $('#v-pills-keputusanSemakan-tab').attr('data-toggle', 'pill');
+                $('.nav-pills> .active').next('a').trigger('click');
+            });
+
+            $('#keputusanSemakan').on("click", function () {
+                message();
+                $('#v-pills-pengesahanMaklumat-tab').removeClass("disabled");
+                $('#v-pills-pengesahanMaklumat-tab').removeClass("no-drop");
+                $('#v-pills-pengesahanMaklumat-tab').attr('data-toggle', 'pill');
+                $('.nav-pills> .active').next('a').trigger('click');
+            });
+            //End Enable and Disable Tab
+        });
+    </script>
+}
+
+

@@ -1,0 +1,33 @@
+﻿@using ePerhilitanV2.Infrastructures.Services;
+
+@{
+    HttpContextBase _httpContext = new HttpContextWrapper(System.Web.HttpContext.Current);
+    var _service = new AccountService(_httpContext);
+}
+<div class="sub-header-container">
+    <header class="header navbar navbar-expand-sm">
+        <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
+        @if (Request.IsAuthenticated) //login user
+        {
+            var userId = User.Identity.Name;
+            var userName = GlobalFunction.GetUserLoginDetails(Convert.ToInt32(userId)).NamaPengguna;
+            var datelog = _service.getTicketLogin().IssueDate.ToString("dd/MM/yyyy hh:mm tt", new System.Globalization.CultureInfo("en-US"));
+
+            <ul class="navbar-nav flex-row">
+                <li>
+                    <div class="page-header">
+
+                        <nav class="breadcrumb-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active"><a href="javascript:void(0);">Hai, @userName</a></li>
+                                <li class="breadcrumb-item" aria-current="page"><span>@Resources.Home.DashKew_Login :@datelog </span></li>
+                            </ol>
+                        </nav>
+
+                    </div>
+                </li>
+            </ul>
+        }
+
+    </header>
+</div>

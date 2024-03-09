@@ -1,0 +1,122 @@
+﻿@{ var flag = "MY";}
+<!-- BEGIN LOADER -->
+<div id="load_screen">
+    <div class="loader">
+        <div class="gyro align-self-center"></div>
+    </div>
+</div>
+<!--  END LOADER -->
+<!--  BEGIN NAVBAR  -->
+<div class="sub-header-container sub-header-portal bg-white" style="top:unset !important;padding-bottom:0px !important; position:relative">
+    <header class="header navbar navbar-expand-sm p-0">
+        <nav class="navbar navbar-expand-sm  navbar-light bg-white" style="padding:0px !important;">
+            <div class="px-4 py-2 d-flex logo-section">
+                <a class="logo" href="@Url.Action("Index", "Home")">
+                    <img class="image-3" src="~/Content/Portal/img/image-30.png" />
+                </a>
+                <a class="logo" href="@Url.Action("Index", "Home")">
+                    <img class="image-1" src="~/Content/Portal/img/image-10.png" />
+                </a>
+                <a class="logo" href="@Url.Action("Index", "Home")">
+                    <img class="image-4" src="~/Content/Portal/img/image-40.png" />
+                </a>
+
+            </div>
+
+            <button class="navbar-toggler ml-auto mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown language-dropdown pr-2">
+                        <div class="logo-section3 nav-item dropdown language-dropdown" style="overflow: unset !important; display: inline-block;">
+                            <div class="language-button-default" style="overflow:unset !important;">
+                                @if (Request.Cookies["culture"] != null && Request.Cookies["culture"].Value == "my")
+                                {
+                                    flag = "MY";
+                                }
+                                else
+                                {
+                                    flag = "ENG";
+                                }
+                                <div class="language">
+                                    <img class="malaysia-3-1" src="~/Content/Portal/img/malaysia-3-10.png" />
+                                </div>
+                                <div class="my">@flag</div>
+                                <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="language-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img class="feather-20" src="~/Content/plugins/font-icons/feather/icon-down.svg" />
+                                </a>
+                                <div class="dropdown-menu position-absolute" aria-labelledby="language-dropdown">
+                                    <div class="language-menu-section-desktop">
+                                        <div class="frame-1134">
+                                            <div class="language" style="width:auto !important;">
+                                                <a href="@Url.Action("ChangeLanguage", "Language", new { lang = "my" })" class="dropdown-item d-flex" href="javascript:void(0);"><img src="~/Content/Portal/img/malaysia-3-10.png" class="flag-width" alt="flag"> <span class="align-self-center  class=" my"">&nbsp;MY</span></a>
+                                            </div>
+                                        </div>
+                                        <div class="frame-1135">
+                                            <div class="language" style="width:auto !important">
+                                                <a href="@Url.Action("ChangeLanguage", "Language", new { lang = "en" })" class="dropdown-item d-flex" href="javascript:void(0);"><img src="~/Content/assets/logo/en.png" class="flag-width" alt="flag"> <span class="align-self-center eng">&nbsp;ENG</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="link-button">
+                            <div class="semakan-fi-spesis">
+                                @using (Html.BeginForm("SemakanFi", "home", FormMethod.Get, htmlAttributes: new { @class = "form-inline search-full form-inline search input-focused search-fi", @role = "search", id = "searchForm" }))
+                                {
+                                    <div class="search-bar">
+                                        <input type="text" name="data" class="form-control form-control-sm search-form-control  ml-lg-auto" placeholder="@Resources.Home.Portal_Search">
+                                    </div>
+                                    <a href="javascript:void(0)" class="toggle-password" onclick="submitSearchForm()">
+                                        <i class="feather-20" data-feather="search"></i>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="link-button">
+                            <div class="frame-1176">
+                                <img class="feather-20" src="~/Content/plugins/font-icons/feather/file-color.svg" style="width:20px; height:20px" />
+                                <div class="muat-turun">
+                                    <a href="@Url.Action("UserManual","Home")">@Resources.Home.Portal_Download </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="link-button">
+                            <div class="frame-1176">
+                                <img class="feather-20" src="~/Content/plugins/font-icons/feather/contact_us.svg" style="width:20px; height:20px" />
+                                <div class="muat-turun"><a href="@Url.Action("ContactUs","Home")">@Resources.Home.Portal_CtcUs</a></div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <div class="link-button">
+                            <div class="frame-1176">
+                                <img class="feather-20" src="~/Content/Portal/img/vehicle-20.png" style="width:20px; height:20px" />
+                                <div class="muat-turun"><a href="@Url.Action("OurService","Home")">@Resources.Home.Portal_Service</a></div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <div class="link-button">
+                            <div class="frame-1176">
+                                <img class="feather-20" src="~/Content/plugins/font-icons/feather/faq_spjp.svg" style="width:20px; height:20px" />
+                                <div class="muat-turun"><a href="@Url.Action("Faq","Home")">@Resources.Home.Portal_Faq</a></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+</div>

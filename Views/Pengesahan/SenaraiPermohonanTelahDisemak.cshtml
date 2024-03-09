@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "Senarai Permohonan yang Telah Disemak";
+
+    var lcl = HttpContext.Current.Request.IsLocal;
+
+    var baseurl = lcl == true ? GlobalFunction.Constants.baseurlLocal : GlobalFunction.Constants.baseurlServer;
+
+    // Access the value of LicenseType from ViewBag in controller
+    var LicenseType = ViewBag.LicenseType;
+}
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+
+    <div class="widget-heading mb-3">
+        <h5 class=""> @Resources.Verification.VV_ApplicationCheckedList</h5>
+    </div>
+    <hr />
+    <div class="card-body">
+        <div class="col-xl-8 col-lg-8 col-md-8 mx-auto ">
+            <div class="form-group row">
+                <label for="searchByCites" class="col-sm-3 col-form-label col-form-label-sm text-right">@Resources.Verification.VV_CITES_No</label>
+                <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+                    <input type="email" class="form-control" id="searchByCites">
+                </div>
+                @*<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+                    <button type="button" class="btn btn-dark" id="filterSearch"><i class="feather-20" data-feather="search"></i></button>
+                </div>*@
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="table-responsive">
+        <table id="permohonanTelahDisemak" class="table table-hover" style="width:100%">
+            <thead>
+                <tr>
+                    <th class="text-center">@Resources.Verification.VV_No</th>
+                    <th class="text-center">@Resources.Verification.VV_LicenseNo</th>
+                    <th class="text-center">@Resources.Verification.VV_OwnerName</th>
+                    <th class="text-center">@Resources.Verification.VV_QuantityConfirmed</th>
+                    <th class="text-center">@Resources.Verification.VV_SubmitSendFormDate</th>
+                    <th class="text-center">@Resources.Resource._Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+        var baseSiteURL = '@baseurl';
+
+        $(document).ready(function () {
+
+            var dataTable = GetDataTable(baseSiteURL, baseSiteURL + '/Pengesahan/queryDataTable');
+
+            $('#searchByCites').on("keyup", function () {
+                dataTable.search($('#searchByCites').val()).draw();
+            });
+        })
+
+        function openNewTab(url) {
+            var win = window.open(url, '_blank');
+            win.focus();
+        }
+
+        function GetDataTable(baseSiteURL, dataURL) {
+            var datatable = $('#permohonanTelahDisemak').DataTable({
+                // till here
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                    "sSearchPlaceholder": "Search...",
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                "lengthMenu": [[10, 25, 50, 100, 150, 500, 1000, 5000], [10, 25, 50, 100, 150, 500, 1000, 5000]],
+                "pageLength": 10,
+                'columnDefs': [
+                    {
+                        'targets': [0, 4], // column index (start from 0)
+                        'orderable': false, // set orderable false for selected columns
+                    },
+                ],
+                ajax: {
+                    url: dataURL,
+                    type: "POST",
+                    'data': function (data) {
+                        data.searchByCites = $("#searchByCites").val(); //send to controller
+                        data.type = 2;
+                    }
+                },
+                searching: false,
+                "bServerSide": true,
+                "bProcessing": true,
+                "bSearchable": false,
+                "order": [[1, 'asc']],
+                "bAutoWidth": false,
+                "ordering": true,
+                drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); },
+                //set which table column from DB
+                "columns": [
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data, type, full, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1; // Displays continuous numbering
+                        }
+                    },
+                    {
+                        data: null,
+                        className: "text-center",
+                        render: function (data) {
+                            return data.No_Lesen + ' <b>[' + data.Kategori_Lesen + ']</b>' + ' <br>@Resources.Verification.VV_CITES_No: ' + data.Cites_No + '</br>';
+                        }
+                    },
+                    { data: "Nama_Pemegang", className: "text-center" },
+                    {
+                        data: "Kuantiti_Disahkan", className: "text-center",
+                        render: function (data) {
+                            return data || 0; // Handle undefined or null values
+                        }
+                    },
+                    {
+                        data: "Tarikh_Htr_Borang",
+                        className: "text-center",
+                        render: function (data) {
+                            // Check if data is null or undefined
+                            if (data == null) {
+                                return ''; // or return some default value
+                            }
+
+                            // Parse the date string
+                            var timestamp = parseInt(data.replace("/Date(", "").replace(")/", ""), 10);
+
+                            // Check if timestamp is a valid number
+                            if (isNaN(timestamp)) {
+                                return ''; // or return some default value
+                            }
+
+                            // Create a Date object
+                            var date = new Date(timestamp);
+
+                            // Check if date is valid
+                            if (isNaN(date.getTime())) {
+                                return ''; // or return some default value
+                            }
+
+                            // Format the date using a JavaScript Date object
+                            var formattedDate = date.toLocaleDateString("en-GB");
+                            return formattedDate;
+                        }
+                    },
+                    {
+                      data: null,
+                      className: "text-center",
+                        render: function (data) {
+                          var urlView = '@Url.Action("ViewMaklumat", "Pengesahan")';
+                            urlView = urlView + '/' + data.Id_Lesen ;
+                            return '<a href="' + urlView + '" title="Papar" class="rounded bs-tooltip mr-1" data-original-title="Papar" onclick = "openNewTab(\'' + urlView + '\');return false;">' +
+                              '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye feather-20"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></a>';
+
+                     }
+                 },
+                ]
+            });
+
+            return datatable;
+
+        }
+    </script>
+}
+
+

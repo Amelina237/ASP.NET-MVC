@@ -1,0 +1,128 @@
+﻿@model ePerhilitanV2.Models.ViewModels.PengesahanViewModel.ImportExport
+
+@{
+    ViewBag.Title = @Resources.Verification.VV_ViewDetails;
+    var LicenseType = ViewBag.LicenseType;
+
+}
+
+<style>
+
+    .table > thead > tr > th,
+    .table > tbody > tr > td {
+        color: #000;
+        border: 1px solid #e4e4e4 !important;
+    }
+
+    .table th {
+        padding: 0.75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table td {
+        padding-left: 0.75rem;
+        padding-bottom: 0;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table > tbody:before {
+        content: none; /*Remove content */
+        display: none;
+    }
+</style>
+
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+
+    @if (LicenseType == 7 || LicenseType == 8 || LicenseType == 9)
+    {
+        <!-- START LINK EACH TAB-->
+        <ul class="nav nav-tabs  mb-3 mt-3" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="lesen-tab" data-toggle="tab" href="#lesen" role="tab" aria-controls="lesen" aria-selected="true">@Resources.Verification.VV_HolderLicense_Permit_SP</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="lampiran-tab" data-toggle="tab" href="#lampiran" role="tab" aria-controls="lampiran" aria-selected="false">@Resources.Verification.VV_NoPermitCites</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="hidupanLiar-tab" data-toggle="tab" href="#hidupanLiar" role="tab" aria-controls="hidupanLiar" aria-selected="false">@Resources.Verification.VV_List_Wildlife</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="cites-tab" data-toggle="tab" href="#cites" role="tab" aria-controls="cites" aria-selected="false">@Resources.Verification.VV_MaklumatCites</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pemeriksaan-tab" data-toggle="tab" href="#pemeriksaan" role="tab" aria-controls="pemeriksaan" aria-selected="false">@Resources.Verification.VV_Inspection_Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pengesahan-tab" data-toggle="tab" href="#pengesahan" role="tab" aria-controls="pengesahan" aria-selected="false">@Resources.Verification.VV_SemakanPengesahan</a>
+            </li>
+        </ul>
+        <!-- END LINK EACH TAB -->
+        <!-- START TAB -->
+        <div class="tab-content">
+            <!-- START PEMEGANG LESEN TAB -->
+            <div class="tab-pane fade show active" id="lesen" role="tabpanel" aria-labelledby="lesen-tab">
+                @Html.Partial("_viewLesen", Model)
+            </div>
+            <!-- END PEMEGANG LESEN TAB -->
+            <!-- START LAMPIRAN & CITES TAB -->
+            <div class="tab-pane fade" id="lampiran" role="tabpanel" aria-labelledby="lampiran-tab">
+                @Html.Partial("_viewNoPermit", Model)
+            </div>
+            <!-- END LAMPIRAN & CITES TAB -->
+            <!-- START HIDUPAN LIAR TAB -->
+            <div class="tab-pane fade" id="hidupanLiar" role="tabpanel" aria-labelledby="hidupanLiar-tab">
+                @Html.Partial("_viewHidupanLiar", Model)
+            </div>
+            <!-- END HIDUPAN LIAR TAB -->
+            <!-- START CITES TAB -->
+            <div class="tab-pane fade" id="cites" role="tabpanel" aria-labelledby="cites-tab">
+                @Html.Partial("_viewCites", Model)
+            </div>
+            <!-- END CITES TAB -->
+            <!-- START INSPECTION TAB -->
+            <div class="tab-pane fade" id="pemeriksaan" role="tabpanel" aria-labelledby="pemeriksaan-tab">
+                @Html.Partial("_viewPemeriksaan", Model)
+            </div>
+            <!-- END INSPECTION TAB -->
+            <!-- START SEMAKAN PENGESAHAN TAB -->
+            <div class="tab-pane fade" id="pengesahan" role="tabpanel" aria-labelledby="pengesahan-tab">
+                @Html.Partial("_viewSemakanPengesahan", Model)
+            </div>
+            <!-- END SEMAKAN PENGESAHAN TAB -->
+        </div>
+        <!-- END TAB -->
+    }
+
+    <br />
+
+
+</div>
+<hr />
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //formatted date using flatpickr
+            $("#date").flatpickr({
+                dateFormat: "d-m-Y",
+            });
+
+            $("#dateTime").flatpickr({
+                enableTime: true,
+                dateFormat: "d-m-Y H:i K",
+            });
+
+        });
+
+        function openNewTab(url) {
+            var win = window.open(url, '_blank');
+            win.focus();
+        }
+    </script>
+}
+
+
+

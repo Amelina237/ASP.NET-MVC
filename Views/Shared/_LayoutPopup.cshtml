@@ -1,0 +1,284 @@
+﻿@using System.Configuration
+@using ePerhilitanV2.Infrastructures.Services;
+@{
+    var _service = new AccountService();
+    var userId = "";
+    var checkFirstTimeLogin = false;
+    var checkLastUpdatePassword = false;
+
+    var url = ViewContext.RouteData.Values["Controller"].ToString().ToLower() + '/' + ViewContext.RouteData.Values["Action"].ToString().ToLower();
+
+    if (Request.IsAuthenticated) //login user
+    {
+        userId = User.Identity.Name;
+        checkFirstTimeLogin = _service.CheckFirstTimeLogin(Convert.ToInt32(userId));
+        checkLastUpdatePassword = _service.CheckLastUpdatePassword(Convert.ToInt32(userId));
+    }
+}
+
+<style>
+    a, button, span, ul, h1, h2, h3, h4, h5, h6 {
+        text-transform: uppercase !important;
+    }
+
+    input[type="submit"] {
+        text-transform: uppercase !important;
+    }
+
+    h1, h2, h3, h4, h5, h6, .nav-item {
+        font-weight: bold !important;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif !important;
+    }
+</style>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title | eLesen Perhilitan </title>
+    <link rel="icon" type="image/x-icon" href="~/Content/assets/logo/Logo_Perhilitan.png" />
+    <link href="~/Content/assets/css/loader.css" rel="stylesheet" type="text/css" />
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="~/Content/assets/css/font-style.css" rel="stylesheet">
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="~/Content/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/css/dashboard/dash_2.css" rel="stylesheet" type="text/css" />
+
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link rel="stylesheet" type="text/css" href="~/Content/plugins/table/datatable/datatables.css">
+    <link href="~/Content/plugins/table/datatable/custom_dt_html5.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/table/datatable/dt-global_style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/plugins/table/datatable/dt-global_style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/plugins/select2/select2.min.css">
+    <link href="~/Content/assets/css/elements/tooltip.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- SCRIPT SWEETALERT-->
+    <link href="~/Content/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/animate/animate.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/plugins/sweetalerts/promise-polyfill.js"></script>
+    <link href="~/Content/plugins/sweetalerts/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/css/elements/search.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/css/LesenForm.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/css/structure-sidebar.css" rel="stylesheet" type="text/css">
+    <!-- END SCRIPT SWEETALERT -->
+    <!-- SCRIPT MODAL-->
+    <link href="~/Content/assets/css/components/custom-modal.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/css/components/tabs-accordian/custom-tabs.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/css/users/account-setting.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/plugins/file-upload/file-upload-with-preview.min.css" rel="stylesheet" type="text/css" />
+    <!-- END MODAL -->
+
+</head>
+<body>
+
+    <!-- BEGIN LOADER -->
+    <div id="load_screen">
+        <div class="loader">
+            <div class="loader-content">
+                <div class="spinner-grow align-self-center"></div>
+            </div>
+        </div>
+    </div>
+    <!--  END LOADER -->
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN CONTENT PART  -->
+        <div class="col-md-10 offset-1 layout-spacing" style="padding: 30px; background-color: #fff; border-radius: 6px">
+            @RenderBody()
+        </div>
+        <!--  END CONTENT PART  -->
+
+    </div>
+    <!-- END MAIN CONTAINER -->
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="~/Content/assets/js/libs/jquery-3.6.0.min.js"></script>
+    <script src="~/Content/bootstrap/js/popper.min.js"></script>
+    <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="~/Content/assets/js/app.js"></script>
+    <script src="~/Content/assets/js/species.js"></script>
+    <script src="~/Content/assets/js/management.js"></script>
+    <script src="~/Content/assets/js/loader.js"></script>
+    <script>
+        $(document).ready(function () {
+            App.init();
+        });
+
+    </script>
+    <script src="~/Content/plugins/font-icons/feather/feather.min.js"></script>
+    <script type="text/javascript">
+        feather.replace();
+    </script>
+    <script src="~/Content/assets/js/custom.js"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="~/Content/plugins/apex/apexcharts.min.js"></script>
+    <script src="~/Content/assets/js/dashboard/dash_2.js"></script>
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <!-- BEGIN PAGE DATATABLE/SELECT2 SCRIPTS -->
+    <script src="~/Content/plugins/table/datatable/datatables.js"></script>
+    <script src="~/Content/plugins/select2/select2.min.js"></script>
+    <script src="~/Content/plugins/select2/custom-select2.js"></script>
+    <script src="~/Content/assets/js/elements/tooltip.js"></script>
+
+    <script src="~/Content/plugins/table/datatable/button-ext/dataTables.buttons.min.js"></script>
+    <script src="~/Content/plugins/table/datatable/button-ext/jszip.min.js"></script>
+    <script src="~/Content/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
+    <script src="~/Content/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
+
+    <!-- ENDPAGE DATATABLE/SELECT2 SCRIPTS -->
+    <!-- SCRIPT SWEETALERT-->
+    <script src="~/Content/assets/js/scrollspyNav.js"></script>
+    <script src="~/Content/plugins/sweetalerts/sweetalert2.min.js"></script>
+    <script src="~/Content/plugins/sweetalerts/custom-sweetalert.js"></script>
+    <script src="~/Content/plugins/flatpickr/flatpickr.js"></script>
+    <!-- END SCRIPT SWEETALERT -->
+    @*custom js*@
+    <script src="~/Content/assets/js/custom-dashboard.js"></script>
+    <script src="~/Content/plugins/highlight/highlight.pack.js"></script>
+    <script src="~/Content/plugins/file-upload/file-upload-with-preview.min.js"></script>
+    <script src="~/Content/assets/js/custom.js"></script>
+
+    <!-- Include Chart.js library -->
+    <script src="~/Content/assets/js/chart.js"></script>
+
+
+
+
+    <script>
+        function Validate(form, event,text_ = "@Resources.Resource.Save") {
+            event.preventDefault();
+            const swalWithBootstrapButtons = swal.mixin({
+                confirmButtonClass: 'btn btn-success btn-rounded',
+                cancelButtonClass: 'btn btn-danger btn-rounded mr-3',
+                buttonsStyling: false,
+            })
+
+            swalWithBootstrapButtons({
+                title: '@Resources.Resource.AreYouSure',
+                type: 'question',
+                text: text_,
+                showCancelButton: true,
+                confirmButtonText: '@Resources.Resource.Yes',
+                cancelButtonText: '@Resources.Resource.No',
+                reverseButtons: false,
+                padding: '2em'
+            }).then(function (result) {
+                if (result.value) {
+                    form.submit();
+                } else {
+                    return false;
+                }
+            })
+        }
+
+        function DeleteValidate(linkURL, event, text_ = "Delete") {
+            event.preventDefault();
+
+            const swalWithBootstrapButtons = swal.mixin({
+                confirmButtonClass: 'btn btn-success btn-rounded',
+                cancelButtonClass: 'btn btn-danger btn-rounded mr-3',
+                buttonsStyling: false,
+            })
+
+            swalWithBootstrapButtons({
+                title: '@Resources.Resource.AreYouSure',
+                text: text_,
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '@Resources.Resource.Yes',
+                cancelButtonText: '@Resources.Resource.No',
+                reverseButtons: false,
+                padding: '2em'
+            }).then(function (result) {
+                if (result.value) {
+                    window.location.href = linkURL;
+                } else {
+                    return false;
+                }
+            })
+        }
+
+    </script>
+
+
+    @*start sweetalert popup*@
+    @if (TempData["Message"] != null)
+    {
+        <script>
+            var msg = '@TempData["Message"]';
+                $(document).ready(function()
+                    {
+                   new swal({
+                        html: "<span style='color:black !important'>"+msg+"<span>",
+                        type: "success",
+                        padding: '2em',
+                        allowEscapeKey: false,
+                    })
+                });
+            @TempData.Remove("Message");
+        </script>
+    }
+    @if (TempData["errormessage"] != null)
+    {
+        if (TempData.Count > 0)
+        {
+            <script>
+            var msg = '@TempData["errormessage"]';
+                $(document).ready(function()
+                    {
+                    new swal({
+                        html: "<span style='color:black !important'>"+msg+"<span>",
+                        type: "warning",
+                        padding: '2em',
+                        allowEscapeKey: false,
+                    })
+                });
+            @TempData.Remove("errormessage");
+            </script>
+        }
+
+    }
+    @*end sweet alert popup*@
+
+
+
+    @if (checkFirstTimeLogin == true || checkLastUpdatePassword == true)
+    {
+        if (url != "profile/myprofilepassword")
+        {
+            <script>
+            $(document).ready(function() {
+                // Check if the URL already contains the 'type' parameter
+                if (window.location.href.indexOf('type=') === -1) {
+                    var type = "@GlobalFunction.encodeThis("3")";
+                    location.href = '@Url.Action("MyProfile", "Profile")?type=' + type;
+
+                }
+            });
+            </script>
+        }
+
+
+    }
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

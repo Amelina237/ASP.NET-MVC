@@ -1,0 +1,696 @@
+﻿@*@model List<ePerhilitanV2.Models.ViewModels.PengesahanViewModel.User>*@
+
+@{
+    ViewBag.Title = "Semak Maklumat Permohonan";
+}
+
+<style>
+
+    .txtColorbtn {
+        color: white;
+    }
+</style>
+
+<div class="col-xl-12 col-lg-12 col-md-12">
+    <div class="col-xl-12 col-lg-12 col-md-12 mx-auto mt-3">
+        <div id="iconsAccordion" class="accordion-icons">
+            <div class="card">
+                <div class="card-header" id="headingOne3">
+                    <section class="mb-0 mt-0">
+                        <div role="menu" class="collapsed" data-toggle="collapse" data-target="#iconAccordionOne" aria-expanded="false" aria-controls="iconAccordionOne">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div class="accordion-icon">
+                                        <div class="icon-text">
+                                            <h6 style="font-weight: 500;">@Resources.Verification.VV_Review   </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i data-feather="chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="iconAccordionOne" class="collapse show" aria-labelledby="headingOne3" data-parent="#iconsAccordion" style="">
+                    <div class="card-body">
+                        <div class="col-xl-8 col-lg-8 col-md-8 mx-auto ">
+
+                            <div class="form-group col-md-12" id="jenisCarianGroup">
+                                <p>@Resources.Verification.VV_TypeSearch</p>
+                                <div>
+                                    <select class="form-control form-control-sm nested" id="jenisCarianSelect">
+                                        <optgroup label="Nama">
+                                            <option selected="selected">Please Choose</option>
+                                            <option value="1">Nama Pemilik</option>
+                                            <option value="2">Nama Syarikat</option>
+                                        </optgroup>
+                                        <optgroup label="Nombor">
+                                            <option value="3">No MyKad/Pasport</option>
+                                            <option value="4">No. Pendaftaran Syarikat</option>
+                                            <option value="5">No. Lesen/Permit</option>
+                                            <option value="6">No. CITES/Non-CITES</option>
+                                            <option value="7">No. Penandaan</option>
+                                            <option value="8">No. Telefon Pemilik</option>
+                                        </optgroup>
+                                        <optgroup label="Alamat">
+                                            <option value="9">Alamat Pemilik</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12" id="kategoriAlamatGroup" style="display:none">
+                                <p>Kategori Alamat</p>
+                                <div>
+                                    <select name="alamat" class="form-control form-control-sm nested" id="kategoriAlamatSelect">
+                                        <option>Sila Pilih</option>
+                                        <option>Alamat Surat-menyurat</option>
+                                        <option>Alamat Menyimpan</option>
+                                        <option>Alamat Premis</option>
+                                        <option>Hidupan Liar Ditempatkan</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12 filtered-list-search mx-auto">
+                                <p>@Resources.Verification.VV_Search</p>
+                                <form class="form-inline my-2 my-lg-0 justify-content-center">
+                                    <div class="w-100">
+                                        <input type="text" class="w-100 form-control product-search br-30" id="keyword" placeholder="">
+                                        <button id="SearchBtn" class="btn btn-primary" type="button"><i class="feather-20" data-feather="search"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<hr />*@
+    <br /><br />
+    <!-- START TABLE DISPLAY LIST OF APPLICATION -->
+          <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+              <div class="table-responsive">
+                  <table class="table table-bordered table-hover mb-4 testTable" id="semakPemohon">
+                      <thead>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                  </table>
+              </div>
+
+              <!-- Bootstrap Modal-->
+              <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="userModalLabel">@Resources.Verification.VV_ViewDetails</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body" id="modalBody">
+                              <!-- Partial view content here -->
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+    <!-- END TABLE DISPLAY APPLICATION LIST -->
+</div>
+
+@section scripts{
+    <script>
+        //Get data and display in Modal
+        function openModal(userId) {
+            console.log('Received userId:', userId);
+            $.ajax({
+                url: '@Url.Action("GetOwnerDetail", "Pengesahan")',
+                type: 'GET',
+                data: { id: userId },
+                success: function (data) {
+                    $('#modalBody').html(data);
+                    $('#userModal').modal('show');
+                },
+                error: function () {
+                    swal({
+                        title: 'Invalid!',
+                        text: "Error",
+                        type: 'error',
+                        padding: '2em'
+                    })
+                }
+            });
+        }
+
+        //declare global variable:
+        var table;
+
+        var urlByName = '@Url.Action("GetDataByNamaPemilik", "Pengesahan")';
+        var urlByIC = '@Url.Action("GetDataByICUser", "Pengesahan")';
+        var urlByPhone = '@Url.Action("GetDataByPhone", "Pengesahan")';
+        var urlByRoc = '@Url.Action("GetDataByRoc", "Pengesahan")';
+        var urlByCompany = '@Url.Action("GetDataByCompanyName", "Pengesahan")';
+        var urlByNoPenandaan = '@Url.Action("GetDataByNoPenandaan", "Pengesahan")';
+        var urlByNoLesen = '@Url.Action("GetDataByNoLesen", "Pengesahan")';
+        var urlByCites = '@Url.Action("GetDataByNoCites", "Pengesahan")';
+
+
+        $(function () {
+
+            var jenisCarianSelect;
+            var kategoriAlamatSelect;
+            $('#jenisCarianSelect').on("change",function () {
+                jenisCarianSelect = this.value;
+
+                //Related to Alamat only
+                //Show and Hide Kategori Alamat
+                if (jenisCarianSelect == 9) {
+                    $('#kategoriAlamatGroup').show();
+                }
+                else {
+                    $('#kategoriAlamatGroup').hide();
+                }
+
+            });
+
+            //Get value of kategoriAlamatSelect
+            $('#kategoriAlamatSelect').on("change",function () {
+                kategoriAlamatSelect = this.value;
+            });
+
+            function searchByNameIC(url, jenisCarianSelect, keyword) {
+                if (keyword != "") {
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: { "keyword": keyword },
+                        success: function (data) {
+                            // Initialize and update the data into datatable - use class instead of ID to avoid conflicts if there is different column
+                            table = $('.testTable').DataTable({
+                                "searching": false,
+                                "destroy": true, // Destroy existing DataTable instance
+                                deferRender: true,
+                                "oLanguage": {
+                                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                                    "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                                    "sSearchPlaceholder": "Search...",
+                                    "sLengthMenu": "Results :  _MENU_",
+                                },
+                                  'columnDefs': [
+                                      {
+                                      'targets': [0, 4], // column index (start from 0)
+                                      'orderable': false, // set orderable false for selected columns
+                                      },
+                                  ],
+                                "data": data, // Use data directly
+                                "columns": [
+                                    {
+                                        "data": null,
+                                        "title": "No",
+                                        "width": "5%",
+                                        "className": "text-center",
+                                        "render": function (data, type, row, meta) {
+                                            return meta.row + 1;    //meta.row = index of row + 1
+                                        }
+                                    },
+                                    {
+                                        "data": "ownerName",
+                                        "title": "@Resources.Resource._Name",
+                                        "className": "text-center",
+                                        "width": "25%",
+                                    },
+                                    {
+                                        "data": "ic",
+                                        "title": "@Resources.Resource._Ic_No",
+                                        "className": "text-center",
+                                        "width": "25%",
+                                    },
+                                    {
+                                        "data": "phone",
+                                        "title": "@Resources.Resource._Mobile_No",
+                                        "className": "text-center",
+                                        "width": "25%",
+                                    },
+                                    {
+                                        "data": null,
+                                        "title": "@Resources.Resource._Action",
+                                        "className": "text-center",
+                                        "width": "20%",
+                                        "render": function (data) {
+                                            //data.id_user is must formatted as a string when it's passed to the openModal function(kne ltk '' mark)
+                                            return '<a href="#" class="rounded bs-tooltip mr-1" data-original-title="Papar" onclick="openModal(\'' + data.id_user + '\')">' +
+                                                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye feather-20">' +
+                                                '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>' +
+                                                '<circle cx="12" cy="12" r="3"></circle></svg></a>';
+
+                                        }
+                                    }
+                                ],
+                            });
+                            //redraw the datatable
+                            table.draw();
+                        }
+                    });
+                }
+                else {
+                    swal({
+                        title: 'Invalid!',
+                        text: "Please enter the Keyword!",
+                        type: 'error',
+                        padding: '2em'
+                    });
+                }
+            }
+
+            function searchByCompanyRoc(url, jenisCarianSelect, keyword) {
+                if (keyword != "") {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: { "keyword": keyword },
+                    success: function (data) {
+                        // Initialize and update the data into datatable
+                        table = $('.testTable').DataTable({
+                            "searching": false,
+                            "destroy": true, // Destroy existing DataTable instance
+                            deferRender: true,
+                            "oLanguage": {
+                                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                                "sSearchPlaceholder": "Search...",
+                                "sLengthMenu": "Results :  _MENU_",
+                            },
+                              'columnDefs': [
+                                  {
+                                  'targets': [0, 4], // column index (start from 0)
+                                  'orderable': false, // set orderable false for selected columns
+                                  },
+                              ],
+                            "data": data, // Use data directly
+                            "columns": [
+                                {
+                                    "data": null,
+                                    "title": "No",
+                                    "className": "text-center",
+                                    "width": "5%",
+                                    "render": function (data, type, row, meta) {
+                                        return meta.row + 1;    //meta.row = index of row + 1
+                                    }
+                                },
+                                {
+                                    "data": "ownerName",
+                                    "title": "@Resources.Verification.VV_OwnerName",
+                                    "className": "text-center",
+                                    "width": "25%",
+                                },
+                                {
+                                    "data": "companyName",
+                                    "title": "@Resources.Resource._CompanyName",
+                                    "className": "text-center",
+                                    "width": "25%",
+                                },
+                                {
+                                    "data": "rocNo",
+                                    "title": "@Resources.Resource._CompanyRegisterNo",
+                                    "className": "text-center",
+                                    "width": "25%",
+                                },
+                                {
+                                    "data": null,
+                                    "title": "@Resources.Resource._Action",
+                                    "className": "text-center",
+                                    "width": "20%",
+                                    "render": function (data) {
+                                        //data.id_user is must formatted as a string when it's passed to the openModal function(kne ltk '' mark)
+                                        return '<a href="#" class="rounded bs-tooltip mr-1" data-original-title="Papar" onclick="openModal(\'' + data.id_user + '\')">' +
+                                            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye feather-20">' +
+                                            '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>' +
+                                            '<circle cx="12" cy="12" r="3"></circle></svg></a>';
+
+                                    }
+                                }
+                            ],
+                        });
+                        //redraw the datatable
+                        table.draw();
+                    }
+                });
+            }
+                else
+                {
+                    swal({
+                        title: 'Invalid!',
+                        text: "Please enter the Keyword!",
+                        type: 'error',
+                        padding: '2em'
+                    });
+                }
+            }
+
+            function searchByNoPenandaan(url, jenisCarianSelect, keyword) {
+                 if (keyword != "") {
+                 $.ajax({
+                     url: url,
+                     type: 'POST',
+                     data: { "keyword": keyword },
+                     success: function (data) {
+                         // Initialize and update the data into datatable
+                         table = $('.testTable').DataTable({
+                             "searching": false,
+                             "destroy": true, // Destroy existing DataTable instance
+                             deferRender: true,
+                             "oLanguage": {
+                                 "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                                 "sInfo": "Showing page _PAGE_ of _PAGES_",
+                                 "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                                 "sSearchPlaceholder": "Search...",
+                                 "sLengthMenu": "Results :  _MENU_",
+                             },
+                               'columnDefs': [
+                                   {
+                                   'targets': [0, 4], // column index (start from 0)
+                                   'orderable': false, // set orderable false for selected columns
+                                   },
+                               ],
+                             "data": data, // Use data directly
+                             "columns": [
+                                 {
+                                     "data": null,
+                                     "title": "No",
+                                     "width": "5%",
+                                     "className": "text-center",
+                                     "render": function (data, type, row, meta) {
+                                         return meta.row + 1;    //meta.row = index of row + 1
+                                     }
+                                 },
+                                 {
+                                     "data": null,
+                                     "title": "@Resources.Verification.VV_OwnerName / @Resources.Verification.VV_LicenseNo ",
+                                     "width": "25%",
+                                     "className": "text-center",
+                                     "render": function (data) {
+                                         return data.ownerName + ' <p><b>[' + data.noLesen + ']</b></p> ';
+                                     }
+                                 },
+                                 {
+                                    "data": null,
+                                    "title": "@Resources.Verification.VV_ScientificName / @Resources.Verification.VV_CommonName",
+                                    "width": "35%",
+                                    "className": "text-center",
+                                    "render": function (data) {
+                                        return data.spp_saintifik + ' <b>[' + data.spp_common + ']</b> ';
+                                    }
+                                 },
+                                 {
+                                     "data": "noPenandaan",
+                                     "title": "@Resources.Verification.VV_NoPenandaan",
+                                     "width": "25%",
+                                     "className": "text-center"
+                                 },
+                                 {
+                                     "data": null,
+                                     "title": "@Resources.Resource._Action",
+                                     "width": "10%",
+                                     "className": "text-center",
+                                     "render": function (data) {
+                                         //data.id_user is must formatted as a string when it's passed to the openModal function(kne ltk '' mark)
+                                         return '<a href="#" class="rounded bs-tooltip mr-1" data-original-title="Papar" onclick="openModal(\'' + data.id_user + '\')">' +
+                                             '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye feather-20">' +
+                                             '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>' +
+                                             '<circle cx="12" cy="12" r="3"></circle></svg></a>';
+
+                                     }
+                                 }
+                             ],
+                         });
+                         //redraw the datatable
+                         table.draw();
+                     }
+                 });
+             }
+                 else
+                 {
+                     swal({
+                         title: 'Invalid!',
+                         text: "Please enter the Keyword!",
+                         type: 'error',
+                         padding: '2em'
+                     });
+                 }
+            }
+
+            function searchByLesen(url, jenisCarianSelect, keyword) {
+                if (keyword != "") {
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: { "keyword": keyword },
+                        success: function (data) {
+                            // Initialize and update the data into datatable - use class instead of ID to avoid conflicts if there is different column
+                            table = $('.testTable').DataTable({
+                                "searching": false,
+                                "destroy": true, // Destroy existing DataTable instance
+                                deferRender: true,
+                                "oLanguage": {
+                                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                                    "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                                    "sSearchPlaceholder": "Search...",
+                                    "sLengthMenu": "Results :  _MENU_",
+                                },
+                                  'columnDefs': [
+                                      {
+                                      'targets': [0, 4], // column index (start from 0)
+                                      'orderable': false, // set orderable false for selected columns
+                                      },
+                                  ],
+                                "data": data, // Use data directly
+                                "columns": [
+                                    {
+                                        "data": null,
+                                        "title": "No",
+                                        "width": "5%",
+                                        "className": "text-center",
+                                        "render": function (data, type, row, meta) {
+                                            return meta.row + 1;    //meta.row = index of row + 1
+                                        }
+                                    },
+                                   {
+                                       "data": null,
+                                       "title": "@Resources.Resource.HOME_LicenseType / @Resources.Verification.VV_LicenseNo",
+                                       "width": "35%",
+                                       "className": "text-center",
+                                       "render": function (data) {
+                                           return data.category + ' <b>[' + data.noLesen + ']</b> ';
+                                       }
+                                    },
+                                    {
+                                        "data": "pejabatPengeluar",
+                                        "title": "@Resources.Verification.VV_OfficeProducer",
+                                        "className": "text-center",
+                                        "width": "25%",
+                                    },
+                                    {
+                                        "data": "tarikhMula",
+                                        "title": "@Resources.Verification.VV_StartDate - @Resources.Verification.VV_EndDate ",
+                                        "className": "text-center",
+                                        "width": "25%",
+                                        render: function (data) {
+                                            // Check if data is null or undefined
+                                            if (data == null) {
+                                                return ''; // or return some default value
+                                            }
+
+                                            // Parse the date string
+                                            var timestamp = parseInt(data.replace("/Date(", "").replace(")/", ""), 10);
+
+                                            // Check if timestamp is a valid number
+                                            if (isNaN(timestamp)) {
+                                                return ''; // or return some default value
+                                            }
+
+                                            // Create a Date object
+                                            var date = new Date(timestamp);
+
+                                            // Check if date is valid
+                                            if (isNaN(date.getTime())) {
+                                                return ''; // or return some default value
+                                            }
+
+                                            // Format the date using a JavaScript Date object
+                                            var formattedDate = date.toLocaleDateString("en-GB");
+                                            return formattedDate;
+                                        }
+                                    },
+                                    {
+                                        "data": null,
+                                        "title": "@Resources.Resource._Action",
+                                        "className": "text-center",
+                                        "width": "20%",
+                                        "render": function (data) {
+                                         //data.id_user is must formatted as a string when it's passed to the openModal function(kne ltk '' mark)
+                                         return '<a href="#" class="rounded bs-tooltip mr-1" data-original-title="Papar" onclick="openModal(\'' + data.id_user + '\')">' +
+                                             '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye feather-20">' +
+                                             '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>' +
+                                             '<circle cx="12" cy="12" r="3"></circle></svg></a>';
+
+                                     }
+                                    }
+                                ],
+                            });
+                            //redraw the datatable
+                            table.draw();
+                        }
+                    });
+                }
+                else {
+                    swal({
+                        title: 'Invalid!',
+                        text: "Please enter the Keyword!",
+                        type: 'error',
+                        padding: '2em'
+                    });
+                }
+            }
+
+            function searchByCites(url, jenisCarianSelect, keyword) {
+                if (keyword != "") {
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: { "keyword": keyword },
+                        success: function (data) {
+                            // Initialize and update the data into datatable - use class instead of ID to avoid conflicts if there is different column
+                            table = $('.testTable').DataTable({
+                                "searching": false,
+                                "destroy": true, // Destroy existing DataTable instance
+                                deferRender: true,
+                                "oLanguage": {
+                                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                                    "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                                    "sSearchPlaceholder": "Search...",
+                                    "sLengthMenu": "Results :  _MENU_",
+                                },
+                                  'columnDefs': [
+                                      {
+                                      'targets': [0, 4], // column index (start from 0)
+                                      'orderable': false, // set orderable false for selected columns
+                                      },
+                                  ],
+                                "data": data, // Use data directly
+                                "columns": [
+                                    {
+                                        "data": null,
+                                        "title": "No",
+                                        "width": "5%",
+                                        "className": "text-center",
+                                        "render": function (data, type, row, meta) {
+                                            return meta.row + 1;    //meta.row = index of row + 1
+                                        }
+                                    },
+                                   {
+                                       "data": "ownerName",
+                                       "title": "@Resources.Verification.VV_OwnerName",
+                                       "width": "35%",
+                                       "className": "text-center",
+                                    },
+                                    {
+                                        "data": "ic",
+                                        "title": "@Resources.Resource._Ic_No",
+                                        "className": "text-center",
+                                        "width": "25%",
+                                    },
+                                    {
+                                        "data": "noLesen",
+                                        "title": "@Resources.Verification.VV_LicenseNo",
+                                        "className": "text-center",
+                                        "width": "25%",
+                                    },
+                                    {
+                                        "data": null,
+                                        "title": "@Resources.Resource._Action",
+                                        "className": "text-center",
+                                        "width": "20%",
+                                        "render": function (data) {
+                                            //data.id_user is must formatted as a string when it's passed to the openModal function(kne ltk '' mark)
+                                            return '<a href="#" class="rounded bs-tooltip mr-1" data-original-title="Papar" onclick="openModal(\'' + data.id_user + '\')">' +
+                                                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye feather-20">' +
+                                                '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>' +
+                                                '<circle cx="12" cy="12" r="3"></circle></svg></a>';
+
+                                        }
+                                    }
+                                ],
+                            });
+                            //redraw the datatable
+                            table.draw();
+                        }
+                    });
+                }
+                else {
+                    swal({
+                        title: 'Invalid!',
+                        text: "Please enter the Keyword!",
+                        type: 'error',
+                        padding: '2em'
+                    });
+                }
+            }
+
+            //Get the value of Search after button is click
+            $('#SearchBtn').on("click",function () {
+                var keyword = $('#keyword').val();
+
+                //Search by Name Pemilik
+                if (jenisCarianSelect == 1 && keyword != "") {
+                    searchByNameIC(urlByName, jenisCarianSelect, keyword);
+                }
+                //Search by Nama Syarikat
+                else if (jenisCarianSelect == 2 && keyword != "") {
+                    searchByCompanyRoc(urlByCompany, jenisCarianSelect, keyword);
+                }
+                //Search by IC
+                else if (jenisCarianSelect == 3 && keyword != "") {
+                    searchByNameIC(urlByIC, jenisCarianSelect, keyword);
+                }
+                //Search by No Roc
+                else if (jenisCarianSelect == 4 && keyword != ""){
+                    searchByCompanyRoc(urlByRoc, jenisCarianSelect, keyword);
+                }
+                //Search by No Lesen
+                else if (jenisCarianSelect == 5 && keyword != "") {
+                    searchByLesen(urlByNoLesen, jenisCarianSelect, keyword);
+                }
+                //Search by No Cites
+                else if (jenisCarianSelect == 6 && keyword != "") {
+                    searchByCites(urlByCites, jenisCarianSelect, keyword);
+                }
+                //Search by No Telefon
+                else if (jenisCarianSelect == 8 && keyword != "") {
+                    searchByNameIC(urlByPhone, jenisCarianSelect, keyword);
+                }
+                //Search by No Penandaan
+                else if (jenisCarianSelect == 7 && keyword != "") {
+                    searchByNoPenandaan(urlByNoPenandaan, jenisCarianSelect, keyword);
+                }
+                else {
+                    swal({
+                        title: 'Invalid!',
+                        text: "Please choose the search category and insert the keyword",
+                        type: 'error',
+                        padding: '2em'
+                    })
+                }
+            });
+
+        });
+    </script>
+}
+
