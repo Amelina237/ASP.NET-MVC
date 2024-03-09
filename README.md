@@ -3,7 +3,7 @@
 This project is a web-based application designed for the Malaysian government agency, PERHILITAN MALAYSIA. 
 It will automate the permit and license issuance process for wildlife trade, facilitating efficient management
 
-- **Main Goal**: to enhance performance by transitioning from the old system, which is written in PHP, to the new system built on the .NET Framework,
+- **Main Goal** : to enhance performance by transitioning from the old system, which is written in PHP, to the new system built on the .NET Framework,
   specifically ASP.NET MVC. This transition aims to provide new functionality, making it easier and more efficient for users to complete their tasks.
   
 ## Modules Involved
