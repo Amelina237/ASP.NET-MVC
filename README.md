@@ -1,4 +1,4 @@
-# Project
+## Project Description
 
 This web-based application is designed for the client to automate the permit and license issuance process for wildlife trade, thereby facilitating efficient management.
 
