@@ -1,16 +1,15 @@
-# myPerhilitan
+# Project
 
-This project is a web-based application designed for the Malaysian government agency, PERHILITAN MALAYSIA. 
-It will automate the permit and license issuance process for wildlife trade, facilitating efficient management
+This web-based application is designed for the client to automate the permit and license issuance process for wildlife trade, thereby facilitating efficient management.
 
-- **Main Goal** : to enhance performance by transitioning from the old system, which is written in PHP, to the new system built on the .NET Framework,
+- **Main Goal**: to enhance performance by transitioning from the old system, which is written in PHP, to the new system built on the .NET Framework,
   specifically ASP.NET MVC. This transition aims to provide new functionality, making it easier and more efficient for users to complete their tasks.
   
 ## Modules Involved
 
-- Verification and Validation : Focuses on functions involving Information Reviewer and Approver Officers at the Entry Point for the purpose of importing, exporting, and re-exporting. It encompasses tasks related to verifying and validating data entries, ensuring accuracy, consistency, and compliance with regulations. Additionally, the module facilitates the review and approval process, streamlining verification tasks and enhancing data integrity.
+- Verification and Validation: Focuses on functions involving Information Reviewer and Approver Officers at the Entry Point for the purpose of importing, exporting, and re-exporting. It encompasses tasks related to verifying and validating data entries, ensuring accuracy, consistency, and compliance with regulations. Additionally, the module facilitates the review and approval process, streamlining verification tasks and enhancing data integrity.
 
-- Reporting : Focuses on visualizing the report more attractively using Power BI.
+- Reporting: Focuses on visualizing the report more attractively using Power BI.
 
 ## Technology Stack
 
